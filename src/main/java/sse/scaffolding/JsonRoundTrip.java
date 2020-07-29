@@ -1,9 +1,12 @@
 package sse.scaffolding;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 import sse.json.ObjectMapperStandard;
 import sse.model.SEToken;
@@ -14,6 +17,8 @@ import sse.model.Subject.SubjectCategories;
 import sse.model.TransmitterConfig;
 
 public class JsonRoundTrip {
+	
+	static final Logger log = LoggerFactory.getLogger(JsonRoundTrip.class);
 
 	public static void main(String[] args) {
 
@@ -39,6 +44,14 @@ public class JsonRoundTrip {
 
 			String json = ObjectMapperStandard.getJson(set, true);
 			System.out.println(json);
+			
+			try {
+				SEToken setNew = ObjectMapperStandard.getObjectMapper().readValue(json, SEToken.class);
+			} catch (JsonMappingException e) {
+				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+			} catch (JsonProcessingException e) {
+				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+			}
 		}
 
 		{ 
@@ -61,6 +74,14 @@ public class JsonRoundTrip {
 
 			String json = ObjectMapperStandard.getJson(set, true);
 			System.out.println(json);
+			
+			try {
+				SEToken setNew = ObjectMapperStandard.getObjectMapper().readValue(json, SEToken.class);
+			} catch (JsonMappingException e) {
+				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+			} catch (JsonProcessingException e) {
+				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+			}
 		}
 
 		{
@@ -84,6 +105,14 @@ public class JsonRoundTrip {
 
 			String json = ObjectMapperStandard.getJson(set, true);
 			System.out.println(json);
+			
+			try {
+				SEToken setNew = ObjectMapperStandard.getObjectMapper().readValue(json, SEToken.class);
+			} catch (JsonMappingException e) {
+				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+			} catch (JsonProcessingException e) {
+				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+			}
 		}
 
 		{
@@ -105,8 +134,15 @@ public class JsonRoundTrip {
 
 			String json = ObjectMapperStandard.getJson(set, true);
 			System.out.println(json);
+			
+			try {
+				SEToken setNew = ObjectMapperStandard.getObjectMapper().readValue(json, SEToken.class);
+			} catch (JsonMappingException e) {
+				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+			} catch (JsonProcessingException e) {
+				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+			}
 		}
-
 
 		{
 			System.out.println("# Draft Figure 5, 'SET Containing a SSE Event with Common Claims in the Subject', page 8 top:");
@@ -130,6 +166,14 @@ public class JsonRoundTrip {
 
 			String json = ObjectMapperStandard.getJson(set, true);
 			System.out.println(json);
+			
+			try {
+				SEToken setNew = ObjectMapperStandard.getObjectMapper().readValue(json, SEToken.class);
+			} catch (JsonMappingException e) {
+				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+			} catch (JsonProcessingException e) {
+				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+			}
 		}
 
 		{
@@ -153,6 +197,7 @@ public class JsonRoundTrip {
 
 			String json  = ObjectMapperStandard.getJson(txCfg, true);
 			System.out.println(json);
+			
 		}
 
 	}

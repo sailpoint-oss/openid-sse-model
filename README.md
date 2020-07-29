@@ -35,7 +35,7 @@ one `SSEvent`.
 	set.addEvent(evt);
 ```
 
-See more code examples beyond in `JsonRoundTrip.java`.
+See more code examples in `JsonRoundTrip.java`.
 
 ## Compiling
  

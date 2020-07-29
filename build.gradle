@@ -20,14 +20,13 @@ repositories {
 dependencies {
     
     // JSON Serialization supoprt for Java.
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.11.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
     
     // Simple logging framework, compatible with many loggers.
     implementation 'org.slf4j:slf4j-api:1.7.30'
     
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-    
 }
 
 version = '0.1.0'

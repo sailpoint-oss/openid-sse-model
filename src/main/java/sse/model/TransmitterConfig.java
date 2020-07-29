@@ -27,7 +27,6 @@ public class TransmitterConfig {
 	 * Security Event Tokens issued from this Transmitter.
 	 */
 	@JsonProperty("issuer")
-	@JsonAlias("subjectType")
 	String issuer;
 	
 	/**

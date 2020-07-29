@@ -13,16 +13,26 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Subject {
 	
-	// Defined SubjectTypes of SSE/CAEP event types.
-	// If we need more complicated mappings or ones that do not match lower
-	// case Java keyword allowed characters then we can employ the feature 
-	// shown here:
-	//    https://stackoverflow.com/questions/6667243/using-enum-values-as-string-literals
+	/**
+	 * Defined SubjectTypes of SSE/CAEP event types.
+	 * 
+	 * Java note: If we need more complicated mappings or ones that do not 
+	 * match lower case Java keyword allowed characters then we can employ 
+	 * the feature shown here:
+	 * 
+	 * https://stackoverflow.com/questions/6667243/using-enum-values-as-string-literals
+	 * 
+	 */
 	public enum SubjectTypes {
+		// An e-mail address identifies the subject.
 		email,
+		// An E.164 formatted phone number identities the subject.
 		phone,
+		// This subject is a Subject Principal Administrative Group.
 		spag,
+		// This subject is a subject type defined by the Issuer of the SET event.
 		iss_sub,
+		// TODO: Add description for this SubjectType.
 		id_token_claims
 	}
 	
@@ -40,6 +50,10 @@ public class Subject {
 		session
 	}
 	
+	/**
+	 * The type of subject for the SSE event. See {@link SubjectTypes} for standard
+	 * subject types. 
+	 */
 	@JsonProperty("subject_type")
 	@JsonAlias("subjectType")
 	String subjectType;

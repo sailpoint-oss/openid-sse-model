@@ -14,24 +14,23 @@ public enum SSEventTypes {
 	TOKEN_REVOCATION ("token-revocation", true);
 	
 	// Name space prefix string for Shared Signals and Event types.
-	public static final String ssePrefix = "https://schemas.openid.net/secevent/risc/event-type/";
+	public static final String SSE_PREFIX = "https://schemas.openid.net/secevent/risc/event-type/";
 
 	private final String name;
 
 	private SSEventTypes(String s, boolean addPrefix) {
 		if (addPrefix) {
-			name = ssePrefix + s;
+			name = SSE_PREFIX + s;
 		} else {
 			name = s;
 		}
 	}
 
 	public boolean equalsName(String otherName) {
-		// Note (otherName == null) check is not needed 
-		// because name.equals(null) returns false. 
 		return name.equals(otherName);
 	}
 
+	@Override
 	public String toString() {
 		return this.name;
 	}

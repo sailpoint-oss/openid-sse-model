@@ -165,6 +165,7 @@ public class SEToken {
 		if (null == events) {
 			events = new ArrayList<SSEvent>();
 		}
+		event.setEventType(event.getEventType() + "#" + events.size());
 		events.add(event);
 	}
 	

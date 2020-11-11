@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * @author adam.hampton
  *
  */
-@JsonPropertyOrder({ "iss", "iat", "sub", "npt", "evt"})
+@JsonPropertyOrder({ "type", "iss", "iat", "sub", "npt", "evt"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SSEvent {
 	

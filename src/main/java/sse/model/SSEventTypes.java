@@ -9,7 +9,7 @@ public enum SSEventTypes {
 	ACCOUNT_DISABLED ("account-disabled", true),
 	ACCOUNT_ENABLED  ("account-enabled", true),
 	VERIFICATION     ("verification", true), 
-	IPADDR_CHAGNED   ("ip-address-changed", true),
+	IPADDR_CHANGED   ("ip-address-changed", true),
 	STREAM_UPDATED   ("stream-updated", true),
 	TOKEN_REVOCATION ("token-revocation", true);
 	

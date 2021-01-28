@@ -24,7 +24,7 @@ one `SSEvent`.
 	subj.setPhoneNumber("+1 (408) 555-1212");
 
 	SSEvent evt = new SSEvent();
-	evt.setEventType(SSEventTypes.IPADDR_CHAGNED);
+	evt.setEventType(SSEventTypes.IPADDR_CHANGED);
 	evt.setSubject(subj);
 
 	SEToken set = new SEToken();

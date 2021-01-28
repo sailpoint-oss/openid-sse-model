@@ -92,7 +92,7 @@ public class JsonRoundTrip {
 			subj.setSubject("foo@example.com");
 
 			SSEvent evt = new SSEvent();
-			evt.setEventType(SSEventTypes.IPADDR_CHAGNED);
+			evt.setEventType(SSEventTypes.IPADDR_CHANGED);
 			evt.setSubject(subj);
 			evt.setIpAddress("123.45.67.89"); // From CAEP example, ha!
 
@@ -122,7 +122,7 @@ public class JsonRoundTrip {
 			subj.setSpagId("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a");
 
 			SSEvent evt = new SSEvent();
-			evt.setEventType(SSEventTypes.IPADDR_CHAGNED);
+			evt.setEventType(SSEventTypes.IPADDR_CHANGED);
 			evt.setSubject(subj);
 
 			SEToken set = new SEToken();
@@ -154,7 +154,7 @@ public class JsonRoundTrip {
 			subj.setPhoneNumber("+1 (408) 555-1212");
 
 			SSEvent evt = new SSEvent();
-			evt.setEventType(SSEventTypes.IPADDR_CHAGNED);
+			evt.setEventType(SSEventTypes.IPADDR_CHANGED);
 			evt.setSubject(subj);
 
 			SEToken set = new SEToken();

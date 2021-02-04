@@ -1,19 +1,17 @@
 package sse.scaffolding;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.util.Arrays;
 
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.util.DateUtils;
+import net.minidev.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
-import sse.json.ObjectMapperStandard;
-import sse.model.SEToken;
 import sse.model.SSEvent;
 import sse.model.SSEventTypes;
-import sse.model.Subject;
-import sse.model.Subject.SubjectCategories;
+import sse.model.SubjectIdentifier;
 import sse.model.TransmitterConfig;
 
 public class JsonRoundTrip {
@@ -27,179 +25,158 @@ public class JsonRoundTrip {
 
 		{ 
 			System.out.println("# Draft Figure 1, 'SET Containing a SSE Event with an Email Subject Identifier', page 6 top:");
-			Subject subj = new Subject();
-			subj.setSubjectType(Subject.SubjectTypes.email);
-			subj.setSubject("foo@example.com");
+			JSONObject subj = new SubjectIdentifier.Builder()
+				.subjectType(SubjectIdentifier.EMAIL_SUBJECT_IDENTIFIER_TYPE)
+				.subject("foo@example.com")
+				.build();
 
-			SSEvent evt = new SSEvent();
-			evt.setEventType(SSEventTypes.ACCOUNT_ENABLED);
-			evt.setSubject(subj);
+			JSONObject evt = new SSEvent.Builder()
+				.subject(subj)
+				.build();
 
-			SEToken set = new SEToken();
-			set.setIssuer("https://idp.example.com/");
-			set.setJti("756E69717565206964656E746966696572");
-			set.setIssuedAt(System.currentTimeMillis());
-			set.setAudience("636C69656E745F6964");
-			set.addEvent(evt);
+			JSONObject eventType = new JSONObject();
+			eventType.put(SSEventTypes.RISC_ACCOUNT_ENABLED.toString(), evt);
 
-			String json = ObjectMapperStandard.getJson(set, true);
+			JWTClaimsSet set = new JWTClaimsSet.Builder()
+				.issuer("https://idp.example.com/")
+				.jwtID("756E69717565206964656E746966696572")
+				.issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
+				.audience("636C69656E745F6964")
+				.claim("events", eventType)
+				.build();
+
+			String json = set.toString();
 			System.out.println(json);
 			
 			try {
-				SEToken setNew = ObjectMapperStandard.getObjectMapper().readValue(json, SEToken.class);
-			} catch (JsonMappingException e) {
-				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
-			} catch (JsonProcessingException e) {
-				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+				JWTClaimsSet setNew = JWTClaimsSet.parse(json);
+			} catch (ParseException e) {
+				log.error("ParseException failure de-serializing JSON {}", json, e);
 			}
 		}
 
 		{ 
 			System.out.println("# Draft Figure 2, 'Example SET', page 6 bottom:");
-			Subject subj = new Subject();
-			subj.setSubjectType(Subject.SubjectTypes.iss_sub);
-			subj.setIssuer("https://issuer.example.com/");
-			subj.setSubject("abc1234");
+			JSONObject subj = new SubjectIdentifier.Builder()
+				.subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+				.issuer("https://issuer.example.com/")
+				.subject("abc1234")
+				.build();
 
-			SSEvent evt = new SSEvent();
-			evt.setEventType(SSEventTypes.ACCOUNT_ENABLED);
-			evt.setSubject(subj);
+			JSONObject evt = new SSEvent.Builder()
+				.subject(subj)
+				.build();
 
-			SEToken set = new SEToken();
-			set.setIssuer("https://idp.example.com/");
-			set.setJti("756E69717565206964656E746966696572");
-			set.setIssuedAt(System.currentTimeMillis());
-			set.setAudience("636C69656E745F6964");
-			set.addEvent(evt);
+			JSONObject eventType = new JSONObject();
+			eventType.put(SSEventTypes.RISC_ACCOUNT_ENABLED.toString(), evt);
 
-			String json = ObjectMapperStandard.getJson(set, true);
+			JWTClaimsSet set = new JWTClaimsSet.Builder()
+				.issuer("https://idp.example.com/")
+				.jwtID("756E69717565206964656E746966696572")
+				.issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
+				.audience("636C69656E745F6964")
+				.claim("events", eventType)
+				.build();
+
+			String json = set.toString();
 			System.out.println(json);
-			
+
 			try {
-				SEToken setNew = ObjectMapperStandard.getObjectMapper().readValue(json, SEToken.class);
-			} catch (JsonMappingException e) {
-				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
-			} catch (JsonProcessingException e) {
-				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+				JWTClaimsSet setNew = JWTClaimsSet.parse(json);
+			} catch (ParseException e) {
+				log.error("ParseException failure de-serializing JSON {}", json, e);
 			}
 		}
 
 		{
 			// Reproduce Atul's draft text from `openid-sse-profile-draft2` page 7.
 			System.out.println("# Draft Figure 3, 'Example SET', page 7 top:");
-			Subject subj = new Subject();
-			subj.setSubjectType(Subject.SubjectTypes.email);
-			subj.setSubject("foo@example.com");
+			JSONObject subj = new SubjectIdentifier.Builder()
+				.subjectType(SubjectIdentifier.EMAIL_SUBJECT_IDENTIFIER_TYPE)
+				.subject("foo@example.com")
+				.build();
 
-			SSEvent evt = new SSEvent();
-			evt.setEventType(SSEventTypes.IPADDR_CHANGED);
-			evt.setSubject(subj);
-			evt.setIpAddress("123.45.67.89"); // From CAEP example, ha!
+			JSONObject evt = new SSEvent.Builder()
+				.subject(subj)
+				.ipAddress("123.45.67.89") // From CAEP example, ha!
+				.build();
 
-			SEToken set = new SEToken();
-			set.setIssuer("https://sp.example2.com/");
-			set.setJti("756E69717565206964656E746966696572");
-			set.setIssuedAt(System.currentTimeMillis());
-			set.setAudience("636C69656E745F6964");
-			set.addEvent(evt);
+			JSONObject eventType = new JSONObject();
+			eventType.put(SSEventTypes.CAEP_IPADDR_CHANGED.toString(), evt);
 
-			String json = ObjectMapperStandard.getJson(set, true);
+			JWTClaimsSet set = new JWTClaimsSet.Builder()
+				.issuer("https://sp.example2.com/")
+				.jwtID("756E69717565206964656E746966696572")
+				.issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
+				.audience("636C69656E745F6964")
+				.claim("events", eventType)
+				.build();
+
+
+			String json = set.toString();
 			System.out.println(json);
-			
+
 			try {
-				SEToken setNew = ObjectMapperStandard.getObjectMapper().readValue(json, SEToken.class);
-			} catch (JsonMappingException e) {
-				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
-			} catch (JsonProcessingException e) {
-				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+				JWTClaimsSet setNew = JWTClaimsSet.parse(json);
+			} catch (ParseException e) {
+				log.error("ParseException failure de-serializing JSON {}", json, e);
 			}
 		}
 
 		{
-			System.out.println("# Draft Figure 4, 'SET Containing a SSE Event with a SPAG Subject Type', page 7 bottom:");
-			Subject subj = new Subject();
-			subj.setSubjectType(Subject.SubjectTypes.spag);
-			subj.setSpagId("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a");
+			System.out.println("# Draft Figure 9, 'SET Containing a SSE Event with a Subject and a Property Claim'");
+			JSONObject subj = new SubjectIdentifier.Builder()
+				.subjectType(SubjectIdentifier.SPAG_SUBJECT_IDENTIFIER_TYPE)
+				.spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
+				.build();
 
-			SSEvent evt = new SSEvent();
-			evt.setEventType(SSEventTypes.IPADDR_CHANGED);
-			evt.setSubject(subj);
+			JSONObject evt = new SSEvent.Builder()
+				.subject(subj)
+				.status("paused")
+				.reason("License is not valid")
+				.build();
 
-			SEToken set = new SEToken();
-			set.setIssuer("https://sp.example2.com/");
-			set.setJti("756E69717565206964656E746966696572");
-			set.setIssuedAt(System.currentTimeMillis());
-			set.setAudience("636C69656E745F6964");
-			set.addEvent(evt);
+			JSONObject eventType = new JSONObject();
+			eventType.put(SSEventTypes.CAEP_STREAM_UPDATED.toString(), evt);
 
-			String json = ObjectMapperStandard.getJson(set, true);
+			JWTClaimsSet set = new JWTClaimsSet.Builder()
+				.issuer("https://sp.example2.com/")
+				.jwtID("756E69717565206964656E746966696572")
+				.issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
+				.audience("636C69656E745F6964")
+				.claim("events", eventType)
+				.build();
+
+			String json = set.toString();
 			System.out.println(json);
-			
+
 			try {
-				SEToken setNew = ObjectMapperStandard.getObjectMapper().readValue(json, SEToken.class);
-			} catch (JsonMappingException e) {
-				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
-			} catch (JsonProcessingException e) {
-				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
-			}
-		}
-
-		{
-			System.out.println("# Draft Figure 5, 'SET Containing a SSE Event with Common Claims in the Subject', page 8 top:");
-
-			Subject subj = new Subject();
-			subj.setSubjectType(Subject.SubjectTypes.id_token_claims);
-			subj.setCategory(SubjectCategories.device);
-			subj.setSpagId("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a");
-			subj.setPhoneNumber("+1 (408) 555-1212");
-
-			SSEvent evt = new SSEvent();
-			evt.setEventType(SSEventTypes.IPADDR_CHANGED);
-			evt.setSubject(subj);
-
-			SEToken set = new SEToken();
-			set.setIssuer("https://sp.example2.com/");
-			set.setJti("756E69717565206964656E746966696572");
-			set.setIssuedAt(System.currentTimeMillis());
-			set.setAudience("636C69656E745F6964");
-			set.addEvent(evt);
-
-			String json = ObjectMapperStandard.getJson(set, true);
-			System.out.println(json);
-			
-			try {
-				SEToken setNew = ObjectMapperStandard.getObjectMapper().readValue(json, SEToken.class);
-			} catch (JsonMappingException e) {
-				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
-			} catch (JsonProcessingException e) {
-				log.error("JsonMappingException failure de-serializing JSON {}", json, e);
+				JWTClaimsSet setNew = JWTClaimsSet.parse(json);
+			} catch (ParseException e) {
+				log.error("ParseException failure de-serializing JSON {}", json, e);
 			}
 		}
 
 		{
 			System.out.println("TransmitterConfig JSON example:");
+			String iss = "https://ssedemo.example.com";
 
-			TransmitterConfig txCfg = new TransmitterConfig();
+			JSONObject txCfg = new TransmitterConfig.Builder()
+				.issuer(iss)
+				.jwks_uri(iss + "/jwks")
+				.supported_versions(Arrays.asList("1.0"))
+				.configuration_endpoint(iss + "/config")
+				.status_endpoint(iss + "/status")
+				.add_subject_endpoint(iss + "/addSubject")
+				.remove_subject_endpoint(iss + "/removeSubject")
+				.verification_endpoint(iss + "/verify")
+				.delivery_methods_supported(Arrays.asList("https"))
+				.build();
 
-			String iss = "https://ssedemo.identitynow.com";
-			txCfg.setIssuer(iss);
-			txCfg.setJwksUri(iss + "/jwks");
-			txCfg.setSupportedVersions("1.0");
-			txCfg.setConfigurationEndpoint(iss + "/config");
-			txCfg.setStatusEndpoint(iss + "/status");
-			txCfg.setAddSubjectEndpoint(iss + "/addSubject");
-			txCfg.setRemoveSubjectEndpoint(iss + "/removeSubject");
-			txCfg.setVerificationEndpoint(iss + "/verify");
-
-			ArrayList<String> deliveryMethods = new ArrayList<String>();
-			deliveryMethods.add("https");
-			txCfg.setDeliveryMethodsSupported(deliveryMethods);
-
-			String json  = ObjectMapperStandard.getJson(txCfg, true);
+			String json  = txCfg.toString();
 			System.out.println(json);
 			
 		}
-
 	}
 
 }

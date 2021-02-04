@@ -1,89 +1,62 @@
 package sse.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import net.minidev.json.JSONObject;
+
+import java.util.Map;
 
 /**
- * A JSON Serialize-able container for a Shared Signals Event (SSE Event).
- * 
+ * A Shared Signals Event (SSE Event).
+ *
  * @author adam.hampton
+ * @author matt.domsch
  *
  */
-@JsonPropertyOrder({ "type", "iss", "iat", "sub", "npt", "evt"})
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class SSEvent {
-	
-	/**
-	 * The subject of the SSE Event.
-	 */
-	@JsonProperty("subject")
-	@JsonAlias("sub")
-	Subject subject;
-	
-	/**
-	 * The type of Shared Signals and Events (SSE) event.  
-	 * This is defined in an enumeration (TODO: reference).
-	 * This can be extended by implementers to include their own types
-	 * of events.
-	 */
-	@JsonProperty("type")
-	@JsonAlias({"event_type", "eventType"})
-	String eventType;
-	
-	/**
-	 * Currently a single-string placeholder for the event that may some day expand
-	 * into a much larger JSON Object of its own. Defines the event that has occurred
-	 * to the subject.
-	 */
-	@JsonProperty("evt")
-	@JsonAlias("event")
-	String event;
-	
-	/** 
-	 * Carries the IP address for the IP address changed event. 
-	 * Not clear if this is the new or old IP address for the subject.
-	 * From example events on page 7.
-	 */
-	@JsonProperty("ip_address")
-	@JsonAlias("ipAddress")
-	String ipAddress; 
-	
-	public String getEvent() {
-		return event;
-	}
+public class SSEvent  {
 
-	public void setEvent(String event) {
-		this.event = event;
-	}
-	
-	public Subject getSubject() {
-		return subject;
-	}
+	private SSEvent() {}
 
-	public void setSubject(Subject subject) {
-		this.subject = subject;
-	}
+	public static class Builder {
 
-	public String getEventType() {
-		return eventType;
-	}
+		private static final String SUBJECT_CLAIM     = "subject";
+		private static final String STATUS_CLAIM      = "status";
+		private static final String REASON_CLAIM      = "reason";
+		private static final String PROPERTIES_CLAIM  = "properties";
+		private static final String IPADDRESS_CLAIM   = "ip_address";
+		private static final String ID_CLAIM   		  = "id";
 
-	public void setEventType(String eventType) {
-		this.eventType = eventType;
-	}
-	
-	public void setEventType(SSEventTypes sseType) {
-		this.eventType = sseType.toString();
-	}
+		private final JSONObject claims = new JSONObject();
 
-	public String getIpAddress() {
-		return ipAddress;
-	}
+		public SSEvent.Builder subject(final Map<String, Object> sub) {
+			claims.put(SUBJECT_CLAIM, sub);
+			return this;
+		}
 
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
+		public SSEvent.Builder status(final String status) {
+			claims.put(STATUS_CLAIM, status);
+			return this;
+		}
+
+		public SSEvent.Builder reason(final String reason) {
+
+			claims.put(REASON_CLAIM, reason);
+			return this;
+		}
+		public SSEvent.Builder properties(final Map<String, Object> properties) {
+			claims.put(PROPERTIES_CLAIM, properties);
+			return this;
+		}
+
+		public SSEvent.Builder ipAddress(final String ipAddress) {
+			claims.put(IPADDRESS_CLAIM, ipAddress);
+			return this;
+		}
+
+		public SSEvent.Builder id(final String ipAddress) {
+			claims.put(ID_CLAIM, ipAddress);
+			return this;
+		}
+
+		public JSONObject build() { return claims; }
 	}
-	
 }
+

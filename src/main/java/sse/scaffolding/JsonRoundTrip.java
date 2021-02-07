@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
-import net.minidev.json.JSONObject;
+import com.nimbusds.jose.shaded.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +17,7 @@ import sse.model.TransmitterConfig;
 public class JsonRoundTrip {
 	
 	static final Logger log = LoggerFactory.getLogger(JsonRoundTrip.class);
+	public static final String EVENTS_CLAIM = "events";
 
 	public static void main(String[] args) {
 
@@ -42,7 +43,7 @@ public class JsonRoundTrip {
 				.jwtID("756E69717565206964656E746966696572")
 				.issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
 				.audience("636C69656E745F6964")
-				.claim("events", eventType)
+				.claim(EVENTS_CLAIM, eventType)
 				.build();
 
 			String json = set.toString();
@@ -75,7 +76,7 @@ public class JsonRoundTrip {
 				.jwtID("756E69717565206964656E746966696572")
 				.issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
 				.audience("636C69656E745F6964")
-				.claim("events", eventType)
+				.claim(EVENTS_CLAIM, eventType)
 				.build();
 
 			String json = set.toString();
@@ -109,7 +110,7 @@ public class JsonRoundTrip {
 				.jwtID("756E69717565206964656E746966696572")
 				.issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
 				.audience("636C69656E745F6964")
-				.claim("events", eventType)
+				.claim(EVENTS_CLAIM, eventType)
 				.build();
 
 
@@ -144,7 +145,7 @@ public class JsonRoundTrip {
 				.jwtID("756E69717565206964656E746966696572")
 				.issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
 				.audience("636C69656E745F6964")
-				.claim("events", eventType)
+				.claim(EVENTS_CLAIM, eventType)
 				.build();
 
 			String json = set.toString();

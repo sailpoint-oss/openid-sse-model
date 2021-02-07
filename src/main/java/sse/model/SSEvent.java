@@ -1,6 +1,6 @@
 package sse.model;
 
-import net.minidev.json.JSONObject;
+import com.nimbusds.jose.shaded.json.JSONObject;
 
 import java.util.Map;
 

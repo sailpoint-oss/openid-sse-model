@@ -2,7 +2,6 @@ package sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class TransmitterConfig extends JSONObject {
@@ -24,16 +23,6 @@ public class TransmitterConfig extends JSONObject {
 		 * uses to validate signatures from the Transmitter.
 		 */
 		private static final String JWKS_URI_CLAIM = "jwks_uri";
-
-		/**
-		 * OPTIONAL.  List of string representations of the
-		 * numerical profile versions defined in Section 2 supported by this
-		 * transmitter.  If this element is missing in the Transmitter
-		 * Configuration Metadata, then a single-valued list containing the
-		 * value "1.0" MUST be assumed.
-		 */
-		private static final String SUPPORTED_VERSIONS_CLAIM = "supported_versions";
-		private static final List<String> DEFAULT_SUPPORT_VERSIONS = Arrays.asList("1.0");
 
 		/**
 		 * RECOMMENDED.  List of supported delivery method URIs.
@@ -84,11 +73,6 @@ public class TransmitterConfig extends JSONObject {
 			return this;
 		}
 
-		public Builder supported_versions(final List<String> versions) {
-			claims.put(SUPPORTED_VERSIONS_CLAIM, versions);
-			return this;
-		}
-
 		public Builder delivery_methods_supported(final List<String> methods) {
 			claims.put(DELIVERY_METHODS_SUPPORTED_CLAIM, methods);
 			return this;
@@ -120,9 +104,6 @@ public class TransmitterConfig extends JSONObject {
 		}
 
 		public TransmitterConfig build() {
-			if (!claims.containsKey(SUPPORTED_VERSIONS_CLAIM)) {
-					claims.put(SUPPORTED_VERSIONS_CLAIM, DEFAULT_SUPPORT_VERSIONS);
-			}
 			return claims;
 		}
 	}

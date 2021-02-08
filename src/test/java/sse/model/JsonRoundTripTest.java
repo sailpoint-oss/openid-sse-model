@@ -96,22 +96,5 @@ public class JsonRoundTripTest {
 		JWTClaimsSet setNew = JWTClaimsSet.parse(json);
 	}
 
-	@Test()
-	public void TransmitterConfigTest() throws ParseException {
-		String iss = "https://ssedemo.example.com";
 
-		TransmitterConfig txCfg = new TransmitterConfig.Builder()
-				.issuer(iss)
-				.jwks_uri(iss + "/jwks")
-				.supported_versions(Arrays.asList("1.0"))
-				.configuration_endpoint(iss + "/config")
-				.status_endpoint(iss + "/status")
-				.add_subject_endpoint(iss + "/addSubject")
-				.remove_subject_endpoint(iss + "/removeSubject")
-				.verification_endpoint(iss + "/verify")
-				.delivery_methods_supported(Arrays.asList("https"))
-				.build();
-
-		String json = txCfg.toString();
-	}
 }

@@ -21,15 +21,13 @@ dependencies {
     
     // Nimbus JOSE JWT
     // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
-    compile group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.4.2'
+    api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.4.2'
 
     // Simple logging framework, compatible with many loggers.
     implementation 'org.slf4j:slf4j-api:1.7.30'
     
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-    testImplementation group: 'com.google.guava', name: 'guava', version: '30.1-jre'
-
 }
 
 version = '0.1.0'

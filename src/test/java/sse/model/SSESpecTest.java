@@ -9,7 +9,8 @@ import java.text.ParseException;
 import static org.junit.Assert.*;
 
 public class SSESpecTest  {
-    @Test public void Figure1() throws ParseException {
+    @Test
+    public void Figure1() throws ParseException {
         JSONObject inner = new JSONObject();
         inner.put("subject_type", "iss-sub");
         inner.put("iss", "https://idp.example.com/123456789/");
@@ -34,7 +35,8 @@ public class SSESpecTest  {
         assertEquals(fig_1_json, container_json);
     }
 
-    @Test public void Figure2() throws ParseException {
+    @Test
+    public void Figure2() throws ParseException {
         JSONObject user = new SubjectIdentifier.Builder()
                 .subjectType("iss-sub")
                 .issuer("https://idp.example.com/123456789/")
@@ -69,7 +71,4 @@ public class SSESpecTest  {
         final String container_json = JSONObject.toJSONString(container);
         assertEquals(figure_json, container_json);
     }
-
-
-
 }

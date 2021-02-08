@@ -12,11 +12,11 @@ public class MultiEventInSetTest {
 
 	@Test()
 	public void MultiEventSETTest() throws ParseException {
-		JSONObject urnEvent = new SSEvent.Builder()
+		SSEvent urnEvent = new SSEvent.Builder()
 				.id("44f6142df96bd6ab61e7521d9")
 				.build();
 
-		JSONObject urlEvent = new SSEvent.Builder().build();
+		SSEvent urlEvent = new SSEvent.Builder().build();
 		urlEvent.put("resetAttempts", 5);
 
 		JSONObject eventType = new JSONObject();

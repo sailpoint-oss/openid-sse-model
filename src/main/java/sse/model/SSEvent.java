@@ -11,9 +11,7 @@ import java.util.Map;
  * @author matt.domsch
  *
  */
-public class SSEvent  {
-
-	private SSEvent() {}
+public class SSEvent extends JSONObject {
 
 	public static class Builder {
 
@@ -24,7 +22,7 @@ public class SSEvent  {
 		private static final String IPADDRESS_CLAIM   = "ip_address";
 		private static final String ID_CLAIM   		  = "id";
 
-		private final JSONObject claims = new JSONObject();
+		private final SSEvent claims = new SSEvent();
 
 		public SSEvent.Builder subject(final Map<String, Object> sub) {
 			claims.put(SUBJECT_CLAIM, sub);
@@ -56,7 +54,7 @@ public class SSEvent  {
 			return this;
 		}
 
-		public JSONObject build() { return claims; }
+		public SSEvent build() { return claims; }
 	}
 }
 

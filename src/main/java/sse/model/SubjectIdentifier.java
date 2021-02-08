@@ -2,9 +2,7 @@ package sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
 
-public class SubjectIdentifier {
-
-    private SubjectIdentifier() {}
+public class SubjectIdentifier extends JSONObject {
 
     // https://github.com/richanna/secevent/blob/master/draft-ietf-secevent-subject-identifiers.txt
     public static final String ACCOUNT_SUBJECT_IDENTIFIER_TYPE = "account";
@@ -28,7 +26,7 @@ public class SubjectIdentifier {
         private static final String PHONE_CLAIM = "phone_number";
         private static final String SPAG_ID_CLAIM = "spag_id";
 
-        private final JSONObject claims = new JSONObject();
+        private final SubjectIdentifier claims = new SubjectIdentifier();
 
         public SubjectIdentifier.Builder issuer(final String iss) {
 
@@ -65,7 +63,7 @@ public class SubjectIdentifier {
             return this;
         }
 
-        public JSONObject build() {
+        public SubjectIdentifier build() {
             return claims;
         }
 

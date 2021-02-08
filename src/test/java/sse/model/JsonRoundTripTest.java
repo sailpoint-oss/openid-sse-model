@@ -15,12 +15,12 @@ public class JsonRoundTripTest {
 
 	@Test()
 	public void Test1() throws ParseException {
-		JSONObject subj = new SubjectIdentifier.Builder()
+		SubjectIdentifier subj = new SubjectIdentifier.Builder()
 				.subjectType(SubjectIdentifier.EMAIL_SUBJECT_IDENTIFIER_TYPE)
 				.subject("foo@example.com")
 				.build();
 
-		JSONObject evt = new SSEvent.Builder()
+		SSEvent evt = new SSEvent.Builder()
 				.subject(subj)
 				.build();
 
@@ -41,13 +41,13 @@ public class JsonRoundTripTest {
 
 	@Test()
 	public void Test2() throws ParseException {
-		JSONObject subj = new SubjectIdentifier.Builder()
+		SubjectIdentifier subj = new SubjectIdentifier.Builder()
 				.subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
 				.issuer("https://issuer.example.com/")
 				.subject("abc1234")
 				.build();
 
-		JSONObject evt = new SSEvent.Builder()
+		SSEvent evt = new SSEvent.Builder()
 				.subject(subj)
 				.build();
 
@@ -69,12 +69,12 @@ public class JsonRoundTripTest {
 	@Test
 	public void Test3() throws ParseException {
 		// Reproduce Atul's draft text from `openid-sse-profile-draft2` page 7.
-		JSONObject subj = new SubjectIdentifier.Builder()
+		SubjectIdentifier subj = new SubjectIdentifier.Builder()
 				.subjectType(SubjectIdentifier.EMAIL_SUBJECT_IDENTIFIER_TYPE)
 				.subject("foo@example.com")
 				.build();
 
-		JSONObject evt = new SSEvent.Builder()
+		SSEvent evt = new SSEvent.Builder()
 				.subject(subj)
 				.ipAddress("123.45.67.89") // From CAEP example, ha!
 				.build();
@@ -96,12 +96,12 @@ public class JsonRoundTripTest {
 
 	@Test()
 	public void Test4() throws ParseException {
-		JSONObject subj = new SubjectIdentifier.Builder()
+		SubjectIdentifier subj = new SubjectIdentifier.Builder()
 				.subjectType(SubjectIdentifier.SPAG_SUBJECT_IDENTIFIER_TYPE)
 				.spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
 				.build();
 
-		JSONObject evt = new SSEvent.Builder()
+		SSEvent evt = new SSEvent.Builder()
 				.subject(subj)
 				.status("paused")
 				.reason("License is not valid")
@@ -126,7 +126,7 @@ public class JsonRoundTripTest {
 	public void TransmitterConfigTest() throws ParseException {
 		String iss = "https://ssedemo.example.com";
 
-		JSONObject txCfg = new TransmitterConfig.Builder()
+		TransmitterConfig txCfg = new TransmitterConfig.Builder()
 				.issuer(iss)
 				.jwks_uri(iss + "/jwks")
 				.supported_versions(Arrays.asList("1.0"))

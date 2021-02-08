@@ -5,9 +5,7 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 
-public class TransmitterConfig  {
-
-	private TransmitterConfig() {}
+public class TransmitterConfig extends JSONObject {
 
 	public static class Builder {
 
@@ -72,7 +70,7 @@ public class TransmitterConfig  {
 		/**
 		 * The claims.
 		 */
-		private final JSONObject claims = new JSONObject();
+		private final TransmitterConfig claims = new TransmitterConfig();
 
 		public Builder issuer(final String iss) {
 
@@ -121,7 +119,7 @@ public class TransmitterConfig  {
 			return this;
 		}
 
-		public JSONObject build() {
+		public TransmitterConfig build() {
 			if (!claims.containsKey(SUPPORTED_VERSIONS_CLAIM)) {
 					claims.put(SUPPORTED_VERSIONS_CLAIM, DEFAULT_SUPPORT_VERSIONS);
 			}

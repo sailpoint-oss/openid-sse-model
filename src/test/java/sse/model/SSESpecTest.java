@@ -37,12 +37,12 @@ public class SSESpecTest  {
 
     @Test
     public void Figure2() throws ParseException {
-        JSONObject user = new SubjectIdentifier.Builder()
+        SubjectIdentifier user = new SubjectIdentifier.Builder()
                 .subjectType("iss-sub")
                 .issuer("https://idp.example.com/123456789/")
                 .subject("alice@example.com")
                 .build();
-        JSONObject device = new SubjectIdentifier.Builder()
+        SubjectIdentifier device = new SubjectIdentifier.Builder()
                 .subjectType("iss-sub")
                 .issuer("https://idp.example.com/123456789/")
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")

@@ -17,6 +17,9 @@ public class SubjectIdentifier extends JSONObject {
     public static final String JWT_ID_SUBJECT_IDENTIFIER_TYPE = "jwt-id";
     public static final String SAML_ASSERTION_ID_SUBJECT_IDENTIFIER_TYPE = "saml-assertion-id";
 
+    // openid-sse-profile-1_0 Figure 11
+    public static final String USER_DEVICE_SUBJECT_IDENTIFIER_TYPE = "user-device";
+
     public static class Builder {
 
         private static final String SUBJECT_TYPE_CLAIM = "subject_type";
@@ -28,6 +31,8 @@ public class SubjectIdentifier extends JSONObject {
         private static final String JWT_ID_CLAIM = "jti";
         private static final String SAML_ISSUER_CLAIM = "issuer";
         private static final String SAML_ASSERTION_ID_CLAIM = "assertion_id";
+        private static final String USER_CLAIM = "user";
+        private static final String DEVICE_CLAIM = "device";
 
         private final SubjectIdentifier claims = new SubjectIdentifier();
 
@@ -80,6 +85,20 @@ public class SubjectIdentifier extends JSONObject {
         public SubjectIdentifier.Builder samlAssertionID(final String assertionId) {
 
             claims.put(SAML_ASSERTION_ID_CLAIM, assertionId);
+            return this;
+        }
+        public SubjectIdentifier.Builder user(final SubjectIdentifier user) {
+            claims.put(USER_CLAIM, user);
+            return this;
+        }
+
+        public SubjectIdentifier.Builder device(final SubjectIdentifier device) {
+            claims.put(DEVICE_CLAIM, device);
+            return this;
+        }
+
+        public SubjectIdentifier.Builder claim(final String name, final Object value) {
+            claims.put(name, value);
             return this;
         }
 

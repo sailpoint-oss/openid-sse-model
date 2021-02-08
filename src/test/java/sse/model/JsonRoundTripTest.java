@@ -14,32 +14,6 @@ public class JsonRoundTripTest {
 	public static final String EVENTS_CLAIM = "events";
 
 	@Test()
-	public void Test1() throws ParseException {
-		SubjectIdentifier subj = new SubjectIdentifier.Builder()
-				.subjectType(SubjectIdentifier.EMAIL_SUBJECT_IDENTIFIER_TYPE)
-				.subject("foo@example.com")
-				.build();
-
-		SSEvent evt = new SSEvent.Builder()
-				.subject(subj)
-				.build();
-
-		JSONObject eventType = new JSONObject();
-		eventType.put(SSEventTypes.RISC_ACCOUNT_ENABLED.toString(), evt);
-
-		JWTClaimsSet set = new JWTClaimsSet.Builder()
-				.issuer("https://idp.example.com/")
-				.jwtID("756E69717565206964656E746966696572")
-				.issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis() / 1000))
-				.audience("636C69656E745F6964")
-				.claim(EVENTS_CLAIM, eventType)
-				.build();
-
-		String json = set.toString();
-		JWTClaimsSet setNew = JWTClaimsSet.parse(json);
-	}
-
-	@Test()
 	public void Test2() throws ParseException {
 		SubjectIdentifier subj = new SubjectIdentifier.Builder()
 				.subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)

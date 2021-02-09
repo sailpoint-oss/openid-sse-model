@@ -13,9 +13,8 @@ a Java environment. It includes the following dependences:
 ## Examples
 
 Producing a Security Event Token using this library involves constructing the objects
-representing the `SubjectIdentifier`, the `SSEvent` (Shared Signals Event), and the `SEToken` (Security 
-Event Token) that will carry the event.  At its most basic level an `SEToken` can carry 
-one `SSEvent`.  
+representing the `SubjectIdentifier`, the `SSEvent` (Shared Signals Event), and the JWTClaimsSet (Security 
+Event Token) that will carry the event.
 
 ```java
         SubjectIdentifier subj = new SubjectIdentifier.Builder()

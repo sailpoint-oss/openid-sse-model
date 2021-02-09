@@ -23,9 +23,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
     api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.4.2'
 
-    // Simple logging framework, compatible with many loggers.
-    implementation 'org.slf4j:slf4j-api:1.7.30'
-    
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }

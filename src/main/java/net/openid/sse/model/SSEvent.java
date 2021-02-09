@@ -22,7 +22,18 @@ public class SSEvent extends JSONObject {
 		private static final String IPADDRESS_CLAIM   = "ip_address";
 		private static final String ID_CLAIM   		  = "id";
 
-		private final SSEvent claims = new SSEvent();
+		private String eventTypeName = "";
+		private final JSONObject claims = new JSONObject();
+
+		public SSEvent.Builder eventType(final SSEventTypes eventType) {
+			this.eventTypeName = eventType.toString();
+			return this;
+		}
+
+		public SSEvent.Builder eventType(final String eventType) {
+			this.eventTypeName = eventType;
+			return this;
+		}
 
 		public SSEvent.Builder subject(final Map<String, Object> sub) {
 			claims.put(SUBJECT_CLAIM, sub);
@@ -54,7 +65,11 @@ public class SSEvent extends JSONObject {
 			return this;
 		}
 
-		public SSEvent build() { return claims; }
+		public SSEvent build() {
+			SSEvent event = new SSEvent();
+			event.put(eventTypeName, claims);
+			return event;
+		}
 	}
 }
 

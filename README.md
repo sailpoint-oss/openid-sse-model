@@ -18,26 +18,24 @@ Event Token) that will carry the event.  At its most basic level an `SEToken` ca
 one `SSEvent`.  
 
 ```java
-     SubjectIdentifier subj = new SubjectIdentifier.Builder()
-        .subjectType(SubjectIdentifier.EMAIL_SUBJECT_IDENTIFIER_TYPE)
-        .email("foo@example.com")
-        .build();
+        SubjectIdentifier subj = new SubjectIdentifier.Builder()
+                .subjectType(SubjectIdentifier.EMAIL_SUBJECT_IDENTIFIER_TYPE)
+                .email("foo@example.com")
+                .build();
 
-     SSEvent evt = new SSEvent.Builder()
-        .subject(subj)
-        .ipAddress("123.45.67.89")
-        .build();
+        SSEvent evt = new SSEvent.Builder()
+                .eventType(SSEventTypes.CAEP_IPADDR_CHANGED)
+                .subject(subj)
+                .ipAddress("123.45.67.89")
+                .build();
 
-     JSONObject eventType = new JSONObject();
-        eventType.put(SSEventTypes.CAEP_IPADDR_CHANGED.toString(), evt);
-
-     JWTClaimsSet set = new JWTClaimsSet.Builder()
-        .issuer("https://sp.example2.com/")
-        .jwtID("756E69717565206964656E746966696572")
-        .issueTime(DateUtils.fromSecondsSinceEpoch(1520364019))
-        .audience("636C69656E745F6964")
-        .claim(SEToken.EVENTS_CLAIM, eventType)
-        .build();
+        JWTClaimsSet set = new JWTClaimsSet.Builder()
+                .issuer("https://sp.example2.com/")
+                .jwtID("756E69717565206964656E746966696572")
+                .issueTime(DateUtils.fromSecondsSinceEpoch(1520364019))
+                .audience("636C69656E745F6964")
+                .claim(SEToken.EVENTS_CLAIM, evt)
+                .build();
 ```
 
 See more code examples in `OpenIDSSEProfileTest.java`.

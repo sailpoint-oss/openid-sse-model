@@ -14,7 +14,7 @@ public enum DeliveryMethods {
 
 	private final String name;
 
-	private DeliveryMethods(String s, boolean addPrefix) {
+	DeliveryMethods(String s, boolean addPrefix) {
 		if (addPrefix) {
 			name = SSE_PREFIX + s;
 		} else {

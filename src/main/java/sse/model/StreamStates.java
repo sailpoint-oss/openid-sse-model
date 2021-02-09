@@ -25,7 +25,7 @@ public enum StreamStates {
 	
 	private final String name;
 
-	private StreamStates(String s) {
+	StreamStates(String s) {
 		name = s;
 	}
 

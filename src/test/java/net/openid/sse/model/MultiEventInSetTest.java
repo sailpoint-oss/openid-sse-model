@@ -20,8 +20,8 @@ public class MultiEventInSetTest {
 
 		SSEvent urlEvent = new SSEvent.Builder()
 				.eventType("https://example.com/scim/event/passwordResetExt")
+				.claim("resetAttempts", 5)
 				.build();
-		urlEvent.put("resetAttempts", 5);
 
 		urlEvent.merge(urnEvent);
 

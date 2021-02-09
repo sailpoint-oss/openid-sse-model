@@ -10,21 +10,22 @@ import java.text.ParseException;
 
 import static org.junit.Assert.*;
 
-public class SSESpecTest  {
+public class OpenIDSSEProfileTest  {
     /**
      *  Figure 1: Example: 'user-device-session' Subject Identifier with user only
      */
 
     @Test
     public void Figure1() throws ParseException {
-        JSONObject inner = new JSONObject();
-        inner.put("subject_type", SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE);
-        inner.put("iss", "https://idp.example.com/123456789/");
-        inner.put("sub", "alice@example.com");
+        SubjectIdentifier subj = new SubjectIdentifier.Builder()
+                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .issuer("https://idp.example.com/123456789/")
+                .subject("alice@example.com")
+                .build();
 
         JSONObject container = new JSONObject();
         container.put("subject_type", SubjectIdentifier.USER_DEVICE_SESSION_SUBJECT_IDENTIFIER_TYPE);
-        container.put("user", inner);
+        container.put("user", subj);
 
         final String fig_1_text =
                 "{\n" +

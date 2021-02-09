@@ -65,6 +65,11 @@ public class SSEvent extends JSONObject {
 			return this;
 		}
 
+		public SSEvent.Builder claim(final String claim, Object o) {
+			claims.put(claim, o);
+			return this;
+		}
+
 		public SSEvent build() {
 			SSEvent event = new SSEvent();
 			event.put(eventTypeName, claims);

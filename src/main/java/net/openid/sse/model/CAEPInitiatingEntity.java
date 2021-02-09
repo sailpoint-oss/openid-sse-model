@@ -1,4 +1,4 @@
-package sse.model;
+package net.openid.sse.model;
 
 public enum CAEPInitiatingEntity {
     ADMIN ("admin"),

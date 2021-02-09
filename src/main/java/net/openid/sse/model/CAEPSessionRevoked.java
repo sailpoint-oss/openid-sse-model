@@ -1,4 +1,4 @@
-package sse.model;
+package net.openid.sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
 

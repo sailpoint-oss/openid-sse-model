@@ -1,4 +1,4 @@
-package sse.model;
+package net.openid.sse.model;
 
 /**
  * Commonly used SSE stream states for SSE/RISC/CAEP events.

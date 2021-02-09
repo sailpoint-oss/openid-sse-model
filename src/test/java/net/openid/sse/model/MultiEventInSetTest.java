@@ -1,4 +1,4 @@
-package sse.model;
+package net.openid.sse.model;
 
 import java.text.ParseException;
 import java.util.Arrays;

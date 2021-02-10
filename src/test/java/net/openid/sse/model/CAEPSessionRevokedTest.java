@@ -44,7 +44,7 @@ public class CAEPSessionRevokedTest {
                 .jwtID("24c63fb56e5a2d77a6b512616ca9fa24")
                 .issueTime(DateUtils.fromSecondsSinceEpoch(1600976590L))
                 .audience("https://sp.example.com/caep")
-                .claim("events", eventType)
+                .claim(SEToken.EVENTS_CLAIM, eventType)
                 .build();
 
         final String figure_text = "   {\n" +
@@ -98,7 +98,7 @@ public class CAEPSessionRevokedTest {
                 .issueTime(DateUtils.fromSecondsSinceEpoch(1600976590L))
                 .audience("https://sp.example.com/caep")
                 .subject("jane.smith@example.com")
-                .claim("events", eventType)
+                .claim(SEToken.EVENTS_CLAIM, eventType)
                 .build();
 
         final String figure_text = "   {\n" +
@@ -164,7 +164,7 @@ public class CAEPSessionRevokedTest {
                 .jwtID("24c63fb56e5a2d77a6b512616ca9fa24")
                 .issueTime(DateUtils.fromSecondsSinceEpoch(1600976590L))
                 .audience("https://sp.example.com/caep")
-                .claim("events", eventType)
+                .claim(SEToken.EVENTS_CLAIM, eventType)
                 .build();
 
         final String figure_text = "   {\n" +

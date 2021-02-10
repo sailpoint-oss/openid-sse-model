@@ -18,13 +18,13 @@ public class OpenIDSSEProfileTest  {
     @Test
     public void Figure1() throws ParseException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("alice@example.com")
                 .build();
 
         JSONObject container = new JSONObject();
-        container.put("subject_type", SubjectIdentifier.USER_DEVICE_SESSION_SUBJECT_IDENTIFIER_TYPE);
+        container.put("subject_type", SubjectIdentifierTypes.USER_DEVICE_SESSION);
         container.put("user", subj);
 
         final String fig_1_text =
@@ -49,18 +49,18 @@ public class OpenIDSSEProfileTest  {
     @Test
     public void Figure2() throws ParseException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("alice@example.com")
                 .build();
         SubjectIdentifier device = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();
 
         JSONObject container = new JSONObject();
-        container.put("subject_type", SubjectIdentifier.USER_DEVICE_SESSION_SUBJECT_IDENTIFIER_TYPE);
+        container.put("subject_type", SubjectIdentifierTypes.USER_DEVICE_SESSION);
         container.put("user", user);
         container.put("device", device);
 
@@ -90,18 +90,18 @@ public class OpenIDSSEProfileTest  {
     @Test
     public void Figure3() throws ParseException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("alice@example.com")
                 .build();
         SubjectIdentifier session = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("dMTlD|1600802906337.16|16008.16")
                 .build();
 
         JSONObject container = new JSONObject();
-        container.put("subject_type", SubjectIdentifier.USER_DEVICE_SESSION_SUBJECT_IDENTIFIER_TYPE);
+        container.put("subject_type", SubjectIdentifierTypes.USER_DEVICE_SESSION);
         container.put("user", user);
         container.put("session", session);
 
@@ -131,7 +131,7 @@ public class OpenIDSSEProfileTest  {
     @Test
     public void Figure4() throws ParseException {
         SubjectIdentifier jwtid = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.JWT_ID_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.JWT_ID)
                 .issuer("https://idp.example.com/123456789/")
                 .jwtID("B70BA622-9515-4353-A866-823539EECBC8")
                 .build();
@@ -153,7 +153,7 @@ public class OpenIDSSEProfileTest  {
     @Test
     public void Figure5() throws ParseException {
         SubjectIdentifier samlSI = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.SAML_ASSERTION_ID_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.SAML_ASSERTION_ID)
                 .issuer("https://idp.example.com/123456789/")
                 .samlAssertionID("_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6")
                 .build();
@@ -176,7 +176,7 @@ public class OpenIDSSEProfileTest  {
     @Test()
     public void Figure6() throws ParseException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.EMAIL_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.EMAIL)
                 .email("foo@example.com")
                 .build();
 
@@ -222,7 +222,7 @@ public class OpenIDSSEProfileTest  {
     @Test()
     public void Figure7() throws ParseException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.EMAIL_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.EMAIL)
                 .email("foo@example.com")
                 .spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
                 .build();
@@ -270,7 +270,7 @@ public class OpenIDSSEProfileTest  {
     @Test()
     public void Figure8() throws ParseException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://issuer.example.com/")
                 .subject("abc1234")
                 .build();
@@ -317,7 +317,7 @@ public class OpenIDSSEProfileTest  {
     @Test()
     public void Figure9() throws ParseException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.EMAIL_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.EMAIL)
                 .email("foo@example.com")
                 .build();
 
@@ -364,7 +364,7 @@ public class OpenIDSSEProfileTest  {
     @Test()
     public void Figure10() throws ParseException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.SPAG_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.SPAG)
                 .spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
                 .build();
 
@@ -413,19 +413,19 @@ public class OpenIDSSEProfileTest  {
     @Test()
     public void Figure11() throws ParseException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/")
                 .subject("jane.smith@example.com")
                 .build();
 
         SubjectIdentifier device = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/")
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();
 
         SubjectIdentifier userDevice = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.USER_DEVICE_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.USER_DEVICE_SESSION)
                 .user(user)
                 .device(device)
                 .build();
@@ -451,7 +451,7 @@ public class OpenIDSSEProfileTest  {
                 "  \"events\": {\n" +
                 "    \"https://schemas.openid.net/secevent/caep/event-type/session-revoked\": {\n" +
                 "    \"subject\": {\n" +
-                "        \"subject_type\": \"user-device\",\n" +
+                "        \"subject_type\": \"user-device-session\",\n" +
                 "        \"user\": {\n" +
                 "            \"subject_type\": \"iss-sub\",\n" +
                 "            \"iss\": \"https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/\",\n" +

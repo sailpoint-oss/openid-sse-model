@@ -23,7 +23,7 @@ public class CAEPSessionRevokedTest {
                 .build();
 
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.USER_DEVICE_SESSION_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.USER_DEVICE_SESSION)
                 .claim("session", session)
                 .build();
 
@@ -130,19 +130,19 @@ public class CAEPSessionRevokedTest {
     @Test
     public void Figure3() throws ParseException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("jane.smith@example.com")
                 .build();
 
         SubjectIdentifier device = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.ISSUER_SUBJECT_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();
 
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifier.USER_DEVICE_SESSION_SUBJECT_IDENTIFIER_TYPE)
+                .subjectType(SubjectIdentifierTypes.USER_DEVICE_SESSION)
                 .claim("user", user)
                 .claim("device", device)
                 .build();

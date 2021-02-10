@@ -20,13 +20,13 @@ public class TransmitterConfigTest {
 
         TransmitterConfig txCfg = new TransmitterConfig.Builder()
                 .issuer(iss)
-                .jwks_uri(iss + "/jwks.json")
-                .delivery_methods_supported(Arrays.asList(deliveryMethods))
-                .configuration_endpoint(iss +riscPrefix + "/stream")
-                .status_endpoint(iss + riscPrefix + "/status")
-                .add_subject_endpoint(iss + riscPrefix + "/subject:add")
-                .remove_subject_endpoint(iss + riscPrefix + "/subject:remove")
-                .verification_endpoint(iss + riscPrefix + "/verification")
+                .jwksUri(iss + "/jwks.json")
+                .deliveryMethods(Arrays.asList(deliveryMethods))
+                .configurationEndpoint(iss +riscPrefix + "/stream")
+                .statusEndpoint(iss + riscPrefix + "/status")
+                .addSubjectEndpoint(iss + riscPrefix + "/subject:add")
+                .removeSubjectEndpoint(iss + riscPrefix + "/subject:remove")
+                .verificationEndpoint(iss + riscPrefix + "/verification")
                 .build();
 
         String tc_json = txCfg.toString();

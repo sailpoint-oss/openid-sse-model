@@ -67,38 +67,38 @@ public class TransmitterConfig extends JSONObject {
 			return this;
 		}
 
-		public Builder jwks_uri(final String jwks_uri) {
+		public Builder jwksUri(final String jwks_uri) {
 
 			claims.put(JWKS_URI_CLAIM, jwks_uri);
 			return this;
 		}
 
-		public Builder delivery_methods_supported(final List<String> methods) {
+		public Builder deliveryMethods(final List<String> methods) {
 			claims.put(DELIVERY_METHODS_SUPPORTED_CLAIM, methods);
 			return this;
 		}
 
-		public Builder configuration_endpoint(final String endpoint) {
+		public Builder configurationEndpoint(final String endpoint) {
 			claims.put(CONFIGURATION_ENDPOINT_CLAIM, endpoint);
 			return this;
 		}
 
-		public Builder status_endpoint(final String endpoint) {
+		public Builder statusEndpoint(final String endpoint) {
 			claims.put(STATUS_ENDPOINT_CLAIM, endpoint);
 			return this;
 		}
 
-		public Builder add_subject_endpoint(final String endpoint) {
+		public Builder addSubjectEndpoint(final String endpoint) {
 			claims.put(ADD_SUBJECT_ENDPOINT_CLAIM, endpoint);
 			return this;
 		}
 
-		public Builder remove_subject_endpoint(final String endpoint) {
+		public Builder removeSubjectEndpoint(final String endpoint) {
 			claims.put(REMOVE_SUBJECT_ENDPOINT_CLAIM, endpoint);
 			return this;
 		}
 
-		public Builder verification_endpoint(final String endpoint) {
+		public Builder verificationEndpoint(final String endpoint) {
 			claims.put(VERIFICATION_ENDPOINT_CLAIM, endpoint);
 			return this;
 		}

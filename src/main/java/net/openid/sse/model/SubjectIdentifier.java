@@ -38,7 +38,7 @@ public class SubjectIdentifier extends JSONObject {
 
         public SubjectIdentifier.Builder issuer(final String iss) {
             final String subjectTypeClaim = (String) claims.getOrDefault(SUBJECT_TYPE_CLAIM, null);
-            if (null != subjectTypeClaim && SAML_ASSERTION_ID_SUBJECT_IDENTIFIER_TYPE.equals(subjectTypeClaim)) {
+            if (SAML_ASSERTION_ID_SUBJECT_IDENTIFIER_TYPE.equals(subjectTypeClaim)) {
                 claims.put(SAML_ISSUER_CLAIM, iss);
             }
             else {

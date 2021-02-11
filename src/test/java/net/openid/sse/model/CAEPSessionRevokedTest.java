@@ -33,7 +33,6 @@ public class CAEPSessionRevokedTest {
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Landspeed violation.")
                 .tenantID("123456789")
-                .eventType(SSEventTypes.CAEP_SESSION_REVOKED)
                 .subject(subj)
                 .build();
 
@@ -85,7 +84,6 @@ public class CAEPSessionRevokedTest {
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Landspeed violation.")
                 .tenantID("123456789")
-                .eventType(SSEventTypes.CAEP_SESSION_REVOKED)
                 .build();
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
@@ -149,7 +147,6 @@ public class CAEPSessionRevokedTest {
                 .reasonUser("Your device is no longer compliant.")
                 .tenantID("123456789")
                 .eventTimestamp(1600975810L)
-                .eventType(SSEventTypes.CAEP_SESSION_REVOKED)
                 .subject(subj)
                 .build();
 

@@ -9,6 +9,11 @@ public class CAEPSessionRevoked extends SSEvent {
         private static final String REASON_USER_CLAIM = "reason_user";
         private static final String TENANT_ID_CLAIM = "tenant_id";
 
+        public Builder() {
+            super();
+            super.eventType(SSEventTypes.CAEP_SESSION_REVOKED);
+        }
+
         public Builder eventTimestamp(final long eventTimestamp) {
             super.claims.put(EVENT_TIMESTAMP_CLAIM, eventTimestamp);
             return this;

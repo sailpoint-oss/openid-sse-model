@@ -38,6 +38,7 @@ public class OpenIDSSEProfileTest  {
                 "       }\n" +
                 "   }";
 
+        // TODO: replace string comparison with JSONObject equality
         final String fig_1_json = JSONObject.toJSONString((JSONObjectUtils.parse(fig_1_text)));
         final String container_json = JSONObject.toJSONString(container);
         assertEquals(fig_1_json, container_json);

@@ -51,6 +51,7 @@ public class TransmitterConfigTest {
                 "       \"https://tr.example.com/risc/mgmt/verification\"\n" +
                 "   }";
 
+        // TODO: replace String comparison with JSONObject comparison
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         assertEquals(figure_json, tc_json);
 

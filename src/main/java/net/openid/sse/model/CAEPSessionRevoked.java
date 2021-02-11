@@ -1,5 +1,8 @@
 package net.openid.sse.model;
 
+// TODO: move eventTimestamp into a base class
+// TODO: create more CAEP event-specific classes
+
 public class CAEPSessionRevoked extends SSEvent {
 
     public static class Builder extends SSEvent.Builder {

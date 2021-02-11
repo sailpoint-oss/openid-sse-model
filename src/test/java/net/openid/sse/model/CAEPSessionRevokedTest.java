@@ -28,11 +28,11 @@ public class CAEPSessionRevokedTest {
                 .build();
 
         SSEvent evt = new CAEPSessionRevoked.Builder()
-                .eventTimestamp(1600975810L)
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Landspeed violation.")
                 .tenantID("123456789")
+                .eventTimestamp(1600975810L)
                 .subject(subj)
                 .build();
 
@@ -79,11 +79,11 @@ public class CAEPSessionRevokedTest {
     @Test
     public void Figure2() throws ParseException {
         SSEvent evt = new CAEPSessionRevoked.Builder()
-                .eventTimestamp(1600975810L)
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Landspeed violation.")
                 .tenantID("123456789")
+                .eventTimestamp(1600975810L)
                 .build();
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()

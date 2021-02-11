@@ -16,13 +16,13 @@ public class CAEPCredentialChange extends CAEPBaseEvent {
             super.eventType(SSEventTypes.CAEP_CREDENTIAL_CHANGE);
         }
 
-        public Builder credentialType(final String type) {
-            super.members.put(CREDENTIAL_TYPE, type);
+        public Builder credentialType(final CAEPCredentialType type) {
+            super.members.put(CREDENTIAL_TYPE, type.toString());
             return this;
         }
 
-        public Builder changeType(final String type) {
-            super.members.put(CHANGE_TYPE, type);
+        public Builder changeType(final CAEPChangeType type) {
+            super.members.put(CHANGE_TYPE, type.toString());
             return this;
         }
 

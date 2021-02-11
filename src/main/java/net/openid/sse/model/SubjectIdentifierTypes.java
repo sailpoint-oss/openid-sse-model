@@ -1,5 +1,8 @@
 package net.openid.sse.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum SubjectIdentifierTypes {
 
     // https://github.com/richanna/secevent/blob/master/draft-ietf-secevent-subject-identifiers.txt
@@ -24,6 +27,23 @@ public enum SubjectIdentifierTypes {
     public boolean equalsName(final String otherName) {
         return name.equals(otherName);
     }
+
+    private static final Map<String, SubjectIdentifierTypes> BY_NAME = new HashMap<>();
+
+    static {
+        for (SubjectIdentifierTypes t: values()) {
+            BY_NAME.put(t.name, t);
+        }
+    }
+
+    public static SubjectIdentifierTypes valueOfLabel(String name) {
+        return BY_NAME.get(name);
+    }
+
+    public static boolean contains(final String name) {
+        return BY_NAME.containsKey(name);
+    }
+
 
     @Override
     public String toString() {

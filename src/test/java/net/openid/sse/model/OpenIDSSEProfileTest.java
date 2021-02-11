@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class OpenIDSSEProfileTest  {
     /**
@@ -16,16 +16,17 @@ public class OpenIDSSEProfileTest  {
      */
 
     @Test
-    public void Figure1() throws ParseException {
+    public void Figure1() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("alice@example.com")
                 .build();
 
-        JSONObject container = new JSONObject();
-        container.put("subject_type", SubjectIdentifierTypes.USER_DEVICE_SESSION);
-        container.put("user", subj);
+        SubjectIdentifier container = new SubjectIdentifier.Builder()
+                .subjectType( SubjectIdentifierTypes.USER_DEVICE_SESSION)
+                .claim("user", subj)
+                .build();
 
         final String fig_1_text =
                 "{\n" +
@@ -40,6 +41,7 @@ public class OpenIDSSEProfileTest  {
         final String fig_1_json = JSONObject.toJSONString((JSONObjectUtils.parse(fig_1_text)));
         final String container_json = JSONObject.toJSONString(container);
         assertEquals(fig_1_json, container_json);
+        subj.validate();
     }
 
     /**
@@ -47,7 +49,7 @@ public class OpenIDSSEProfileTest  {
      */
 
     @Test
-    public void Figure2() throws ParseException {
+    public void Figure2() throws ParseException, ValidationException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
@@ -59,10 +61,11 @@ public class OpenIDSSEProfileTest  {
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();
 
-        JSONObject container = new JSONObject();
-        container.put("subject_type", SubjectIdentifierTypes.USER_DEVICE_SESSION);
-        container.put("user", user);
-        container.put("device", device);
+        SubjectIdentifier container = new SubjectIdentifier.Builder()
+                .subjectType(SubjectIdentifierTypes.USER_DEVICE_SESSION)
+                .claim("user", user)
+                .claim("device", device)
+                .build();
 
         final String figure_text ="{\n" +
                 "       \"subject_type\": \"user-device-session\",\n" +
@@ -81,6 +84,8 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String container_json = JSONObject.toJSONString(container);
         assertEquals(figure_json, container_json);
+        user.validate();
+        device.validate();
     }
 
     /**
@@ -88,7 +93,7 @@ public class OpenIDSSEProfileTest  {
      */
 
     @Test
-    public void Figure3() throws ParseException {
+    public void Figure3() throws ParseException, ValidationException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
@@ -100,10 +105,11 @@ public class OpenIDSSEProfileTest  {
                 .subject("dMTlD|1600802906337.16|16008.16")
                 .build();
 
-        JSONObject container = new JSONObject();
-        container.put("subject_type", SubjectIdentifierTypes.USER_DEVICE_SESSION);
-        container.put("user", user);
-        container.put("session", session);
+        SubjectIdentifier container = new SubjectIdentifier.Builder()
+                .subjectType(SubjectIdentifierTypes.USER_DEVICE_SESSION)
+                .claim("user", user)
+                .claim("session", session)
+                .build();
 
         final String figure_text ="   {\n" +
                 "       \"subject_type\": \"user-device-session\",\n" +
@@ -122,6 +128,9 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String container_json = JSONObject.toJSONString(container);
         assertEquals(figure_json, container_json);
+        user.validate();
+        session.validate();
+        container.validate();
     }
 
     /**
@@ -129,7 +138,7 @@ public class OpenIDSSEProfileTest  {
      */
 
     @Test
-    public void Figure4() throws ParseException {
+    public void Figure4() throws ParseException, ValidationException {
         SubjectIdentifier jwtid = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.JWT_ID)
                 .issuer("https://idp.example.com/123456789/")
@@ -144,6 +153,7 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String jwtid_json = JSONObject.toJSONString(jwtid);
         assertEquals(figure_json, jwtid_json);
+        jwtid.validate();
     }
 
     /**
@@ -151,7 +161,7 @@ public class OpenIDSSEProfileTest  {
      */
 
     @Test
-    public void Figure5() throws ParseException {
+    public void Figure5() throws ParseException, ValidationException {
         SubjectIdentifier samlSI = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.SAML_ASSERTION_ID)
                 .issuer("https://idp.example.com/123456789/")
@@ -167,6 +177,7 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String samlsi_json = JSONObject.toJSONString(samlSI);
         assertEquals(figure_json, samlsi_json);
+        samlSI.validate();
     }
 
 
@@ -174,7 +185,7 @@ public class OpenIDSSEProfileTest  {
      * Figure 6: Example: SET Containing a SSE Event with an Email Subject Identifier
      */
     @Test()
-    public void Figure6() throws ParseException {
+    public void Figure6() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.EMAIL)
                 .email("foo@example.com")
@@ -211,7 +222,7 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String JWTClaimsSet_json = set.toString();
         assertEquals(figure_json, JWTClaimsSet_json);
-
+        subj.validate();
         String json = set.toString();
         JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
     }
@@ -220,7 +231,7 @@ public class OpenIDSSEProfileTest  {
      * Figure 7: Example: SET Containing a SSE Event with a Subject That Has an Additional SPAG identifier Claim
      */
     @Test()
-    public void Figure7() throws ParseException {
+    public void Figure7() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.EMAIL)
                 .email("foo@example.com")
@@ -259,6 +270,7 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String JWTClaimsSet_json = set.toString();
         assertEquals(figure_json, JWTClaimsSet_json);
+        subj.validate();
 
         String json = set.toString();
         JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
@@ -268,7 +280,7 @@ public class OpenIDSSEProfileTest  {
      * Figure 8: Example: SET Containing a SSE Event with an Issuer and Subject Identifier
      */
     @Test()
-    public void Figure8() throws ParseException {
+    public void Figure8() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://issuer.example.com/")
@@ -307,6 +319,7 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String JWTClaimsSet_json = set.toString();
         assertEquals(figure_json, JWTClaimsSet_json);
+        subj.validate();
 
         JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
     }
@@ -315,7 +328,7 @@ public class OpenIDSSEProfileTest  {
      * Figure 9: Example: SET Containing a SSE Event with a Subject and a Property Claim
      */
     @Test()
-    public void Figure9() throws ParseException {
+    public void Figure9() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.EMAIL)
                 .email("foo@example.com")
@@ -354,6 +367,7 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String JWTClaimsSet_json = set.toString();
         assertEquals(figure_json, JWTClaimsSet_json);
+        subj.validate();
 
         JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
     }
@@ -362,7 +376,7 @@ public class OpenIDSSEProfileTest  {
      *  Figure 10: Example: SET Containing a SSE Event with a SPAG Subject Type
      */
     @Test()
-    public void Figure10() throws ParseException {
+    public void Figure10() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.SPAG)
                 .spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
@@ -403,6 +417,7 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String JWTClaimsSet_json = set.toString();
         assertEquals(figure_json, JWTClaimsSet_json);
+        subj.validate();
 
         JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
     }
@@ -411,7 +426,7 @@ public class OpenIDSSEProfileTest  {
      *  Figure 11: Example: SET Containing a SSE Event with a Compound subject_type
      */
     @Test()
-    public void Figure11() throws ParseException {
+    public void Figure11() throws ParseException, ValidationException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/")
@@ -470,6 +485,9 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String JWTClaimsSet_json = set.toString();
         assertEquals(figure_json, JWTClaimsSet_json);
+        user.validate();
+        device.validate();
+        userDevice.validate();
 
         JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
     }
@@ -478,7 +496,7 @@ public class OpenIDSSEProfileTest  {
      *  Figure 12: Example: SET Containing a SSE Event with a Proprietary subject_type
      */
     @Test()
-    public void Figure12() throws ParseException {
+    public void Figure12() throws ParseException, ValidationException {
         final String proprietarySubjectType = "x-device-id";
 
        SubjectIdentifier device = new SubjectIdentifier.Builder()
@@ -517,6 +535,7 @@ public class OpenIDSSEProfileTest  {
         final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
         final String JWTClaimsSet_json = set.toString();
         assertEquals(figure_json, JWTClaimsSet_json);
+        device.validate();
 
         JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
     }

@@ -1,6 +1,6 @@
 package net.openid.sse.model;
 
-public enum SubjectIdentifierClaims {
+public enum SubjectIdentifierMembers {
 
     SUBJECT_TYPE("subject_type"),
     ISSUER("iss"),
@@ -17,7 +17,7 @@ public enum SubjectIdentifierClaims {
 
     private final String name;
 
-    SubjectIdentifierClaims(final String s) {
+    SubjectIdentifierMembers(final String s) {
         name = s;
     }
 

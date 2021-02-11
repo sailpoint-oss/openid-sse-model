@@ -8,7 +8,7 @@ public enum SubjectIdentifierTypes {
     // https://github.com/richanna/secevent/blob/master/draft-ietf-secevent-subject-identifiers.txt
     ACCOUNT ("account"),
     EMAIL("email"),
-    ISSUER_SUBJECT ("iss-sub"),
+    ISSUER_SUBJECT ("iss_sub"),
     PHONE_NUMBER ("phone_number"),
     ALIASES ( "aliases"),
 

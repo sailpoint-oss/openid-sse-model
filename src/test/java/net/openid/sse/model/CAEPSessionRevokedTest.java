@@ -168,12 +168,12 @@ public class CAEPSessionRevokedTest {
                 "               \"subject\": {\n" +
                 "                   \"subject_type\": \"user-device-session\",\n" +
                 "                   \"user\": {\n" +
-                "                       \"subject_type\": \"iss-sub\",\n" +
+                "                       \"subject_type\": \"iss_sub\",\n" +
                 "                       \"iss\": \"https://idp.example.com/123456789/\",\n" +
                 "                       \"sub\": \"jane.smith@example.com\"\n" +
                 "                   },\n" +
                 "                   \"device\": {\n" +
-                "                       \"subject_type\": \"iss-sub\",\n" +
+                "                       \"subject_type\": \"iss_sub\",\n" +
                 "                       \"iss\": \"https://idp.example.com/123456789/\",\n" +
                 "                       \"sub\": \"e9297990-14d2-42ec-a4a9-4036db86509a\"\n" +
                 "                   }\n" +

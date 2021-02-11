@@ -32,7 +32,7 @@ public class OpenIDSSEProfileTest  {
                 "{\n" +
                 "       \"subject_type\": \"user-device-session\",\n" +
                 "       \"user\": {\n" +
-                "           \"subject_type\": \"iss-sub\",\n" +
+                "           \"subject_type\": \"iss_sub\",\n" +
                 "           \"iss\": \"https://idp.example.com/123456789/\",\n" +
                 "           \"sub\": \"alice@example.com\"\n" +
                 "       }\n" +
@@ -71,12 +71,12 @@ public class OpenIDSSEProfileTest  {
         final String figure_text ="{\n" +
                 "       \"subject_type\": \"user-device-session\",\n" +
                 "       \"user\": {\n" +
-                "           \"subject_type\": \"iss-sub\",\n" +
+                "           \"subject_type\": \"iss_sub\",\n" +
                 "           \"iss\": \"https://idp.example.com/123456789/\",\n" +
                 "           \"sub\": \"alice@example.com\"\n" +
                 "       },\n" +
                 "       \"device\": {\n" +
-                "           \"subject_type\": \"iss-sub\",\n" +
+                "           \"subject_type\": \"iss_sub\",\n" +
                 "           \"iss\": \"https://idp.example.com/123456789/\",\n" +
                 "           \"sub\": \"e9297990-14d2-42ec-a4a9-4036db86509a\"\n" +
                 "       }\n" +
@@ -115,12 +115,12 @@ public class OpenIDSSEProfileTest  {
         final String figure_text ="   {\n" +
                 "       \"subject_type\": \"user-device-session\",\n" +
                 "       \"user\": {\n" +
-                "           \"subject_type\": \"iss-sub\",\n" +
+                "           \"subject_type\": \"iss_sub\",\n" +
                 "           \"iss\": \"https://idp.example.com/123456789/\",\n" +
                 "           \"sub\": \"alice@example.com\"\n" +
                 "       },\n" +
                 "       \"session\": {\n" +
-                "           \"subject_type\": \"iss-sub\",\n" +
+                "           \"subject_type\": \"iss_sub\",\n" +
                 "           \"iss\": \"https://idp.example.com/123456789/\",\n" +
                 "           \"sub\": \"dMTlD|1600802906337.16|16008.16\"\n" +
                 "       }\n" +
@@ -309,7 +309,7 @@ public class OpenIDSSEProfileTest  {
                 "  \"events\": {\n" +
                 "    \"https://schemas.openid.net/secevent/risc/event-type/account-enabled\": {\n" +
                 "      \"subject\": {\n" +
-                "        \"subject_type\": \"iss-sub\",\n" +
+                "        \"subject_type\": \"iss_sub\",\n" +
                 "        \"iss\": \"https://issuer.example.com/\",\n" +
                 "        \"sub\": \"abc1234\"\n" +
                 "      }\n" +
@@ -469,12 +469,12 @@ public class OpenIDSSEProfileTest  {
                 "    \"subject\": {\n" +
                 "        \"subject_type\": \"user-device-session\",\n" +
                 "        \"user\": {\n" +
-                "            \"subject_type\": \"iss-sub\",\n" +
+                "            \"subject_type\": \"iss_sub\",\n" +
                 "            \"iss\": \"https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/\",\n" +
                 "            \"sub\": \"jane.smith@example.com\"\n" +
                 "        },\n" +
                 "        \"device\": {\n" +
-                "            \"subject_type\": \"iss-sub\",\n" +
+                "            \"subject_type\": \"iss_sub\",\n" +
                 "            \"iss\": \"https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/\",\n" +
                 "            \"sub\": \"e9297990-14d2-42ec-a4a9-4036db86509a\"\n" +
                 "        }\n" +
@@ -502,7 +502,7 @@ public class OpenIDSSEProfileTest  {
 
        SubjectIdentifier device = new SubjectIdentifier.Builder()
                 .subjectType(proprietarySubjectType)
-                .claim("device_id", "c0384/devices/2354122")
+                .member("device_id", "c0384/devices/2354122")
                 .build();
 
         SSEvent evt = new SSEvent.Builder()

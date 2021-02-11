@@ -15,15 +15,15 @@ public class SSEvent extends JSONObject {
 
 	public static class Builder {
 
-		private static final String SUBJECT_CLAIM     = "subject";
-		private static final String STATUS_CLAIM      = "status";
-		private static final String REASON_CLAIM      = "reason";
-		private static final String PROPERTIES_CLAIM  = "properties";
-		private static final String IPADDRESS_CLAIM   = "ip_address";
-		private static final String ID_CLAIM   		  = "id";
+		private static final String SUBJECT_MEMBER     = "subject";
+		private static final String STATUS_MEMBER      = "status";
+		private static final String REASON_MEMBER      = "reason";
+		private static final String PROPERTIES_MEMBER  = "properties";
+		private static final String IPADDRESS_MEMBER   = "ip_address";
+		private static final String ID_MEMBER   	   = "id";
 
 		private String eventTypeName = "";
-		protected final JSONObject claims = new JSONObject();
+		protected final JSONObject members = new JSONObject();
 
 		public Builder eventType(final SSEventTypes eventType) {
 			this.eventTypeName = eventType.toString();
@@ -36,43 +36,43 @@ public class SSEvent extends JSONObject {
 		}
 
 		public Builder subject(final Map<String, Object> sub) {
-			claims.put(SUBJECT_CLAIM, sub);
+			members.put(SUBJECT_MEMBER, sub);
 			return this;
 		}
 
 		public Builder status(final String status) {
-			claims.put(STATUS_CLAIM, status);
+			members.put(STATUS_MEMBER, status);
 			return this;
 		}
 
 		public Builder reason(final String reason) {
 
-			claims.put(REASON_CLAIM, reason);
+			members.put(REASON_MEMBER, reason);
 			return this;
 		}
 		public Builder properties(final Map<String, Object> properties) {
-			claims.put(PROPERTIES_CLAIM, properties);
+			members.put(PROPERTIES_MEMBER, properties);
 			return this;
 		}
 
 		public Builder ipAddress(final String ipAddress) {
-			claims.put(IPADDRESS_CLAIM, ipAddress);
+			members.put(IPADDRESS_MEMBER, ipAddress);
 			return this;
 		}
 
 		public Builder id(final String ipAddress) {
-			claims.put(ID_CLAIM, ipAddress);
+			members.put(ID_MEMBER, ipAddress);
 			return this;
 		}
 
 		public Builder claim(final String claim, final Object o) {
-			claims.put(claim, o);
+			members.put(claim, o);
 			return this;
 		}
 
 		public SSEvent build() {
 			SSEvent event = new SSEvent();
-			event.put(eventTypeName, claims);
+			event.put(eventTypeName, members);
 			return  event;
 		}
 	}

@@ -23,49 +23,49 @@ public class SSEvent extends JSONObject {
 		private static final String ID_CLAIM   		  = "id";
 
 		private String eventTypeName = "";
-		private final JSONObject claims = new JSONObject();
+		protected final JSONObject claims = new JSONObject();
 
-		public SSEvent.Builder eventType(final SSEventTypes eventType) {
+		public Builder eventType(final SSEventTypes eventType) {
 			this.eventTypeName = eventType.toString();
 			return this;
 		}
 
-		public SSEvent.Builder eventType(final String eventType) {
+		public Builder eventType(final String eventType) {
 			this.eventTypeName = eventType;
 			return this;
 		}
 
-		public SSEvent.Builder subject(final Map<String, Object> sub) {
+		public Builder subject(final Map<String, Object> sub) {
 			claims.put(SUBJECT_CLAIM, sub);
 			return this;
 		}
 
-		public SSEvent.Builder status(final String status) {
+		public Builder status(final String status) {
 			claims.put(STATUS_CLAIM, status);
 			return this;
 		}
 
-		public SSEvent.Builder reason(final String reason) {
+		public Builder reason(final String reason) {
 
 			claims.put(REASON_CLAIM, reason);
 			return this;
 		}
-		public SSEvent.Builder properties(final Map<String, Object> properties) {
+		public Builder properties(final Map<String, Object> properties) {
 			claims.put(PROPERTIES_CLAIM, properties);
 			return this;
 		}
 
-		public SSEvent.Builder ipAddress(final String ipAddress) {
+		public Builder ipAddress(final String ipAddress) {
 			claims.put(IPADDRESS_CLAIM, ipAddress);
 			return this;
 		}
 
-		public SSEvent.Builder id(final String ipAddress) {
+		public Builder id(final String ipAddress) {
 			claims.put(ID_CLAIM, ipAddress);
 			return this;
 		}
 
-		public SSEvent.Builder claim(final String claim, Object o) {
+		public Builder claim(final String claim, final Object o) {
 			claims.put(claim, o);
 			return this;
 		}
@@ -73,7 +73,7 @@ public class SSEvent extends JSONObject {
 		public SSEvent build() {
 			SSEvent event = new SSEvent();
 			event.put(eventTypeName, claims);
-			return event;
+			return  event;
 		}
 	}
 }

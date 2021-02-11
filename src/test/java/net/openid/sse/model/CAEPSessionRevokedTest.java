@@ -24,27 +24,25 @@ public class CAEPSessionRevokedTest {
 
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.USER_DEVICE_SESSION)
-                .claim("session", session)
+                .session(session)
                 .build();
 
-        CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
+        SSEvent evt = new CAEPSessionRevoked.Builder()
                 .eventTimestamp(1600975810L)
-                .subject(subj)
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Landspeed violation.")
                 .tenantID("123456789")
+                .eventType(SSEventTypes.CAEP_SESSION_REVOKED)
+                .subject(subj)
                 .build();
-
-        JSONObject eventType = new JSONObject();
-        eventType.put(SSEventTypes.CAEP_SESSION_REVOKED.toString(), evt);
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
                 .issuer("https://idp.example.com/123456789/")
                 .jwtID("24c63fb56e5a2d77a6b512616ca9fa24")
                 .issueTime(DateUtils.fromSecondsSinceEpoch(1600976590L))
                 .audience("https://sp.example.com/caep")
-                .claim(SEToken.EVENTS_CLAIM, eventType)
+                .claim(SEToken.EVENTS_CLAIM, evt)
                 .build();
 
         final String figure_text = "   {\n" +
@@ -70,9 +68,9 @@ public class CAEPSessionRevokedTest {
                 "       }\n" +
                 "   }";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String set_json = set.toString();
-        assertEquals(figure_json, set_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
     }
 
     /**
@@ -81,16 +79,14 @@ public class CAEPSessionRevokedTest {
 
     @Test
     public void Figure2() throws ParseException {
-        CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
+        SSEvent evt = new CAEPSessionRevoked.Builder()
                 .eventTimestamp(1600975810L)
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Landspeed violation.")
                 .tenantID("123456789")
+                .eventType(SSEventTypes.CAEP_SESSION_REVOKED)
                 .build();
-
-        JSONObject eventType = new JSONObject();
-        eventType.put(SSEventTypes.CAEP_SESSION_REVOKED.toString(), evt);
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
                 .issuer("https://idp.example.com/123456789/")
@@ -98,7 +94,7 @@ public class CAEPSessionRevokedTest {
                 .issueTime(DateUtils.fromSecondsSinceEpoch(1600976590L))
                 .audience("https://sp.example.com/caep")
                 .subject("jane.smith@example.com")
-                .claim(SEToken.EVENTS_CLAIM, eventType)
+                .claim(SEToken.EVENTS_CLAIM, evt)
                 .build();
 
         final String figure_text = "   {\n" +
@@ -118,9 +114,9 @@ public class CAEPSessionRevokedTest {
                 "       }\n" +
                 "   }\n";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String set_json = set.toString();
-        assertEquals(figure_json, set_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
     }
 
     /**
@@ -143,28 +139,26 @@ public class CAEPSessionRevokedTest {
 
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.USER_DEVICE_SESSION)
-                .claim("user", user)
-                .claim("device", device)
+                .user(user)
+                .device(device)
                 .build();
 
-        CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
-                .subject(subj)
+        SSEvent evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Your device is no longer compliant.")
                 .tenantID("123456789")
                 .eventTimestamp(1600975810L)
+                .eventType(SSEventTypes.CAEP_SESSION_REVOKED)
+                .subject(subj)
                 .build();
-
-        JSONObject eventType = new JSONObject();
-        eventType.put(SSEventTypes.CAEP_SESSION_REVOKED.toString(), evt);
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
                 .issuer("https://idp.example.com/123456789/")
                 .jwtID("24c63fb56e5a2d77a6b512616ca9fa24")
                 .issueTime(DateUtils.fromSecondsSinceEpoch(1600976590L))
                 .audience("https://sp.example.com/caep")
-                .claim(SEToken.EVENTS_CLAIM, eventType)
+                .claim(SEToken.EVENTS_CLAIM, evt)
                 .build();
 
         final String figure_text = "   {\n" +
@@ -196,9 +190,9 @@ public class CAEPSessionRevokedTest {
                 "       }\n" +
                 "   }\n";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String set_json = set.toString();
-        assertEquals(figure_json, set_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
     }
 
 }

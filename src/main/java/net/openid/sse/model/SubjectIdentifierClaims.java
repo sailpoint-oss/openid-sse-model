@@ -12,6 +12,7 @@ public enum SubjectIdentifierClaims {
     SAML_ASSERTION_ID("assertion_id"),
     USER("user"),
     DEVICE("device"),
+    SESSION("session"),
     SPAG_ID("spag_id");
 
     private final String name;

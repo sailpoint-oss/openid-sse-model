@@ -103,6 +103,12 @@ public class SubjectIdentifier extends JSONObject {
             return this;
         }
 
+        public SubjectIdentifier.Builder session(final SubjectIdentifier session) {
+            claims.put(SESSION, session);
+            return this;
+        }
+
+
         public SubjectIdentifier.Builder claim(final String name, final Object value) {
             claims.put(name, value);
             return this;

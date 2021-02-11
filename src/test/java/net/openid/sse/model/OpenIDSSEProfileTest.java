@@ -25,7 +25,7 @@ public class OpenIDSSEProfileTest  {
 
         SubjectIdentifier container = new SubjectIdentifier.Builder()
                 .subjectType( SubjectIdentifierTypes.USER_DEVICE_SESSION)
-                .claim("user", subj)
+                .user(subj)
                 .build();
 
         final String fig_1_text =
@@ -63,8 +63,8 @@ public class OpenIDSSEProfileTest  {
 
         SubjectIdentifier container = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.USER_DEVICE_SESSION)
-                .claim("user", user)
-                .claim("device", device)
+                .user(user)
+                .device(device)
                 .build();
 
         final String figure_text ="{\n" +
@@ -107,8 +107,8 @@ public class OpenIDSSEProfileTest  {
 
         SubjectIdentifier container = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.USER_DEVICE_SESSION)
-                .claim("user", user)
-                .claim("session", session)
+                .user(user)
+                .session(session)
                 .build();
 
         final String figure_text ="   {\n" +

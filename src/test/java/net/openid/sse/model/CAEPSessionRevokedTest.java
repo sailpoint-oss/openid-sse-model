@@ -30,7 +30,7 @@ public class CAEPSessionRevokedTest {
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .eventTimestamp(1600975810L)
                 .subject(subj)
-                .initiatingEntity(CAEPInitiatingEntity.POLICY.toString())
+                .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Landspeed violation.")
                 .tenantID("123456789")
@@ -83,7 +83,7 @@ public class CAEPSessionRevokedTest {
     public void Figure2() throws ParseException {
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .eventTimestamp(1600975810L)
-                .initiatingEntity(CAEPInitiatingEntity.POLICY.toString())
+                .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Landspeed violation.")
                 .tenantID("123456789")
@@ -149,7 +149,7 @@ public class CAEPSessionRevokedTest {
 
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .subject(subj)
-                .initiatingEntity(CAEPInitiatingEntity.POLICY.toString())
+                .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Your device is no longer compliant.")
                 .tenantID("123456789")

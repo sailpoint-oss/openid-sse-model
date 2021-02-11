@@ -24,8 +24,8 @@ public class CAEPSessionRevoked extends JSONObject {
             return this;
         }
 
-        public Builder initiatingEntity(final String entity) {
-            claims.put(INITIATING_ENTITY_CLAIM, entity);
+        public Builder initiatingEntity(final CAEPInitiatingEntity entity) {
+            claims.put(INITIATING_ENTITY_CLAIM, entity.toString());
             return this;
         }
 

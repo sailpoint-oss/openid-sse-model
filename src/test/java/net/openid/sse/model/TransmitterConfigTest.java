@@ -29,8 +29,6 @@ public class TransmitterConfigTest {
                 .verificationEndpoint(iss + riscPrefix + "/verification")
                 .build();
 
-        String tc_json = txCfg.toString();
-
         final String figure_text = "{\n" +
                 "     \"issuer\":\n" +
                 "       \"https://tr.example.com\",\n" +
@@ -51,12 +49,8 @@ public class TransmitterConfigTest {
                 "       \"https://tr.example.com/risc/mgmt/verification\"\n" +
                 "   }";
 
-        // TODO: replace String comparison with JSONObject comparison
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        assertEquals(figure_json, tc_json);
-
-
-
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        assertEquals(figureJson, txCfg);
     }
 
 }

@@ -12,13 +12,13 @@ public class CAEPDeviceComplianceChange extends CAEPBaseEvent {
             super.eventType(SSEventTypes.CAEP_DEVICE_COMPLIANCE_CHANGE);
         }
 
-        public Builder previousStatus(final String status) {
-            super.members.put(PREVIOUS_STATUS, status);
+        public Builder previousStatus(final CAEPComplianceStatus status) {
+            super.members.put(PREVIOUS_STATUS, status.toString());
             return this;
         }
 
-        public Builder currentStatus(final String status) {
-            super.members.put(CURRENT_STATUS, status);
+        public Builder currentStatus(final CAEPComplianceStatus status) {
+            super.members.put(CURRENT_STATUS, status.toString());
             return this;
         }
     }

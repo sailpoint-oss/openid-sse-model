@@ -1,7 +1,5 @@
 package net.openid.sse.model;
 
-// TODO: create more CAEP event-specific classes
-
 public class CAEPBaseEvent extends SSEvent {
 
     public static class Builder extends SSEvent.Builder {

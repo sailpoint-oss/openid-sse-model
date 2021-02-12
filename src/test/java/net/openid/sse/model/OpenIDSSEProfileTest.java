@@ -28,7 +28,7 @@ public class OpenIDSSEProfileTest  {
                 .user(subj)
                 .build();
 
-        final String fig_1_text =
+        final String figure_text =
                 "{\n" +
                 "       \"subject_type\": \"user-device-session\",\n" +
                 "       \"user\": {\n" +
@@ -38,10 +38,8 @@ public class OpenIDSSEProfileTest  {
                 "       }\n" +
                 "   }";
 
-        // TODO: replace string comparison with JSONObject equality
-        final String fig_1_json = JSONObject.toJSONString((JSONObjectUtils.parse(fig_1_text)));
-        final String container_json = JSONObject.toJSONString(container);
-        assertEquals(fig_1_json, container_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        assertEquals(figureJson, container);
         subj.validate();
     }
 
@@ -82,9 +80,8 @@ public class OpenIDSSEProfileTest  {
                 "       }\n" +
                 "}\n";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String container_json = JSONObject.toJSONString(container);
-        assertEquals(figure_json, container_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        assertEquals(figureJson, container);
         user.validate();
         device.validate();
     }
@@ -126,9 +123,8 @@ public class OpenIDSSEProfileTest  {
                 "       }\n" +
                 "   }\n";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String container_json = JSONObject.toJSONString(container);
-        assertEquals(figure_json, container_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        assertEquals(figureJson, container);
         user.validate();
         session.validate();
         container.validate();
@@ -151,9 +147,8 @@ public class OpenIDSSEProfileTest  {
                 "       \"jti\": \"B70BA622-9515-4353-A866-823539EECBC8\"\n" +
                 "   }\n";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String jwtid_json = JSONObject.toJSONString(jwtid);
-        assertEquals(figure_json, jwtid_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        assertEquals(figureJson, jwtid);
         jwtid.validate();
     }
 
@@ -175,9 +170,8 @@ public class OpenIDSSEProfileTest  {
                 "       \"assertion_id\": \"_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6\"\n" +
                 "   }\n";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String samlsi_json = JSONObject.toJSONString(samlSI);
-        assertEquals(figure_json, samlsi_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        assertEquals(figureJson, samlSI);
         samlSI.validate();
     }
 
@@ -220,12 +214,12 @@ public class OpenIDSSEProfileTest  {
                 "  }\n" +
                 "}";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String JWTClaimsSet_json = set.toString();
-        assertEquals(figure_json, JWTClaimsSet_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
         subj.validate();
-        String json = set.toString();
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
+
+        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
     }
 
     /**
@@ -268,13 +262,12 @@ public class OpenIDSSEProfileTest  {
                 "  }\n" +
                 "}";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String JWTClaimsSet_json = set.toString();
-        assertEquals(figure_json, JWTClaimsSet_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
         subj.validate();
 
-        String json = set.toString();
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
+        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
     }
 
     /**
@@ -317,12 +310,12 @@ public class OpenIDSSEProfileTest  {
                 "  }\n" +
                 "}";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String JWTClaimsSet_json = set.toString();
-        assertEquals(figure_json, JWTClaimsSet_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
         subj.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
+        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
     }
 
     /**
@@ -365,12 +358,12 @@ public class OpenIDSSEProfileTest  {
                 "  }\n" +
                 "}";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String JWTClaimsSet_json = set.toString();
-        assertEquals(figure_json, JWTClaimsSet_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
         subj.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
+        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
     }
 
     /**
@@ -415,12 +408,12 @@ public class OpenIDSSEProfileTest  {
                 "  }\n" +
                 "}";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String JWTClaimsSet_json = set.toString();
-        assertEquals(figure_json, JWTClaimsSet_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
         subj.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
+        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
     }
 
     /**
@@ -483,14 +476,14 @@ public class OpenIDSSEProfileTest  {
                 "  }\n" +
                 "}";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String JWTClaimsSet_json = set.toString();
-        assertEquals(figure_json, JWTClaimsSet_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
         user.validate();
         device.validate();
         userDevice.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
+        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
     }
 
     /**
@@ -533,11 +526,11 @@ public class OpenIDSSEProfileTest  {
                 "  }\n" +
                 "}\n";
 
-        final String figure_json = JSONObject.toJSONString((JSONObjectUtils.parse(figure_text)));
-        final String JWTClaimsSet_json = set.toString();
-        assertEquals(figure_json, JWTClaimsSet_json);
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
         device.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_json);
+        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
     }
 }

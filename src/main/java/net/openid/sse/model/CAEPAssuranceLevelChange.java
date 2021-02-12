@@ -13,18 +13,18 @@ public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
             super.eventType(SSEventTypes.CAEP_ASSURANCE_LEVEL_CHANGE);
         }
 
-        public Builder currentLevel(final String level) {
-            super.members.put(CURRENT_LEVEL, level);
+        public Builder currentLevel(final NISTAuthenticatorAssuranceLevel level) {
+            super.members.put(CURRENT_LEVEL, level.toString());
             return this;
         }
 
-        public Builder previousLevel(final String level) {
-            super.members.put(PREVIOUS_LEVEL, level);
+        public Builder previousLevel(final NISTAuthenticatorAssuranceLevel level) {
+            super.members.put(PREVIOUS_LEVEL, level.toString());
             return this;
         }
 
-        public Builder changeDirection(final String direction) {
-            super.members.put(CHANGE_DIRECTION, direction);
+        public Builder changeDirection(final AssuranceLevelChangeDirection direction) {
+            super.members.put(CHANGE_DIRECTION, direction.toString());
             return this;
         }
 

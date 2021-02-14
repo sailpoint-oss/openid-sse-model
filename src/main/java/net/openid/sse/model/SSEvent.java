@@ -103,13 +103,36 @@ public abstract class SSEvent extends JSONObject {
 		}
 	}
 
-	public void validate() throws ValidationException {
+	private void validateEventTypeName() throws ValidationException {
 		for (String k : this.keySet()) {
 			if (SSEventTypes.contains(k))
 				return;
 		}
 		throw new ValidationException("SSEvent eventTypeName not in SSEventTypes.");
 	}
+
+	private void validateSubjectPresent() throws ValidationException {
+		final SSEventTypes eventType = getEventType();
+		if (null == eventType) {
+			/* Unknown event type, not instantiated via a normal constructor. */
+			return;
+		}
+		JSONObject members = (JSONObject) get(eventType.toString());
+		if (null == members) {
+			throw new ValidationException("SSE Events must have a container Map whose key is the event type URI");
+		}
+
+		if (!members.containsKey(SUBJECT_MEMBER)) {
+			throw new ValidationException("SSE Events must include subject member.");
+		}
+	}
+
+
+	public void validate() throws ValidationException {
+		validateEventTypeName();
+		validateSubjectPresent();
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {

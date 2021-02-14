@@ -59,7 +59,7 @@ public abstract class CAEPBaseEvent extends SSEvent {
         }
 
         if (!members.containsKey(Builder.EVENT_TIMESTAMP_MEMBER)) {
-            throw new ValidationException("CAEP Events must include an event_timestamp.");
+            return;
         }
         Object eventTimestamp = members.get(Builder.EVENT_TIMESTAMP_MEMBER);
 

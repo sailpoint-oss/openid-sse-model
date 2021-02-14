@@ -1,5 +1,8 @@
 package net.openid.sse.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Commonly used SSE event types for SSE/CAEP events.
  *
@@ -41,6 +44,22 @@ public enum SSEventTypes {
 	@Override
 	public String toString() {
 		return this.name;
+	}
+
+	private static final Map<String, SSEventTypes> BY_NAME = new HashMap<>();
+
+	static {
+		for (SSEventTypes t: values()) {
+			BY_NAME.put(t.name, t);
+		}
+	}
+
+	public static SSEventTypes valueOfLabel(String name) {
+		return BY_NAME.get(name);
+	}
+
+	public static boolean contains(final String name) {
+		return BY_NAME.containsKey(name);
 	}
 
 }

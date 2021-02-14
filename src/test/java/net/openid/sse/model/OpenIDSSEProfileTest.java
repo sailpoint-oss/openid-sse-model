@@ -186,7 +186,7 @@ public class OpenIDSSEProfileTest  {
                 .email("foo@example.com")
                 .build();
 
-        SSEvent evt = new SSEvent.Builder()
+        PlainSSEvent evt = new PlainSSEvent.Builder()
                 .eventType(SSEventTypes.RISC_ACCOUNT_ENABLED)
                 .subject(subj)
                 .build();
@@ -219,7 +219,8 @@ public class OpenIDSSEProfileTest  {
         assertEquals(figureJson, setJson);
         subj.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
+        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
+        SEToken.validate(parsedSet);
     }
 
     /**
@@ -233,7 +234,7 @@ public class OpenIDSSEProfileTest  {
                 .spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
                 .build();
 
-        SSEvent evt = new SSEvent.Builder()
+        PlainSSEvent evt = new PlainSSEvent.Builder()
                 .eventType(SSEventTypes.RISC_ACCOUNT_ENABLED)
                 .subject(subj)
                 .build();
@@ -267,7 +268,8 @@ public class OpenIDSSEProfileTest  {
         assertEquals(figureJson, setJson);
         subj.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
+        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
+        SEToken.validate(parsedSet);
     }
 
     /**
@@ -281,7 +283,7 @@ public class OpenIDSSEProfileTest  {
                 .subject("abc1234")
                 .build();
 
-        SSEvent evt = new SSEvent.Builder()
+        PlainSSEvent evt = new PlainSSEvent.Builder()
                 .eventType(SSEventTypes.RISC_ACCOUNT_ENABLED)
                 .subject(subj)
                 .build();
@@ -315,7 +317,8 @@ public class OpenIDSSEProfileTest  {
         assertEquals(figureJson, setJson);
         subj.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
+        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
+        SEToken.validate(parsedSet);
     }
 
     /**
@@ -328,7 +331,7 @@ public class OpenIDSSEProfileTest  {
                 .email("foo@example.com")
                 .build();
 
-        SSEvent evt = new SSEvent.Builder()
+        PlainSSEvent evt = new PlainSSEvent.Builder()
                 .eventType(SSEventTypes.CAEP_IPADDR_CHANGED)
                 .subject(subj)
                 .ipAddress("123.45.67.89")
@@ -363,7 +366,8 @@ public class OpenIDSSEProfileTest  {
         assertEquals(figureJson, setJson);
         subj.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
+        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
+        SEToken.validate(parsedSet);
     }
 
     /**
@@ -376,7 +380,7 @@ public class OpenIDSSEProfileTest  {
                 .spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
                 .build();
 
-        SSEvent evt = new SSEvent.Builder()
+        PlainSSEvent evt = new PlainSSEvent.Builder()
                 .eventType(SSEventTypes.CAEP_STREAM_UPDATED)
                 .subject(subj)
                 .status("paused")
@@ -413,7 +417,8 @@ public class OpenIDSSEProfileTest  {
         assertEquals(figureJson, setJson);
         subj.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
+        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
+        SEToken.validate(parsedSet);
     }
 
     /**
@@ -439,8 +444,7 @@ public class OpenIDSSEProfileTest  {
                 .device(device)
                 .build();
 
-        SSEvent evt = new SSEvent.Builder()
-               .eventType(SSEventTypes.CAEP_SESSION_REVOKED)
+        CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                .subject(userDevice)
                .build();
 
@@ -483,7 +487,8 @@ public class OpenIDSSEProfileTest  {
         device.validate();
         userDevice.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
+        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
+        SEToken.validate(parsedSet);
     }
 
     /**
@@ -498,8 +503,7 @@ public class OpenIDSSEProfileTest  {
                 .member("device_id", "c0384/devices/2354122")
                 .build();
 
-        SSEvent evt = new SSEvent.Builder()
-                .eventType(SSEventTypes.CAEP_SESSION_REVOKED)
+        CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .subject(device)
                 .build();
 
@@ -531,6 +535,7 @@ public class OpenIDSSEProfileTest  {
         assertEquals(figureJson, setJson);
         device.validate();
 
-        JWTClaimsSet setNew = JWTClaimsSet.parse(figure_text);
+        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
+        SEToken.validate(parsedSet);
     }
 }

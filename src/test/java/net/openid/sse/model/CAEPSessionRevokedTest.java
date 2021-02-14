@@ -122,7 +122,7 @@ public class CAEPSessionRevokedTest {
      */
 
     @Test
-    public void Figure3() throws ParseException {
+    public void Figure3() throws ParseException, ValidationException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
@@ -141,7 +141,7 @@ public class CAEPSessionRevokedTest {
                 .device(device)
                 .build();
 
-        SSEvent evt = new CAEPSessionRevoked.Builder()
+        CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Policy Violation: C076E82F")
                 .reasonUser("Your device is no longer compliant.")
@@ -190,6 +190,9 @@ public class CAEPSessionRevokedTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+
+        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
+        SEToken.validate(parsedSet);
     }
 
 }

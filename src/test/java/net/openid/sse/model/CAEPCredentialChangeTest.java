@@ -16,7 +16,7 @@ public class CAEPCredentialChangeTest {
      */
 
     @Test
-    public void Figure6() throws ParseException {
+    public void Figure6() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3456789/")
@@ -68,5 +68,6 @@ public class CAEPCredentialChangeTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+        evt.validate();
     }
 }

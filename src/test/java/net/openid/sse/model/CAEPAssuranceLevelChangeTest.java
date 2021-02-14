@@ -16,14 +16,14 @@ public class CAEPAssuranceLevelChangeTest {
      */
 
     @Test
-    public void Figure7() throws ParseException {
+    public void Figure7() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3456789/")
                 .subject("jane.smith@example.com")
                 .build();
 
-        SSEvent evt = new CAEPAssuranceLevelChange.Builder()
+        CAEPAssuranceLevelChange evt = new CAEPAssuranceLevelChange.Builder()
                 .currentLevel(NISTAuthenticatorAssuranceLevel.NIST_AAL2)
                 .previousLevel(NISTAuthenticatorAssuranceLevel.NIST_AAL1)
                 .changeDirection(AssuranceLevelChangeDirection.INCREASE)
@@ -64,5 +64,6 @@ public class CAEPAssuranceLevelChangeTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+        evt.validate();
     }
 }

@@ -1,42 +1,83 @@
 package net.openid.sse.model;
 
-public class CAEPBaseEvent extends SSEvent {
+import com.nimbusds.jose.shaded.json.JSONObject;
 
-    public static class Builder extends SSEvent.Builder {
-        private static final String EVENT_TIMESTAMP_CLAIM    = "event_timestamp";
-        private static final String INITIATING_ENTITY_MEMBER = "initiating_entity";
-        private static final String REASON_ADMIN_MEMBER      = "reason_admin";
-        private static final String REASON_USER_MEMBER       = "reason_user";
-        private static final String TENANT_ID_MEMBER         = "tenant_id";
+public abstract class CAEPBaseEvent extends SSEvent {
 
-        public Builder() {
-            super();
+    protected CAEPBaseEvent() {}
+
+    public abstract static class Builder<T extends CAEPBaseEvent, B extends CAEPBaseEvent.Builder<T, B>>
+            extends SSEvent.Builder<T, B> {
+        protected static final String EVENT_TIMESTAMP_MEMBER   = "event_timestamp";
+        protected static final String INITIATING_ENTITY_MEMBER = "initiating_entity";
+        protected static final String REASON_ADMIN_MEMBER      = "reason_admin";
+        protected static final String REASON_USER_MEMBER       = "reason_user";
+        protected static final String TENANT_ID_MEMBER         = "tenant_id";
+
+        protected Builder(final SSEventTypes eventType) {
+            super(eventType);
         }
 
-        public Builder eventTimestamp(final long eventTimestamp) {
-            super.members.put(EVENT_TIMESTAMP_CLAIM, eventTimestamp);
-            return this;
+        public B eventTimestamp(final long eventTimestamp) {
+            members.put(EVENT_TIMESTAMP_MEMBER, eventTimestamp);
+            return thisObj;
         }
 
-        public Builder initiatingEntity(final CAEPInitiatingEntity entity) {
-            super.members.put(INITIATING_ENTITY_MEMBER, entity.toString());
-            return this;
+        public B initiatingEntity(final CAEPInitiatingEntity entity) {
+            members.put(INITIATING_ENTITY_MEMBER, entity.toString());
+            return thisObj;
         }
 
-        public Builder reasonAdmin(final String s) {
-            super.members.put(REASON_ADMIN_MEMBER, s);
-            return this;
+        public B reasonAdmin(final String s) {
+            members.put(REASON_ADMIN_MEMBER, s);
+            return thisObj;
         }
 
-        public Builder reasonUser(final String s) {
-            super.members.put(REASON_USER_MEMBER, s);
-            return this;
+        public B reasonUser(final String s) {
+            members.put(REASON_USER_MEMBER, s);
+            return thisObj;
         }
 
-        public Builder tenantID(final String id) {
-            super.members.put(TENANT_ID_MEMBER, id);
-            return this;
+        public B tenantID(final String id) {
+            members.put(TENANT_ID_MEMBER, id);
+            return thisObj;
         }
 
     }
+
+    protected CAEPBaseEvent(final SSEventTypes eventType) {}
+
+    public void validateEventTimestamp() throws ValidationException {
+        final SSEventTypes eventType = getEventType();
+        if (null == eventType) {
+            /* Unknown event type, not instantiated via a normal constructor. */
+            return;
+        }
+        JSONObject members = (JSONObject) get(eventType.toString());
+        if (null == members) {
+            throw new ValidationException("CAEP Events must have a container Map whose key is the event type URI");
+        }
+
+        if (!members.containsKey(Builder.EVENT_TIMESTAMP_MEMBER)) {
+            throw new ValidationException("CAEP Events must include an event_timestamp.");
+        }
+        Object eventTimestamp = members.get(Builder.EVENT_TIMESTAMP_MEMBER);
+
+        if (!(eventTimestamp instanceof Long)) {
+            throw new ValidationException("CAEP Events event_timestamp must be of type Long.");
+        }
+        Long eventTimestampL = (Long) eventTimestamp;
+        if (eventTimestampL < 0) {
+            throw new ValidationException("CAEP Events event_timestamp must be > 0.");
+        }
+    }
+
+    @Override
+    public void validate() throws ValidationException {
+        super.validate();
+        validateEventTimestamp();
+    }
+
+
+
 }

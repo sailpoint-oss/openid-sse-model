@@ -16,7 +16,7 @@ public class CAEPDeviceComplianceChangeTest {
      */
 
     @Test
-    public void Figure8() throws ParseException {
+    public void Figure8() throws ParseException, ValidationException {
         SubjectIdentifier device = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
@@ -28,7 +28,7 @@ public class CAEPDeviceComplianceChangeTest {
                 .device(device)
                 .build();
 
-        SSEvent evt = new CAEPDeviceComplianceChange.Builder()
+        CAEPDeviceComplianceChange evt = new CAEPDeviceComplianceChange.Builder()
                 .previousStatus(CAEPComplianceStatus.COMPLIANT)
                 .currentStatus(CAEPComplianceStatus.NOT_COMPLIANT)
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
@@ -76,5 +76,6 @@ public class CAEPDeviceComplianceChangeTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+        evt.validate();
     }
 }

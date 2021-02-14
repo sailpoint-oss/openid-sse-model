@@ -16,7 +16,7 @@ public class CAEPTokenClaimsChangeTest {
      */
 
     @Test
-    public void Figure4() throws ParseException {
+    public void Figure4() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.JWT_ID)
                 .issuer("https://idp.example.com/987654321/")
@@ -63,13 +63,15 @@ public class CAEPTokenClaimsChangeTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+
+        evt.validate();
     }
     /**
      * Figure 5: Example: SAML Assertion Claims Change
      */
 
     @Test
-    public void Figure5() throws ParseException {
+    public void Figure5() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .subjectType(SubjectIdentifierTypes.SAML_ASSERTION_ID)
                 .issuer("https://idp.example.com/987654321/")
@@ -117,5 +119,6 @@ public class CAEPTokenClaimsChangeTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+        evt.validate();
     }
 }

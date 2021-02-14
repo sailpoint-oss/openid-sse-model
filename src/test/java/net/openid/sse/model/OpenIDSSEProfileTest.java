@@ -84,6 +84,7 @@ public class OpenIDSSEProfileTest  {
         assertEquals(figureJson, container);
         user.validate();
         device.validate();
+        container.validate();
     }
 
     /**
@@ -217,7 +218,9 @@ public class OpenIDSSEProfileTest  {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+
         subj.validate();
+        evt.validate();
 
         JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
         SEToken.validate(parsedSet);
@@ -266,7 +269,9 @@ public class OpenIDSSEProfileTest  {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+
         subj.validate();
+        evt.validate();
 
         JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
         SEToken.validate(parsedSet);
@@ -315,7 +320,9 @@ public class OpenIDSSEProfileTest  {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+
         subj.validate();
+        evt.validate();
 
         JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
         SEToken.validate(parsedSet);
@@ -364,7 +371,9 @@ public class OpenIDSSEProfileTest  {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+
         subj.validate();
+        evt.validate();
 
         JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
         SEToken.validate(parsedSet);
@@ -415,7 +424,9 @@ public class OpenIDSSEProfileTest  {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+
         subj.validate();
+        evt.validate();
 
         JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
         SEToken.validate(parsedSet);
@@ -483,9 +494,11 @@ public class OpenIDSSEProfileTest  {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+
         user.validate();
         device.validate();
         userDevice.validate();
+        evt.validate();
 
         JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
         SEToken.validate(parsedSet);
@@ -533,7 +546,9 @@ public class OpenIDSSEProfileTest  {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+
         device.validate();
+        evt.validate();
 
         JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
         SEToken.validate(parsedSet);

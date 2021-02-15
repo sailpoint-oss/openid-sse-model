@@ -112,7 +112,6 @@ public abstract class SSEvent extends JSONObject {
 	}
 
 	private void validateSubjectPresent() throws ValidationException {
-		final SSEventTypes eventType = getEventType();
 		if (null == eventType) {
 			/* Unknown event type, not instantiated via a normal constructor. */
 			return;

@@ -7,6 +7,8 @@ import java.lang.reflect.Method;
 
 public class Utils {
 
+    protected Utils() {}
+
     public static void validateMember(final SSEvent event, final String member, final Class<?> memberCls) throws ValidationException {
         final SSEventTypes eventType = event.getEventType();
         if (null == eventType) {
@@ -21,16 +23,16 @@ public class Utils {
         }
 
         // Fun with reflection to invoke contains() if the enum.name has it (and throw an exception if it does not so we can go fix it
-        Method methodToFind = null;
+        Method methodToFind;
         try {
-            methodToFind = memberCls.getMethod("contains", new Class[]{String.class});
+            methodToFind = memberCls.getMethod("contains", String.class);
         } catch (NoSuchMethodException | SecurityException e) {
             throw new ValidationException(memberCls.getName() + " does not have a contains() method.");
         }
 
         try {
             final Boolean present = (Boolean) methodToFind.invoke(memberCls, o.toString());
-            if (!present) {
+            if (Boolean.FALSE.equals(present)) {
                 throw new ValidationException(event.getClass().getName() + " member " + member + " has an invalid value.");
             }
         }

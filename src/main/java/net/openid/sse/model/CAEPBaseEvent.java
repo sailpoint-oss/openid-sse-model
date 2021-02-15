@@ -45,8 +45,6 @@ public abstract class CAEPBaseEvent extends SSEvent {
 
     }
 
-    protected CAEPBaseEvent(final SSEventTypes eventType) {}
-
     public void validateEventTimestamp() throws ValidationException {
         final SSEventTypes eventType = getEventType();
         if (null == eventType) {

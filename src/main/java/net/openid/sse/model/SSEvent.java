@@ -35,8 +35,8 @@ public abstract class SSEvent extends JSONObject {
 
 	protected abstract static class Builder<T extends SSEvent, B extends Builder<T, B>> {
 
-		protected T members;
-		protected B thisObj;
+		final protected T members;
+		final protected B thisObj;
 
 		protected Builder() {
 			members = createObj();

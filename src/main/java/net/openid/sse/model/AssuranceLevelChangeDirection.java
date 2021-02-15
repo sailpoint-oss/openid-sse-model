@@ -35,6 +35,7 @@ public enum AssuranceLevelChangeDirection {
         return BY_NAME.get(name);
     }
 
+    @SuppressWarnings("unused")
     public static boolean contains(final String name) {
         return BY_NAME.containsKey(name);
     }

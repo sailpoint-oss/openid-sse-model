@@ -1,4 +1,7 @@
-package sse.model;
+package net.openid.sse.model;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Commonly used SSE stream states for SSE/RISC/CAEP events.
@@ -25,7 +28,7 @@ public enum StreamStates {
 	
 	private final String name;
 
-	private StreamStates(String s) {
+	StreamStates(String s) {
 		name = s;
 	}
 
@@ -37,5 +40,22 @@ public enum StreamStates {
 	public String toString() {
 		return this.name;
 	}
+
+	private static final Map<String, StreamStates> BY_NAME = new HashMap<>();
+
+	static {
+		for (StreamStates t: values()) {
+			BY_NAME.put(t.name, t);
+		}
+	}
+
+	public static StreamStates valueOfLabel(String name) {
+		return BY_NAME.get(name);
+	}
+
+	public static boolean contains(final String name) {
+		return BY_NAME.containsKey(name);
+	}
+
 
 }

@@ -21,15 +21,18 @@ dependencies {
     
     // Nimbus JOSE JWT
     // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
-    compile group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.4.2'
-    // https://mvnrepository.com/artifact/net.minidev/json-smart
-    compile group: 'net.minidev', name: 'json-smart', version: '2.3'
+    api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.4.2'
 
-    // Simple logging framework, compatible with many loggers.
-    implementation 'org.slf4j:slf4j-api:1.7.30'
-    
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+}
+
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
 }
 
 version = '0.1.0'

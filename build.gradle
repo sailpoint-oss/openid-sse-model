@@ -9,6 +9,7 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+    id 'java-library-distribution'
 }
 
 repositories {
@@ -21,10 +22,16 @@ dependencies {
     
     // Nimbus JOSE JWT
     // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
-    api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.4.2'
+    implementation group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.5'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+}
+
+distributions {
+    main {
+        distributionBaseName = 'openid-sse-model'
+    }
 }
 
 allprojects {

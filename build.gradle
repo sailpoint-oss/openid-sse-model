@@ -39,6 +39,9 @@ java {
     withSourcesJar()
 }
 
+compileJava {
+    options.release = 9
+}
 publishing {
     publications {
         main(MavenPublication) {
@@ -91,7 +94,6 @@ javadoc {
 
 signing {
     useGpgCmd()
-    sign configurations.archives
     sign publishing.publications.main
 }
 

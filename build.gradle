@@ -5,23 +5,21 @@
  * For more details take a look at the Java Libraries chapter in the Gradle
  * User Manual available at https://docs.gradle.org/6.3/userguide/java_library_plugin.html
  */
-
 plugins {
-    // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     
     // Nimbus JOSE JWT
     // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
-    api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.4.2'
+    api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.7'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
@@ -35,4 +33,71 @@ allprojects {
     }
 }
 
-version = '0.1.0'
+java {
+    modularity.inferModulePath = true
+    withJavadocJar()
+    withSourcesJar()
+}
+
+compileJava {
+    options.release = 9
+}
+publishing {
+    publications {
+        main(MavenPublication) {
+            from components.java
+            pom {
+                name = 'openid-sse-model'
+                description = 'OpenID Shared Signals and Events models'
+                url = 'http://github.com/sailpoint-oss/openid-sse-model'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'adam-hampton-sp'
+                        name = 'Adam Hampton'
+                        email = 'adam.hampton@sailpoint.com'
+                    }
+                    developer {
+                        id = 'matt-domsch-sp'
+                        name = 'Matt Domsch'
+                        email = 'matt.domsch@sailpoint.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/sailpoint-oss/openid-sse-model.git'
+                    developerConnection = 'scm:git:ssh://github.com/sailpoint-oss/openid-sse-model.git'
+                    url = 'https://github.com/sailpoint-oss/openid-sse-model/'
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'myRepo'
+            url = "file://${buildDir}/repo"
+        }
+    }
+}
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications.main
+}
+
+group = 'net.openid'
+version = '0.1.0-SNAPSHOT'
+
+

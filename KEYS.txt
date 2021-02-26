@@ -1,3 +1,18 @@
+This file contains the PGP keys of various developers.
+
+Users: gpg --import KEYS.txt
+Developers: 
+        (gpg --list-sigs <your name>
+             && gpg --armor --export <your name>) >> this file.
+
+pub   rsa4096 2021-02-24 [SC]
+      FA5C0CC71B18B0FAA2ED5E1A453785727F5767D9
+uid           [ultimate] Matt Domsch (SailPoint VP, Engineering Fellow) <matt.domsch@sailpoint.com>
+sig 3        453785727F5767D9 2021-02-24  Matt Domsch (SailPoint VP, Engineering Fellow) <matt.domsch@sailpoint.com>
+sub   rsa4096 2021-02-24 [E]
+sig          453785727F5767D9 2021-02-24  Matt Domsch (SailPoint VP, Engineering Fellow) <matt.domsch@sailpoint.com>
+
+
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mQINBGA2nMwBEADP9gtt8N4QmzJpl5dnrcJ8TubukD4UPz4ozKsDUCbQnLlg0cLT
@@ -97,3 +112,4 @@ Zb3XgdRt2RGjPvkMzYsc4MttYM6nXo46WSZ6jS+drE/mCELjtbJxKw1vzs1C3CJQ
 vq8txVHir65VGRzMnow=
 =xUDe
 -----END PGP PUBLIC KEY BLOCK-----
+

@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2021 SailPoint Technologies, Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 package net.openid.sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;

@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 public abstract class SSEvent extends JSONObject {
 
-	private static final String SUBJECT_MEMBER     = "subject";
+	protected static final String SUBJECT_MEMBER   = "subject";
 	private static final String STATUS_MEMBER      = "status";
 	private static final String REASON_MEMBER      = "reason";
 	private static final String PROPERTIES_MEMBER  = "properties";
@@ -132,6 +132,21 @@ public abstract class SSEvent extends JSONObject {
 		}
 	}
 
+	public Object getClaim(final String claim) {
+		JSONObject members = (JSONObject) get(eventType.toString());
+		if (null == members) {
+			return null;
+		}
+
+		if (!members.containsKey(claim)) {
+			return null;
+		}
+		return members.get(claim);
+	}
+
+	public SubjectIdentifier getSubjectIdentifier() {
+		return (SubjectIdentifier) getClaim(SUBJECT_MEMBER);
+	}
 
 	public void validate() throws ValidationException {
 		validateEventTypeName();

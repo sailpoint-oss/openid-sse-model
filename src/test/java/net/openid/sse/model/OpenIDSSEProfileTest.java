@@ -193,8 +193,7 @@ public class OpenIDSSEProfileTest  {
                 .email("foo@example.com")
                 .build();
 
-        PlainSSEvent evt = new PlainSSEvent.Builder()
-                .eventType(SSEventTypes.RISC_ACCOUNT_ENABLED)
+        RISCAccountEnabled evt = new RISCAccountEnabled.Builder()
                 .subject(subj)
                 .build();
 
@@ -243,8 +242,7 @@ public class OpenIDSSEProfileTest  {
                 .spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
                 .build();
 
-        PlainSSEvent evt = new PlainSSEvent.Builder()
-                .eventType(SSEventTypes.RISC_ACCOUNT_ENABLED)
+        RISCAccountEnabled evt = new RISCAccountEnabled.Builder()
                 .subject(subj)
                 .build();
 
@@ -294,8 +292,7 @@ public class OpenIDSSEProfileTest  {
                 .subject("abc1234")
                 .build();
 
-        PlainSSEvent evt = new PlainSSEvent.Builder()
-                .eventType(SSEventTypes.RISC_ACCOUNT_ENABLED)
+        RISCAccountEnabled evt = new RISCAccountEnabled.Builder()
                 .subject(subj)
                 .build();
 
@@ -344,8 +341,7 @@ public class OpenIDSSEProfileTest  {
                 .email("foo@example.com")
                 .build();
 
-        PlainSSEvent evt = new PlainSSEvent.Builder()
-                .eventType(SSEventTypes.CAEP_IPADDR_CHANGED)
+        CAEPIPAddrChanged evt = new CAEPIPAddrChanged.Builder()
                 .subject(subj)
                 .ipAddress("123.45.67.89")
                 .build();
@@ -395,8 +391,7 @@ public class OpenIDSSEProfileTest  {
                 .spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
                 .build();
 
-        PlainSSEvent evt = new PlainSSEvent.Builder()
-                .eventType(SSEventTypes.CAEP_STREAM_UPDATED)
+        CAEPStreamUpdated evt = new CAEPStreamUpdated.Builder()
                 .subject(subj)
                 .status("paused")
                 .reason("License is not valid")

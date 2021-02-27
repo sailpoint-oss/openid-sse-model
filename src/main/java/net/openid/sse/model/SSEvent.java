@@ -24,8 +24,6 @@ public abstract class SSEvent extends JSONObject {
 	private static final String STATUS_MEMBER      = "status";
 	private static final String REASON_MEMBER      = "reason";
 	private static final String PROPERTIES_MEMBER  = "properties";
-	private static final String IPADDRESS_MEMBER   = "ip_address";
-	private static final String ID_MEMBER   	   = "id";
 
 	private SSEventTypes eventType;
 
@@ -90,16 +88,6 @@ public abstract class SSEvent extends JSONObject {
 
 		public B properties(final Map<String, Object> properties) {
 			members.put(PROPERTIES_MEMBER, properties);
-			return thisObj;
-		}
-
-		public B ipAddress(final String ipAddress) {
-			members.put(IPADDRESS_MEMBER, ipAddress);
-			return thisObj;
-		}
-
-		public B id(final String ipAddress) {
-			members.put(ID_MEMBER, ipAddress);
 			return thisObj;
 		}
 

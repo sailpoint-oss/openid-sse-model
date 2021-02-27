@@ -103,8 +103,8 @@ public abstract class SSEvent extends JSONObject {
 			return thisObj;
 		}
 
-		public B claim(final String claim, final Object o) {
-			members.put(claim, o);
+		public B member(final String key, final Object o) {
+			members.put(key, o);
 			return thisObj;
 		}
 	}
@@ -132,20 +132,20 @@ public abstract class SSEvent extends JSONObject {
 		}
 	}
 
-	public Object getClaim(final String claim) {
+	public Object getMember(final String member) {
 		JSONObject members = (JSONObject) get(eventType.toString());
 		if (null == members) {
 			return null;
 		}
 
-		if (!members.containsKey(claim)) {
+		if (!members.containsKey(member)) {
 			return null;
 		}
-		return members.get(claim);
+		return members.get(member);
 	}
 
 	public SubjectIdentifier getSubjectIdentifier() {
-		return (SubjectIdentifier) getClaim(SUBJECT_MEMBER);
+		return (SubjectIdentifier) getMember(SUBJECT_MEMBER);
 	}
 
 	public void validate() throws ValidationException {

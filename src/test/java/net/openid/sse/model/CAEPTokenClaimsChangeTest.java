@@ -35,7 +35,7 @@ public class CAEPTokenClaimsChangeTest {
         SSEvent evt = new CAEPTokenClaimsChange.Builder()
                 .eventTimestamp(1600975810L)
                 .subject(subj)
-                .claim("claims", claims)
+                .member("claims", claims)
                 .build();
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
@@ -91,7 +91,7 @@ public class CAEPTokenClaimsChangeTest {
         SSEvent evt = new CAEPTokenClaimsChange.Builder()
                 .eventTimestamp(1600975810L)
                 .subject(subj)
-                .claim("claims", claims)
+                .member("claims", claims)
                 .build();
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()

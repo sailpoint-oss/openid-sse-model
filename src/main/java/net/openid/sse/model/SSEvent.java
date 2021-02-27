@@ -132,8 +132,12 @@ public abstract class SSEvent extends JSONObject {
 		return members.get(member);
 	}
 
-	public SubjectIdentifier getSubjectIdentifier() {
+	public final SubjectIdentifier getSubjectIdentifier() {
 		return (SubjectIdentifier) getMember(SUBJECT_MEMBER);
+	}
+
+	public final String getStatus() {
+		return (String) getMember(STATUS_MEMBER);
 	}
 
 	public void validate() throws ValidationException {

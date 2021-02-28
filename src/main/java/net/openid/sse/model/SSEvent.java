@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 public abstract class SSEvent extends JSONObject {
 
-	protected static final String SUBJECT_MEMBER   = "subject";
+	private static final String SUBJECT_MEMBER     = "subject";
 	private static final String STATUS_MEMBER      = "status";
 	private static final String REASON_MEMBER      = "reason";
 	private static final String PROPERTIES_MEMBER  = "properties";

@@ -16,6 +16,7 @@ class SSESpecs {
 
 public enum SSEventTypes {
 
+	RISC_ACCOUNT_CREDENTIAL_CHANGE_REQUIRED ("account-credential-change-required", SSESpecs.RISC_PREFIX),
 	RISC_ACCOUNT_PURGED   ("account-purged", SSESpecs.RISC_PREFIX),
 	RISC_ACCOUNT_DISABLED ("account-disabled", SSESpecs.RISC_PREFIX),
 	RISC_ACCOUNT_ENABLED  ("account-enabled", SSESpecs.RISC_PREFIX),

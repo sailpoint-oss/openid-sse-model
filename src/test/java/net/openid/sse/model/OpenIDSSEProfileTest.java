@@ -10,13 +10,36 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.text.ParseException;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertEquals;
 
 public class OpenIDSSEProfileTest  {
+
+    private void dumpMapRecursive(Map<String, Object> map, int level) {
+        for (String k : map.keySet()) {
+            Object o = map.get(k);
+            // Can't use String.repeat() here until Java 11, we support 9+ at the moment.
+            String sb = IntStream.range(0, level).mapToObj(i -> "\t").collect(Collectors.joining());
+            System.out.printf("%s%s -> (%s) %s%n", sb, k, o.getClass(), o.toString());
+            if (o instanceof JSONObject) {
+                dumpMapRecursive((JSONObject) o, level+1);
+            }
+        }
+    }
+
+    private void dumpJWT(@NotNull JWTClaimsSet set) {
+        Map<String, Object> map = set.getClaims();
+        dumpMapRecursive(map, 1);
+    }
+
+
     /**
      *  Figure 1: Example: 'user-device-session' Subject Identifier with user only
      */

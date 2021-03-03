@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2021 SailPoint Technologies, Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 package net.openid.sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
@@ -18,8 +24,6 @@ public abstract class SSEvent extends JSONObject {
 	private static final String STATUS_MEMBER      = "status";
 	private static final String REASON_MEMBER      = "reason";
 	private static final String PROPERTIES_MEMBER  = "properties";
-	private static final String IPADDRESS_MEMBER   = "ip_address";
-	private static final String ID_MEMBER   	   = "id";
 
 	private SSEventTypes eventType;
 
@@ -35,8 +39,8 @@ public abstract class SSEvent extends JSONObject {
 
 	protected abstract static class Builder<T extends SSEvent, B extends Builder<T, B>> {
 
-		final protected T members;
-		final protected B thisObj;
+		protected final T members;
+		protected final B thisObj;
 
 		protected Builder() {
 			members = createObj();
@@ -87,18 +91,8 @@ public abstract class SSEvent extends JSONObject {
 			return thisObj;
 		}
 
-		public B ipAddress(final String ipAddress) {
-			members.put(IPADDRESS_MEMBER, ipAddress);
-			return thisObj;
-		}
-
-		public B id(final String ipAddress) {
-			members.put(ID_MEMBER, ipAddress);
-			return thisObj;
-		}
-
-		public B claim(final String claim, final Object o) {
-			members.put(claim, o);
+		public B member(final String key, final Object o) {
+			members.put(key, o);
 			return thisObj;
 		}
 	}
@@ -126,6 +120,25 @@ public abstract class SSEvent extends JSONObject {
 		}
 	}
 
+	public Object getMember(final String member) {
+		JSONObject members = (JSONObject) get(eventType.toString());
+		if (null == members) {
+			return null;
+		}
+
+		if (!members.containsKey(member)) {
+			return null;
+		}
+		return members.get(member);
+	}
+
+	public final SubjectIdentifier getSubjectIdentifier() {
+		return (SubjectIdentifier) getMember(SUBJECT_MEMBER);
+	}
+
+	public final String getStatus() {
+		return (String) getMember(STATUS_MEMBER);
+	}
 
 	public void validate() throws ValidationException {
 		validateEventTypeName();

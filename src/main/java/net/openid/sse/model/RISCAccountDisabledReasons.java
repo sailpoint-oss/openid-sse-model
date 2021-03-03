@@ -26,15 +26,14 @@ import java.util.Map;
  *    (Section 8.1.5) after the Event Stream is re-enabled.
  *
  */
-public enum StreamStates {
-	
-	ENABLED ("enabled"),
-	PAUSED ("paused"),
-	DISABLED ("disabled");
-	
+public enum RISCAccountDisabledReasons {
+
+	HIJACKING ("hijacking"),
+	BULK_ACCOUNT ("bulk-account");
+
 	private final String name;
 
-	StreamStates(String s) {
+	RISCAccountDisabledReasons(String s) {
 		name = s;
 	}
 
@@ -47,21 +46,19 @@ public enum StreamStates {
 		return this.name;
 	}
 
-	private static final Map<String, StreamStates> BY_NAME = new HashMap<>();
+	private static final Map<String, RISCAccountDisabledReasons> BY_NAME = new HashMap<>();
 
 	static {
-		for (StreamStates t: values()) {
+		for (RISCAccountDisabledReasons t: values()) {
 			BY_NAME.put(t.name, t);
 		}
 	}
 
-	public static StreamStates valueOfLabel(String name) {
+	public static RISCAccountDisabledReasons valueOfLabel(String name) {
 		return BY_NAME.get(name);
 	}
 
 	public static boolean contains(final String name) {
 		return BY_NAME.containsKey(name);
 	}
-
-
 }

@@ -16,9 +16,21 @@ class SSESpecs {
 
 public enum SSEventTypes {
 
+	RISC_ACCOUNT_CREDENTIAL_CHANGE_REQUIRED ("account-credential-change-required", SSESpecs.RISC_PREFIX),
+	RISC_ACCOUNT_PURGED   ("account-purged", SSESpecs.RISC_PREFIX),
 	RISC_ACCOUNT_DISABLED ("account-disabled", SSESpecs.RISC_PREFIX),
 	RISC_ACCOUNT_ENABLED  ("account-enabled", SSESpecs.RISC_PREFIX),
 	RISC_VERIFICATION     ("verification", SSESpecs.RISC_PREFIX),
+	RISC_IDENTIFIER_CHANGED  ("identifier-changed", SSESpecs.RISC_PREFIX),
+	RISC_IDENTIFIER_RECYCLED ("identifier-recycled", SSESpecs.RISC_PREFIX),
+	RISC_OPT_IN           ("opt-in", SSESpecs.RISC_PREFIX),
+	RISC_OPT_OUT_INITIATED ("opt-out-initiated", SSESpecs.RISC_PREFIX),
+	RISC_OPT_OUT_CANCELLED ("opt-out-cancelled", SSESpecs.RISC_PREFIX),
+	RISC_OPT_OUT_EFFECTIVE ("opt-out-effective", SSESpecs.RISC_PREFIX),
+	RISC_RECOVERY_ACTIVATED ("recovery-activated", SSESpecs.RISC_PREFIX),
+	RISC_RECOVERY_INFORMATION_CHANGED ("recovery-information-changed", SSESpecs.RISC_PREFIX),
+	RISC_SESSIONS_REVOKED   ("sessions-revoked", SSESpecs.RISC_PREFIX),
+
 	CAEP_IPADDR_CHANGED   ("ip-address-changed", SSESpecs.CAEP_PREFIX),
 	CAEP_STREAM_UPDATED   ("stream-updated", SSESpecs.CAEP_PREFIX),
 	CAEP_TOKEN_REVOCATION ("token-revocation", SSESpecs.CAEP_PREFIX),

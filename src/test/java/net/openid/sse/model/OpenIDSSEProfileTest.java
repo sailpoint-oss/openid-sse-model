@@ -1,16 +1,45 @@
+/*
+ * Copyright (c) 2021 SailPoint Technologies, Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 package net.openid.sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.text.ParseException;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertEquals;
 
 public class OpenIDSSEProfileTest  {
+
+    private void dumpMapRecursive(Map<String, Object> map, int level) {
+        for (String k : map.keySet()) {
+            Object o = map.get(k);
+            // Can't use String.repeat() here until Java 11, we support 9+ at the moment.
+            String sb = IntStream.range(0, level).mapToObj(i -> "\t").collect(Collectors.joining());
+            System.out.printf("%s%s -> (%s) %s%n", sb, k, o.getClass(), o.toString());
+            if (o instanceof JSONObject) {
+                dumpMapRecursive((JSONObject) o, level+1);
+            }
+        }
+    }
+
+    private void dumpJWT(@NotNull JWTClaimsSet set) {
+        Map<String, Object> map = set.getClaims();
+        dumpMapRecursive(map, 1);
+    }
+
+
     /**
      *  Figure 1: Example: 'user-device-session' Subject Identifier with user only
      */
@@ -187,8 +216,7 @@ public class OpenIDSSEProfileTest  {
                 .email("foo@example.com")
                 .build();
 
-        PlainSSEvent evt = new PlainSSEvent.Builder()
-                .eventType(SSEventTypes.RISC_ACCOUNT_ENABLED)
+        RISCAccountEnabled evt = new RISCAccountEnabled.Builder()
                 .subject(subj)
                 .build();
 
@@ -237,8 +265,7 @@ public class OpenIDSSEProfileTest  {
                 .spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
                 .build();
 
-        PlainSSEvent evt = new PlainSSEvent.Builder()
-                .eventType(SSEventTypes.RISC_ACCOUNT_ENABLED)
+        RISCAccountEnabled evt = new RISCAccountEnabled.Builder()
                 .subject(subj)
                 .build();
 
@@ -288,8 +315,7 @@ public class OpenIDSSEProfileTest  {
                 .subject("abc1234")
                 .build();
 
-        PlainSSEvent evt = new PlainSSEvent.Builder()
-                .eventType(SSEventTypes.RISC_ACCOUNT_ENABLED)
+        RISCAccountEnabled evt = new RISCAccountEnabled.Builder()
                 .subject(subj)
                 .build();
 
@@ -338,8 +364,7 @@ public class OpenIDSSEProfileTest  {
                 .email("foo@example.com")
                 .build();
 
-        PlainSSEvent evt = new PlainSSEvent.Builder()
-                .eventType(SSEventTypes.CAEP_IPADDR_CHANGED)
+        CAEPIPAddrChanged evt = new CAEPIPAddrChanged.Builder()
                 .subject(subj)
                 .ipAddress("123.45.67.89")
                 .build();
@@ -389,8 +414,7 @@ public class OpenIDSSEProfileTest  {
                 .spagID("https://example.com/v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a")
                 .build();
 
-        PlainSSEvent evt = new PlainSSEvent.Builder()
-                .eventType(SSEventTypes.CAEP_STREAM_UPDATED)
+        CAEPStreamUpdated evt = new CAEPStreamUpdated.Builder()
                 .subject(subj)
                 .status("paused")
                 .reason("License is not valid")

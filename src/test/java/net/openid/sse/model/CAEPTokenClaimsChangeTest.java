@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2021 SailPoint Technologies, Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 package net.openid.sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
@@ -29,7 +35,7 @@ public class CAEPTokenClaimsChangeTest {
         SSEvent evt = new CAEPTokenClaimsChange.Builder()
                 .eventTimestamp(1600975810L)
                 .subject(subj)
-                .claim("claims", claims)
+                .member("claims", claims)
                 .build();
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
@@ -85,7 +91,7 @@ public class CAEPTokenClaimsChangeTest {
         SSEvent evt = new CAEPTokenClaimsChange.Builder()
                 .eventTimestamp(1600975810L)
                 .subject(subj)
-                .claim("claims", claims)
+                .member("claims", claims)
                 .build();
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()

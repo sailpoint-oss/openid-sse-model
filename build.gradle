@@ -19,6 +19,7 @@ dependencies {
     // Nimbus JOSE JWT
     // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
     api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.7'
+    implementation 'org.jetbrains:annotations:20.1.0'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
@@ -43,7 +44,7 @@ compileJava {
 }
 publishing {
     publications {
-        main(MavenPublication) {
+        model(MavenPublication) {
             from components.java
             pom {
                 name = 'openid-sse-model'
@@ -93,7 +94,7 @@ javadoc {
 
 signing {
     useGpgCmd()
-    sign publishing.publications.main
+    sign publishing.publications.model
 }
 
 group = 'net.openid'

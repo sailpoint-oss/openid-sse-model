@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-module net.openid.sse.model {
-    exports net.openid.sse.model;
+module com.sailpoint.sse.model {
+    exports com.sailpoint.sse.model;
     requires transitive com.nimbusds.jose.jwt;
 }

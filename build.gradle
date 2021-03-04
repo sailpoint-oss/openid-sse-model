@@ -97,7 +97,7 @@ signing {
     sign publishing.publications.model
 }
 
-group = 'net.openid'
+group = 'com.sailpoint'
 version = '0.1.0-SNAPSHOT'
 
 

@@ -7,7 +7,6 @@
          <trusted-key id="042b29e928995b9db963c636c7ca19b7b620d787" group="com.github.stephenc.jcip" name="jcip-annotations" version="1.0-1"/>
          <trusted-key id="4db1a49729b053caf015cee9a6adfc93ef34893e" group="org.hamcrest"/>
          <trusted-key id="82f0964816ad7319cb0cccf93efd9d223d715e9a" group="com.nimbusds" name="nimbus-jose-jwt" version="9.7"/>
-         <trusted-key id="8756c4f765c9ac3cb6b85d62379ce192d401ab61" group="org.jetbrains" name="annotations" version="20.1.0"/>
          <trusted-key id="d4c89ea4aaf455fd88b22087efe8086f9e93774e" group="junit" name="junit" version="4.12"/>
       </trusted-keys>
    </configuration>

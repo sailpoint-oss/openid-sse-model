@@ -62,6 +62,9 @@ public class TransmitterConfig extends JSONObject {
 		 */
 		private static final String VERIFICATION_ENDPOINT_MEMBER = "verification_endpoint";
 
+		// List of Strings
+		private static final String CRITICAL_CLAIMS_MEMBER = "critical_claims";
+
 		/**
 		 * The members.
 		 */
@@ -108,6 +111,12 @@ public class TransmitterConfig extends JSONObject {
 			members.put(VERIFICATION_ENDPOINT_MEMBER, endpoint);
 			return this;
 		}
+
+		public Builder criticalClaims(final List<String> claims) {
+			members.put(CRITICAL_CLAIMS_MEMBER, claims);
+			return this;
+		}
+
 
 		public TransmitterConfig build() {
 			return members;

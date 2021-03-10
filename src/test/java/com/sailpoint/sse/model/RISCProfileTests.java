@@ -23,7 +23,7 @@ public class RISCProfileTests {
     @Test
     public void Figure1() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
+                .format(IdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/")
                 .subject("7375626A656374")
                 .build();
@@ -48,7 +48,7 @@ public class RISCProfileTests {
                 "     \"events\": {\n" +
                 "       \"https://schemas.openid.net/secevent/risc/event-type/account-credential-change-required\": {\n" +
                 "         \"subject\": {\n" +
-                "           \"subject_type\": \"iss_sub\",\n" +
+                "           \"format\": \"iss_sub\",\n" +
                 "           \"iss\": \"https://idp.example.com/\",\n" +
                 "           \"sub\": \"7375626A656374\"\n" +
                 "         }\n" +
@@ -74,7 +74,7 @@ public class RISCProfileTests {
     @Test
     public void Figure2() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
+                .format(IdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/")
                 .subject("7375626A656374")
                 .build();
@@ -100,7 +100,7 @@ public class RISCProfileTests {
                 "     \"events\": {\n" +
                 "       \"https://schemas.openid.net/secevent/risc/event-type/account-disabled\": {\n" +
                 "         \"subject\": {\n" +
-                "           \"subject_type\": \"iss_sub\",\n" +
+                "           \"format\": \"iss_sub\",\n" +
                 "           \"iss\": \"https://idp.example.com/\",\n" +
                 "           \"sub\": \"7375626A656374\"\n" +
                 "         },\n" +
@@ -125,7 +125,7 @@ public class RISCProfileTests {
     @Test
     public void Figure3() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifierTypes.EMAIL)
+                .format(IdentifierFormats.EMAIL)
                 .email("john.doe@example.com")
                 .build();
 
@@ -150,7 +150,7 @@ public class RISCProfileTests {
                 "     \"events\": {\n" +
                 "       \"https://schemas.openid.net/secevent/risc/event-type/identifier-changed\": {\n" +
                 "         \"subject\": {\n" +
-                "           \"subject_type\": \"email\",\n" +
+                "           \"format\": \"email\",\n" +
                 "           \"email\": \"john.doe@example.com\"\n" +
                 "         },\n" +
                 "         \"new-value\": \"john.roe@example.com\"\n" +
@@ -173,7 +173,7 @@ public class RISCProfileTests {
     @Test
     public void Figure4() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifierTypes.EMAIL)
+                .format(IdentifierFormats.EMAIL)
                 .email("foo@example.com")
                 .build();
 
@@ -197,7 +197,7 @@ public class RISCProfileTests {
                 "     \"events\": {\n" +
                 "       \"https://schemas.openid.net/secevent/risc/event-type/identifier-recycled\": {\n" +
                 "         \"subject\": {\n" +
-                "           \"subject_type\": \"email\",\n" +
+                "           \"format\": \"email\",\n" +
                 "           \"email\": \"foo@example.com\"\n" +
                 "         }\n" +
                 "       }\n" +

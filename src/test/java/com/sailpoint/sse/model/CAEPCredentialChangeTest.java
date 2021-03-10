@@ -24,7 +24,7 @@ public class CAEPCredentialChangeTest {
     @Test
     public void Figure6() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
+                .format(IdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3456789/")
                 .subject("jane.smith@example.com")
                 .build();
@@ -33,15 +33,17 @@ public class CAEPCredentialChangeTest {
                 .credentialType(CAEPCredentialType.FIDO2_ROAMING)
                 .changeType(CAEPChangeType.CREATE)
                 .fido2AAGuid("accced6a-63f5-490a-9eea-e59bc1896cfc")
-                .eventTimestamp(1600975811L)
+                .eventTimestamp(1615304991643L)
                 .initiatingEntity(CAEPInitiatingEntity.USER)
                 .subject(subj)
+                .reasonAdmin("User self-enrollment")
+//                .member("credential_name", "Jane's USB authenticator")
                 .build();
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
                 .issuer("https://idp.example.com/3456789/")
                 .jwtID("07efd930f0977e4fcc1149a733ce7f78")
-                .issueTime(DateUtils.fromSecondsSinceEpoch(1600976598L))
+                .issueTime(DateUtils.fromSecondsSinceEpoch(1615305159L))
                 .audience("https://sp.example2.net/caep")
                 .claim(SEToken.EVENTS_CLAIM, evt)
                 .build();
@@ -49,27 +51,25 @@ public class CAEPCredentialChangeTest {
         final String figure_text = "   {\n" +
                 "       \"iss\": \"https://idp.example.com/3456789/\",\n" +
                 "       \"jti\": \"07efd930f0977e4fcc1149a733ce7f78\",\n" +
-                "       \"iat\": 1600976598,\n" +
+                "       \"iat\": 1615305159,\n" +
                 "       \"aud\": \"https://sp.example2.net/caep\",\n" +
                 "       \"events\": {\n" +
                 "           \"https://schemas.openid.net/secevent/caep/event-type/credential-change\": {\n" +
                 "               \"subject\": {\n" +
-                "                   \"subject_type\": \"iss_sub\",\n" +
+                "                   \"format\": \"iss_sub\",\n" +
                 "                   \"iss\": \"https://idp.example.com/3456789/\",\n" +
                 "                   \"sub\": \"jane.smith@example.com\"\n" +
                 "               },\n" +
-//                "               \"current_level\": \"nist-aal2\",\n" +
-//                "               \"previous_level\": \"nist-aal1\",\n" +
-//               "               \"change_direction\": \"increase\",\n" +
                 "               \"credential_type\": \"fido2-roaming\",\n" +
                 "               \"change_type\": \"create\",\n" +
                 "               \"fido2_aaguid\": \"accced6a-63f5-490a-9eea-e59bc1896cfc\",\n" +
 //                "               \"credential_name\": \"Jane's USB authenticator\",\n" +
                 "               \"initiating_entity\": \"user\",\n" +
-                "               \"event_timestamp\": 1600975811\n" +
+                "               \"reason_admin\": \"User self-enrollment\",\n" +
+                "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +
-                "   }";
+                "   }\n";
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());

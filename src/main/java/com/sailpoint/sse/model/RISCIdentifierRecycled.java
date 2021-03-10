@@ -31,8 +31,8 @@ public class RISCIdentifierRecycled extends SSEvent {
     public void validate() throws ValidationException {
         super.validate();
         SubjectIdentifier subj = getSubjectIdentifier();
-        final String type = subj.get(SubjectIdentifierMembers.SUBJECT_TYPE);
-        if (SubjectIdentifierTypes.EMAIL.equalsName(type) || SubjectIdentifierTypes.PHONE_NUMBER.equalsName(type)) {
+        final String type = subj.get(SubjectIdentifierMembers.FORMAT);
+        if (IdentifierFormats.EMAIL.equalsName(type) || IdentifierFormats.PHONE_NUMBER.equalsName(type)) {
             return;
         }
         throw new ValidationException("RISC Identifier Recycled event must have a subject_type of email or phone_number");

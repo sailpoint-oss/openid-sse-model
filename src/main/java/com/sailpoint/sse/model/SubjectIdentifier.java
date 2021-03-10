@@ -20,19 +20,27 @@ public class SubjectIdentifier extends JSONObject {
         this.put(s, o);
     }
 
-    public void validateSubjectType() throws ValidationException {
-        final String subjectType = this.get(SubjectIdentifierMembers.SUBJECT_TYPE);
-        if (null == subjectType) {
-            throw new ValidationException("Subject Identifier member subject_type must be present.");
-        }
-        if (SubjectIdentifierTypes.contains(subjectType) || subjectType.startsWith("x-"))
+    public void validateFormat() throws ValidationException {
+        final String format = this.get(SubjectIdentifierMembers.FORMAT);
+        if (null == format) {
             return;
-        throw new ValidationException("Subject Identifier member subject_type " +
+        }
+        if (IdentifierFormats.contains(format) || format.startsWith("x-"))
+            return;
+        throw new ValidationException("Subject Identifier member format " +
                 "must be defined by specification or begin with x-.");
     }
 
     public void validate() throws ValidationException {
-        validateSubjectType();
+        validateFormat();
+
+        // Subject Identifiers can be complex (thus recursive)
+        for (Entry<String, Object> entry : entrySet()) {
+            if (entry.getValue() instanceof SubjectIdentifier) {
+                SubjectIdentifier si = (SubjectIdentifier) entry.getValue();
+                si.validate();
+            }
+        }
     }
 
 
@@ -40,9 +48,14 @@ public class SubjectIdentifier extends JSONObject {
 
         private final SubjectIdentifier members = new SubjectIdentifier();
 
+        public Builder format(final IdentifierFormats format) {
+            members.put(SubjectIdentifierMembers.FORMAT, format.toString());
+            return this;
+        }
+
         public Builder issuer(final String iss) {
-            final String subjectTypeMember = members.get(SubjectIdentifierMembers.SUBJECT_TYPE);
-            if (SubjectIdentifierTypes.SAML_ASSERTION_ID.equalsName(subjectTypeMember)) {
+            final String subjectTypeMember = members.get(SubjectIdentifierMembers.FORMAT);
+            if (IdentifierFormats.SAML_ASSERTION_ID.equalsName(subjectTypeMember)) {
                 members.put(SubjectIdentifierMembers.SAML_ISSUER, iss);
             }
             else {
@@ -50,17 +63,6 @@ public class SubjectIdentifier extends JSONObject {
             }
             return this;
         }
-
-        public Builder subjectType(final String subjectType) {
-            members.put(SubjectIdentifierMembers.SUBJECT_TYPE, subjectType);
-            return this;
-        }
-
-        public Builder subjectType(final SubjectIdentifierTypes subjectType) {
-            members.put(SubjectIdentifierMembers.SUBJECT_TYPE.toString(), subjectType.toString());
-            return this;
-        }
-
 
         public Builder subject(final String sub) {
 
@@ -80,12 +82,6 @@ public class SubjectIdentifier extends JSONObject {
             return this;
         }
 
-        public Builder spagID(final String spag_id) {
-
-            members.put(SubjectIdentifierMembers.SPAG_ID, spag_id);
-            return this;
-        }
-
         public Builder jwtID(final String jwt_id) {
 
             members.put(SubjectIdentifierMembers.JWT_ID, jwt_id);
@@ -97,6 +93,13 @@ public class SubjectIdentifier extends JSONObject {
             members.put(SubjectIdentifierMembers.SAML_ASSERTION_ID, assertionId);
             return this;
         }
+
+        public Builder id(final String id) {
+
+            members.put(SubjectIdentifierMembers.ID, id);
+            return this;
+        }
+
         public Builder user(final SubjectIdentifier user) {
             members.put(SubjectIdentifierMembers.USER, user);
             return this;
@@ -109,6 +112,11 @@ public class SubjectIdentifier extends JSONObject {
 
         public Builder session(final SubjectIdentifier session) {
             members.put(SubjectIdentifierMembers.SESSION, session);
+            return this;
+        }
+
+        public Builder tenant(final SubjectIdentifier tenant) {
+            members.put(SubjectIdentifierMembers.TENANT, tenant);
             return this;
         }
 

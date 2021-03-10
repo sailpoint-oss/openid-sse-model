@@ -18,12 +18,12 @@ public abstract class CAEPBaseEvent extends SSEvent {
         protected static final String INITIATING_ENTITY_MEMBER = "initiating_entity";
         protected static final String REASON_ADMIN_MEMBER      = "reason_admin";
         protected static final String REASON_USER_MEMBER       = "reason_user";
-        protected static final String TENANT_ID_MEMBER         = "tenant_id";
 
         protected Builder(final SSEventTypes eventType) {
             super(eventType);
         }
 
+        // Timestamp in milliseconds from epoch
         public B eventTimestamp(final long eventTimestamp) {
             members.put(EVENT_TIMESTAMP_MEMBER, eventTimestamp);
             return thisObj;
@@ -44,28 +44,30 @@ public abstract class CAEPBaseEvent extends SSEvent {
             return thisObj;
         }
 
-        public B tenantID(final String id) {
-            members.put(TENANT_ID_MEMBER, id);
-            return thisObj;
-        }
-
     }
 
-    public void validateEventTimestamp() throws ValidationException {
+    public JSONObject getEventMembers() throws ValidationException {
         final SSEventTypes eventType = getEventType();
         if (null == eventType) {
             /* Unknown event type, not instantiated via a normal constructor. */
-            return;
+            throw new ValidationException("CAEP Events must set eventType in their constructor");
         }
+
         JSONObject members = (JSONObject) get(eventType.toString());
         if (null == members) {
             throw new ValidationException("CAEP Events must have a container Map whose key is the event type URI");
         }
+        return members;
+    }
 
-        if (!members.containsKey(Builder.EVENT_TIMESTAMP_MEMBER)) {
-            return;
-        }
+
+    public void validateEventTimestamp() throws ValidationException {
+        JSONObject members = getEventMembers();
+
         Object eventTimestamp = members.get(Builder.EVENT_TIMESTAMP_MEMBER);
+        if (null == eventTimestamp) {
+            throw new ValidationException("CAEP Events must have an event_timestamp member");
+        }
 
         if (!(eventTimestamp instanceof Long)) {
             throw new ValidationException("CAEP Events event_timestamp must be of type Long.");

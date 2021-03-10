@@ -24,7 +24,7 @@ public class CAEPAssuranceLevelChangeTest {
     @Test
     public void Figure7() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
+                .format(IdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3456789/")
                 .subject("jane.smith@example.com")
                 .build();
@@ -33,7 +33,7 @@ public class CAEPAssuranceLevelChangeTest {
                 .currentLevel(NISTAuthenticatorAssuranceLevel.NIST_AAL2)
                 .previousLevel(NISTAuthenticatorAssuranceLevel.NIST_AAL1)
                 .changeDirection(AssuranceLevelChangeDirection.INCREASE)
-                .eventTimestamp(1600975811L)
+                .eventTimestamp(1615304991643L)
                 .initiatingEntity(CAEPInitiatingEntity.USER)
                 .subject(subj)
                 .build();
@@ -41,7 +41,7 @@ public class CAEPAssuranceLevelChangeTest {
         JWTClaimsSet set = new JWTClaimsSet.Builder()
                 .issuer("https://idp.example.com/3456789/")
                 .jwtID("07efd930f0977e4fcc1149a733ce7f78")
-                .issueTime(DateUtils.fromSecondsSinceEpoch(1600976598L))
+                .issueTime(DateUtils.fromSecondsSinceEpoch(1615305159L))
                 .audience("https://sp.example2.net/caep")
                 .claim(SEToken.EVENTS_CLAIM, evt)
                 .build();
@@ -49,12 +49,12 @@ public class CAEPAssuranceLevelChangeTest {
         final String figure_text = "   {\n" +
                 "       \"iss\": \"https://idp.example.com/3456789/\",\n" +
                 "       \"jti\": \"07efd930f0977e4fcc1149a733ce7f78\",\n" +
-                "       \"iat\": 1600976598,\n" +
+                "       \"iat\": 1615305159,\n" +
                 "       \"aud\": \"https://sp.example2.net/caep\",\n" +
                 "       \"events\": {\n" +
                 "           \"https://schemas.openid.net/secevent/caep/event-type/assurance-level-change\": {\n" +
                 "               \"subject\": {\n" +
-                "                   \"subject_type\": \"iss_sub\",\n" +
+                "                   \"format\": \"iss_sub\",\n" +
                 "                   \"iss\": \"https://idp.example.com/3456789/\",\n" +
                 "                   \"sub\": \"jane.smith@example.com\"\n" +
                 "               },\n" +
@@ -62,10 +62,10 @@ public class CAEPAssuranceLevelChangeTest {
                 "               \"previous_level\": \"nist-aal1\",\n" +
                 "               \"change_direction\": \"increase\",\n" +
                 "               \"initiating_entity\": \"user\",\n" +
-                "               \"event_timestamp\": 1600975811\n" +
+                "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +
-                "   }";
+                "   }\n";
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());

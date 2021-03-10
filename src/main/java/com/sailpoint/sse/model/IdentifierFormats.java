@@ -9,24 +9,24 @@ package com.sailpoint.sse.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum SubjectIdentifierTypes {
+public enum IdentifierFormats {
 
     // https://github.com/richanna/secevent/blob/master/draft-ietf-secevent-subject-identifiers.txt
     ACCOUNT ("account"),
     EMAIL("email"),
-    ISSUER_SUBJECT ("iss_sub"),
     PHONE_NUMBER ("phone_number"),
+    ISSUER_SUBJECT ("iss_sub"),
     ALIASES ( "aliases"),
 
-    // https://bitbucket.org/openid/risc/pull-requests/5 section 3.2
-    SPAG( "spag"),
-    USER_DEVICE_SESSION ("user-device-session"),
-    JWT_ID ("jwt-id"),
-    SAML_ASSERTION_ID ("saml-assertion-id");
+    JWT_ID ("jwt_id"),
+    SAML_ASSERTION_ID ("saml_assertion_id"),
+
+    //  https://bitbucket.org/openid/risc/pull-requests/8/align-with-new-subject-identifier-draft
+    OPAQUE ("opaque");
 
     private final String name;
 
-    SubjectIdentifierTypes(final String s) {
+    IdentifierFormats(final String s) {
         name = s;
     }
 
@@ -34,15 +34,15 @@ public enum SubjectIdentifierTypes {
         return name.equals(otherName);
     }
 
-    private static final Map<String, SubjectIdentifierTypes> BY_NAME = new HashMap<>();
+    private static final Map<String, IdentifierFormats> BY_NAME = new HashMap<>();
 
     static {
-        for (SubjectIdentifierTypes t: values()) {
+        for (IdentifierFormats t: values()) {
             BY_NAME.put(t.name, t);
         }
     }
 
-    public static SubjectIdentifierTypes valueOfLabel(String name) {
+    public static IdentifierFormats valueOfLabel(String name) {
         return BY_NAME.get(name);
     }
 

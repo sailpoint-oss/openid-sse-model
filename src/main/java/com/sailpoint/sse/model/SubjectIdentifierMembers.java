@@ -11,7 +11,7 @@ import java.util.Map;
 
 public enum SubjectIdentifierMembers {
 
-    SUBJECT_TYPE("subject_type"),
+    FORMAT("format"),
     ISSUER("iss"),
     SUBJECT("sub"),
     EMAIL("email"),
@@ -22,7 +22,11 @@ public enum SubjectIdentifierMembers {
     USER("user"),
     DEVICE("device"),
     SESSION("session"),
-    SPAG_ID("spag_id");
+    APPLICATION("application"),
+    TENANT("tenant"),
+    ORG_UNIT("org-unit"),
+    GROUP("group"),
+    ID("id");
 
     private final String name;
 

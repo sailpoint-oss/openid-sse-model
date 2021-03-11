@@ -32,7 +32,7 @@ public class CAEPTokenClaimsChangeTest {
         JSONObject claims = new JSONObject();
         claims.put("role", "ro-admin");
 
-        SSEvent evt = new CAEPTokenClaimsChange.Builder()
+        CAEPTokenClaimsChange evt = new CAEPTokenClaimsChange.Builder()
                 .eventTimestamp(1615304991643L)
                 .subject(subj)
                 .claims(claims)
@@ -88,7 +88,7 @@ public class CAEPTokenClaimsChangeTest {
         claims.put("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role",
                 "ro-admin");
 
-        SSEvent evt = new CAEPTokenClaimsChange.Builder()
+        CAEPTokenClaimsChange evt = new CAEPTokenClaimsChange.Builder()
                 .eventTimestamp(1615304991643L)
                 .subject(subj)
                 .member("claims", claims)

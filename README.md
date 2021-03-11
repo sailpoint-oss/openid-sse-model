@@ -16,36 +16,47 @@ representing the Subject Identifier, the Shared Signals Event, and the Security
 Event Token that will carry the event.  There are specific event classes for each defined RISC and CAEP event.
 Construction follows the builder pattern. Events each have a validate() method to verify mandatory fields. 
 
+        SubjectIdentifier session = new SubjectIdentifier.Builder()
+                .format(IdentifierFormats.OPAQUE)
+                .subject("dMTlD|1600802906337.16|16008.16")
+                .build();
+
         SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
-                .issuer("https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/")
-                .subject("jane.smith@example.com")
+                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .issuer("https://idp.example.com/123456789/")
+                .subject("dMTlD|1600802906337.16|16008.16")
                 .build();
 
-        SubjectIdentifier device = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifierTypes.ISSUER_SUBJECT)
-                .issuer("https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/")
-                .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
+        SubjectIdentifier tenant = new SubjectIdentifier.Builder()
+                .format(IdentifierFormats.OPAQUE)
+                .id("123456789")
                 .build();
 
-        SubjectIdentifier userDevice = new SubjectIdentifier.Builder()
-                .subjectType(SubjectIdentifierTypes.USER_DEVICE_SESSION)
+        SubjectIdentifier subj = new SubjectIdentifier.Builder()
+                .session(session)
                 .user(user)
-                .device(device)
+                .tenant(tenant)
                 .build();
 
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
-               .subject(userDevice)
-               .build();
-        evt.validate(); /* throws ValidationException */
+                .initiatingEntity(CAEPInitiatingEntity.POLICY)
+                .reasonAdmin("Landspeed Policy Violation: C076E82F")
+                .reasonUser("Access attempt from multiple regions.")
+                .eventTimestamp(System.currentTimeMillis())
+                .subject(subj)
+                .build();
+        evt.validate();
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
-                .issuer("https://idp.example.com/")
-                .jwtID("756E69717565206964656E746966696572")
+                .issuer("https://idp.example.com/123456789/")
+                .jwtID("24c63fb56e5a2d77a6b512616ca9fa24")
                 .issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
-                .audience("636C69656E745F6964")
+                .audience("https://sp.example.com/caep")
                 .claim(SEToken.EVENTS_CLAIM, evt)
                 .build();
+
+
+
 
 See more usage examples in `src/test`.
 
@@ -57,8 +68,11 @@ See more usage examples in `src/test`.
 
 produces a versioned .jar file in the build/libs directory:
 
-	ls -latr build/libs
-	...  13308 Jul 29 12:33 openid-sse-model-0.1.0-SNAPSHOT.jar
+    ls -ltr build/libs
+    total 700
+    -rwxrwxrwx 1 mdomsch mdomsch  64318 Mar 10 22:33 openid-sse-model-0.1.0-SNAPSHOT.jar
+    -rwxrwxrwx 1 mdomsch mdomsch 616249 Mar 10 22:33 openid-sse-model-0.1.0-SNAPSHOT-javadoc.jar
+    -rwxrwxrwx 1 mdomsch mdomsch  28791 Mar 10 22:33 openid-sse-model-0.1.0-SNAPSHOT-sources.jar
 	
 ## Testing 
 

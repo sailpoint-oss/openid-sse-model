@@ -46,7 +46,7 @@ public class CAEPSessionRevokedTest {
                 .tenant(tenant)
                 .build();
 
-        SSEvent evt = new CAEPSessionRevoked.Builder()
+        CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Landspeed Policy Violation: C076E82F")
                 .reasonUser("Access attempt from multiple regions.")
@@ -103,7 +103,7 @@ public class CAEPSessionRevokedTest {
 
     @Test
     public void Figure2() throws ParseException {
-        SSEvent evt = new CAEPSessionRevoked.Builder()
+        CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Landspeed Policy Violation: C076E82F")
                 .reasonUser("Access attempt from multiple regions.")

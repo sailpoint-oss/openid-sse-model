@@ -29,7 +29,7 @@ public class CAEPCredentialChangeTest {
                 .subject("jane.smith@example.com")
                 .build();
 
-        SSEvent evt = new CAEPCredentialChange.Builder()
+        CAEPCredentialChange evt = new CAEPCredentialChange.Builder()
                 .credentialType(CAEPCredentialType.FIDO2_ROAMING)
                 .changeType(CAEPChangeType.CREATE)
                 .fido2AAGuid("accced6a-63f5-490a-9eea-e59bc1896cfc")

@@ -48,7 +48,7 @@ method to verify mandatory fields.
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
                 .issuer("https://idp.example.com/123456789/")
-                .jwtID("24c63fb56e5a2d77a6b512616ca9fa24")
+                .jwtID(UUID.randomUUID().toString())
                 .issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
                 .audience("https://sp.example.com/caep")
                 .claim(SEToken.EVENTS_CLAIM, evt)

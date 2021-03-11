@@ -36,11 +36,12 @@ method to verify mandatory fields.
                 .tenant(tenant)
                 .build();
 
+        final long now = System.currentTimeMillis();
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Landspeed Policy Violation: C076E82F")
                 .reasonUser("Access attempt from multiple regions.")
-                .eventTimestamp(System.currentTimeMillis())
+                .eventTimestamp(now)
                 .subject(subj)
                 .build();
         evt.validate();
@@ -48,7 +49,7 @@ method to verify mandatory fields.
         JWTClaimsSet set = new JWTClaimsSet.Builder()
                 .issuer("https://idp.example.com/123456789/")
                 .jwtID(UUID.randomUUID().toString())
-                .issueTime(DateUtils.fromSecondsSinceEpoch(System.currentTimeMillis()/1000))
+                .issueTime(DateUtils.fromSecondsSinceEpoch(now/1000))
                 .audience("https://sp.example.com/caep")
                 .claim(SEToken.EVENTS_CLAIM, evt)
                 .build();

@@ -1,7 +1,6 @@
 # sse-openid-model
 
-An implementation of the Shared Signals and Events (SSE) data model for the Continuous Access Evaluation Protocol (CAEP)
-and Risk Incident Sharing and Coordination (RISC) event profiles.
+An implementation of the [OpenID Foundation](https://openid.net/wg/sse/)'s Shared Signals and Events (SSE) data model for the Continuous Access Evaluation Protocol (CAEP) and Risk Incident Sharing and Coordination (RISC) event profiles.
 
 This library provides classes implementing SSE (both CAEP and RISC profiles) under a Java environment. It includes the
 following dependences:

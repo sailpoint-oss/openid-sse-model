@@ -11,6 +11,7 @@ import com.nimbusds.jose.util.JSONObjectUtils;
 import org.junit.Test;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -20,22 +21,24 @@ public class TransmitterConfigTest {
     @Test()
     public void Figure15() throws ParseException {
         final String iss = "https://tr.example.com";
-        final String riscPrefix = "/risc/mgmt";
+        final String ssePrefix = "/sse/mgmt";
         final String[] deliveryMethods = { DeliveryMethods.PUSH.toString(),
                                             DeliveryMethods.POLL.toString() };
+        final ArrayList<String> criticalMembers = new ArrayList<>(Arrays.asList("tenant", "user"));
 
         TransmitterConfig txCfg = new TransmitterConfig.Builder()
                 .issuer(iss)
                 .jwksUri(iss + "/jwks.json")
                 .deliveryMethods(Arrays.asList(deliveryMethods))
-                .configurationEndpoint(iss +riscPrefix + "/stream")
-                .statusEndpoint(iss + riscPrefix + "/status")
-                .addSubjectEndpoint(iss + riscPrefix + "/subject:add")
-                .removeSubjectEndpoint(iss + riscPrefix + "/subject:remove")
-                .verificationEndpoint(iss + riscPrefix + "/verification")
+                .configurationEndpoint(iss + ssePrefix + "/stream")
+                .statusEndpoint(iss + ssePrefix + "/status")
+                .addSubjectEndpoint(iss + ssePrefix + "/subject:add")
+                .removeSubjectEndpoint(iss + ssePrefix + "/subject:remove")
+                .verificationEndpoint(iss + ssePrefix + "/verification")
+                .criticalSubjectMembers(criticalMembers)
                 .build();
 
-        final String figure_text = "{\n" +
+        final String figure_text = "   {\n" +
                 "     \"issuer\":\n" +
                 "       \"https://tr.example.com\",\n" +
                 "     \"jwks_uri\":\n" +
@@ -44,15 +47,16 @@ public class TransmitterConfigTest {
                 "       \"https://schemas.openid.net/secevent/risc/delivery-method/push\",\n" +
                 "       \"https://schemas.openid.net/secevent/risc/delivery-method/poll\"],\n" +
                 "     \"configuration_endpoint\":\n" +
-                "       \"https://tr.example.com/risc/mgmt/stream\",\n" +
+                "       \"https://tr.example.com/sse/mgmt/stream\",\n" +
                 "     \"status_endpoint\":\n" +
-                "       \"https://tr.example.com/risc/mgmt/status\",\n" +
+                "       \"https://tr.example.com/sse/mgmt/status\",\n" +
                 "     \"add_subject_endpoint\":\n" +
-                "       \"https://tr.example.com/risc/mgmt/subject:add\",\n" +
+                "       \"https://tr.example.com/sse/mgmt/subject:add\",\n" +
                 "     \"remove_subject_endpoint\":\n" +
-                "       \"https://tr.example.com/risc/mgmt/subject:remove\",\n" +
+                "       \"https://tr.example.com/sse/mgmt/subject:remove\",\n" +
                 "     \"verification_endpoint\":\n" +
-                "       \"https://tr.example.com/risc/mgmt/verification\"\n" +
+                "       \"https://tr.example.com/sse/mgmt/verification\",\n" +
+                "     \"critical_subject_members\": [ \"tenant\", \"user\" ]\n" +
                 "   }";
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));

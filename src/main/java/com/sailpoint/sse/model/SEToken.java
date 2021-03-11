@@ -10,14 +10,14 @@ import com.nimbusds.jwt.JWTClaimsSet;
 
 import java.text.ParseException;
 
-public class SEToken
-{
+public class SEToken {
     public static final String EVENTS_CLAIM = "events";
     private static final String TYP_CLAIM = "typ";
     private static final String EXP_CLAIM = "exp";
     private static final String TYP_VALUE = "secevent+jwt";
 
-    private SEToken() {}
+    private SEToken() {
+    }
 
     /* openid-sse-profile-1_0.txt section 11.1.4 */
     private static void validateTyp(final JWTClaimsSet set) throws ParseException, ValidationException {

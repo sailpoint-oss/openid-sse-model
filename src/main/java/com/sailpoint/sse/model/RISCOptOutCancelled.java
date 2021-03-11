@@ -10,6 +10,10 @@ public class RISCOptOutCancelled extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCOptOutCancelled, RISCOptOutCancelled.Builder> {
 
+        public Builder() {
+            super(SSEventTypes.RISC_OPT_OUT_CANCELLED);
+        }
+
         @Override
         protected RISCOptOutCancelled createObj() {
             return new RISCOptOutCancelled();
@@ -17,10 +21,6 @@ public class RISCOptOutCancelled extends SSEvent {
 
         protected RISCOptOutCancelled.Builder getThis() {
             return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_OPT_OUT_CANCELLED);
         }
     }
 

@@ -13,7 +13,8 @@ import java.lang.reflect.Method;
 
 public class Utils {
 
-    protected Utils() {}
+    protected Utils() {
+    }
 
     public static void validateMember(final SSEvent event, final String member, final Class<?> memberCls) throws ValidationException {
         final SSEventTypes eventType = event.getEventType();
@@ -41,11 +42,9 @@ public class Utils {
             if (Boolean.FALSE.equals(present)) {
                 throw new ValidationException(event.getClass().getName() + " member " + member + " has an invalid value.");
             }
-        }
-        catch(IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             throw new ValidationException(event.getClass().getName() + " member " + member + " IllegalAccessException: " + e);
-        }
-        catch(InvocationTargetException e) {
+        } catch (InvocationTargetException e) {
             throw new ValidationException(event.getClass().getName() + " member " + member + " InvocationTargetException: " + e);
         }
     }

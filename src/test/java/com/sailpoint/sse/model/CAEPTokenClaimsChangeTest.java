@@ -72,6 +72,7 @@ public class CAEPTokenClaimsChangeTest {
 
         evt.validate();
     }
+
     /**
      * Figure 5: Example: SAML Assertion Claims Change
      */

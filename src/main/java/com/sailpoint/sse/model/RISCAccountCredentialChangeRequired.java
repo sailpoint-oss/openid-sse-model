@@ -10,6 +10,10 @@ public class RISCAccountCredentialChangeRequired extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCAccountCredentialChangeRequired, RISCAccountCredentialChangeRequired.Builder> {
 
+        public Builder() {
+            super(SSEventTypes.RISC_ACCOUNT_CREDENTIAL_CHANGE_REQUIRED);
+        }
+
         @Override
         protected RISCAccountCredentialChangeRequired createObj() {
             return new RISCAccountCredentialChangeRequired();
@@ -17,10 +21,6 @@ public class RISCAccountCredentialChangeRequired extends SSEvent {
 
         protected RISCAccountCredentialChangeRequired.Builder getThis() {
             return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_ACCOUNT_CREDENTIAL_CHANGE_REQUIRED);
         }
     }
 

@@ -57,8 +57,7 @@ public class SubjectIdentifier extends JSONObject {
             final String subjectTypeMember = members.get(SubjectIdentifierMembers.FORMAT);
             if (IdentifierFormats.SAML_ASSERTION_ID.equalsName(subjectTypeMember)) {
                 members.put(SubjectIdentifierMembers.SAML_ISSUER, iss);
-            }
-            else {
+            } else {
                 members.put(SubjectIdentifierMembers.ISSUER, iss);
             }
             return this;
@@ -126,7 +125,9 @@ public class SubjectIdentifier extends JSONObject {
             return this;
         }
 
-        public SubjectIdentifier build() { return members; }
+        public SubjectIdentifier build() {
+            return members;
+        }
 
     }
 }

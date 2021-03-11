@@ -22,8 +22,8 @@ public class TransmitterConfigTest {
     public void Figure15() throws ParseException {
         final String iss = "https://tr.example.com";
         final String ssePrefix = "/sse/mgmt";
-        final String[] deliveryMethods = { DeliveryMethods.PUSH.toString(),
-                                            DeliveryMethods.POLL.toString() };
+        final String[] deliveryMethods = {DeliveryMethods.PUSH.toString(),
+                DeliveryMethods.POLL.toString()};
         final ArrayList<String> criticalMembers = new ArrayList<>(Arrays.asList("tenant", "user"));
 
         TransmitterConfig txCfg = new TransmitterConfig.Builder()

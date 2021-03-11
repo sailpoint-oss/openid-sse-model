@@ -8,22 +8,6 @@ package com.sailpoint.sse.model;
 
 public class RISCIdentifierRecycled extends SSEvent {
 
-    public static class Builder extends SSEvent.Builder<RISCIdentifierRecycled, RISCIdentifierRecycled.Builder> {
-
-        @Override
-        protected RISCIdentifierRecycled createObj() {
-            return new RISCIdentifierRecycled();
-        }
-
-        protected RISCIdentifierRecycled.Builder getThis() {
-            return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_IDENTIFIER_RECYCLED);
-        }
-    }
-
     /*
      *  The subject type MUST be either "email" or "phone".
      */
@@ -36,6 +20,22 @@ public class RISCIdentifierRecycled extends SSEvent {
             return;
         }
         throw new ValidationException("RISC Identifier Recycled event must have a subject_type of email or phone_number");
+    }
+
+    public static class Builder extends SSEvent.Builder<RISCIdentifierRecycled, RISCIdentifierRecycled.Builder> {
+
+        public Builder() {
+            super(SSEventTypes.RISC_IDENTIFIER_RECYCLED);
+        }
+
+        @Override
+        protected RISCIdentifierRecycled createObj() {
+            return new RISCIdentifierRecycled();
+        }
+
+        protected RISCIdentifierRecycled.Builder getThis() {
+            return this;
+        }
     }
 
 }

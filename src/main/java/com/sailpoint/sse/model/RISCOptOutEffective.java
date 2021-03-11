@@ -10,6 +10,10 @@ public class RISCOptOutEffective extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCOptOutEffective, RISCOptOutEffective.Builder> {
 
+        public Builder() {
+            super(SSEventTypes.RISC_OPT_OUT_EFFECTIVE);
+        }
+
         @Override
         protected RISCOptOutEffective createObj() {
             return new RISCOptOutEffective();
@@ -17,10 +21,6 @@ public class RISCOptOutEffective extends SSEvent {
 
         protected RISCOptOutEffective.Builder getThis() {
             return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_OPT_OUT_EFFECTIVE);
         }
     }
 

@@ -10,28 +10,6 @@ public class RISCIdentifierChanged extends SSEvent {
 
     private static final String NEW_VALUE_MEMBER = "new-value";
 
-    public static class Builder extends SSEvent.Builder<RISCIdentifierChanged, RISCIdentifierChanged.Builder> {
-
-        @Override
-        protected RISCIdentifierChanged createObj() {
-            return new RISCIdentifierChanged();
-        }
-
-        protected RISCIdentifierChanged.Builder getThis() {
-            return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_IDENTIFIER_CHANGED);
-        }
-
-        public RISCIdentifierChanged.Builder newValue(final String value) {
-            members.put(NEW_VALUE_MEMBER, value);
-            return thisObj;
-        }
-
-    }
-
     @Override
     public void validate() throws ValidationException {
         super.validate();
@@ -42,6 +20,28 @@ public class RISCIdentifierChanged extends SSEvent {
         if (!(oNewValue instanceof String)) {
             throw new ValidationException(String.format("RISC Identifier Changed event member %s must be a String", NEW_VALUE_MEMBER));
         }
+    }
+
+    public static class Builder extends SSEvent.Builder<RISCIdentifierChanged, RISCIdentifierChanged.Builder> {
+
+        public Builder() {
+            super(SSEventTypes.RISC_IDENTIFIER_CHANGED);
+        }
+
+        @Override
+        protected RISCIdentifierChanged createObj() {
+            return new RISCIdentifierChanged();
+        }
+
+        protected RISCIdentifierChanged.Builder getThis() {
+            return this;
+        }
+
+        public RISCIdentifierChanged.Builder newValue(final String value) {
+            members.put(NEW_VALUE_MEMBER, value);
+            return thisObj;
+        }
+
     }
 
 }

@@ -10,6 +10,10 @@ public class RISCOptOutInitiated extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCOptOutInitiated, RISCOptOutInitiated.Builder> {
 
+        public Builder() {
+            super(SSEventTypes.RISC_OPT_OUT_INITIATED);
+        }
+
         @Override
         protected RISCOptOutInitiated createObj() {
             return new RISCOptOutInitiated();
@@ -17,10 +21,6 @@ public class RISCOptOutInitiated extends SSEvent {
 
         protected RISCOptOutInitiated.Builder getThis() {
             return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_OPT_OUT_INITIATED);
         }
     }
 

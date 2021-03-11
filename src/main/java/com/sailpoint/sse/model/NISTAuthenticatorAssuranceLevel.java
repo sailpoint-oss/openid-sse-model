@@ -15,27 +15,18 @@ public enum NISTAuthenticatorAssuranceLevel {
     NIST_AAL2("nist-aal2"),
     NIST_AAL3("nist-aal3");
 
+    private static final Map<String, NISTAuthenticatorAssuranceLevel> BY_NAME = new HashMap<>();
+
+    static {
+        for (NISTAuthenticatorAssuranceLevel t : values()) {
+            BY_NAME.put(t.name, t);
+        }
+    }
+
     private final String name;
 
     NISTAuthenticatorAssuranceLevel(final String s) {
         name = s;
-    }
-
-    public boolean equalsName(final String otherName) {
-        return name.equals(otherName);
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
-    }
-
-    private static final Map<String, NISTAuthenticatorAssuranceLevel> BY_NAME = new HashMap<>();
-
-    static {
-        for (NISTAuthenticatorAssuranceLevel t: values()) {
-            BY_NAME.put(t.name, t);
-        }
     }
 
     public static NISTAuthenticatorAssuranceLevel valueOfLabel(String name) {
@@ -46,7 +37,14 @@ public enum NISTAuthenticatorAssuranceLevel {
         return BY_NAME.containsKey(name);
     }
 
+    public boolean equalsName(final String otherName) {
+        return name.equals(otherName);
+    }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 
 }

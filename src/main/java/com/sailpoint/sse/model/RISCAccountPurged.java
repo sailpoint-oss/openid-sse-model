@@ -10,6 +10,10 @@ public class RISCAccountPurged extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCAccountPurged, RISCAccountPurged.Builder> {
 
+        public Builder() {
+            super(SSEventTypes.RISC_ACCOUNT_PURGED);
+        }
+
         @Override
         protected RISCAccountPurged createObj() {
             return new RISCAccountPurged();
@@ -17,10 +21,6 @@ public class RISCAccountPurged extends SSEvent {
 
         protected RISCAccountPurged.Builder getThis() {
             return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_ACCOUNT_PURGED);
         }
     }
 

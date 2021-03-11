@@ -11,54 +11,53 @@ import java.util.Map;
 
 /**
  * Commonly used SSE stream states for SSE/RISC/CAEP events.
- * 
+ * <p>
  * A Transmitter MAY decide to enable, pause or disable updates about a
  * SPAG independently of an update request from a Receiver.  If a
  * Transmitter decides to start or stop events for a SPAG then the
  * Transmitter MUST do the following according to the status of the
  * stream. If the stream is:
- *  
+ * <p>
  * Enabled  the Transmitter MUST send a SPAG stream updated
- *    (Section 8.1.5) event respectively to the Receiver within the Event Stream.
+ * (Section 8.1.5) event respectively to the Receiver within the Event Stream.
  * Paused  the Transmitter SHOULD send SPAG stream updated
- *    (Section 8.1.5) after the Event Stream is re-started.
+ * (Section 8.1.5) after the Event Stream is re-started.
  * Disabled  the Transmitter MAY send SPAG stream updated
- *    (Section 8.1.5) after the Event Stream is re-enabled.
- *
+ * (Section 8.1.5) after the Event Stream is re-enabled.
  */
 public enum RISCAccountDisabledReasons {
 
-	HIJACKING ("hijacking"),
-	BULK_ACCOUNT ("bulk-account");
+    HIJACKING("hijacking"),
+    BULK_ACCOUNT("bulk-account");
 
-	private final String name;
+    private static final Map<String, RISCAccountDisabledReasons> BY_NAME = new HashMap<>();
 
-	RISCAccountDisabledReasons(String s) {
-		name = s;
-	}
+    static {
+        for (RISCAccountDisabledReasons t : values()) {
+            BY_NAME.put(t.name, t);
+        }
+    }
 
-	public boolean equalsName(String otherName) {
-		return name.equals(otherName);
-	}
+    private final String name;
 
-	@Override
-	public String toString() {
-		return this.name;
-	}
+    RISCAccountDisabledReasons(String s) {
+        name = s;
+    }
 
-	private static final Map<String, RISCAccountDisabledReasons> BY_NAME = new HashMap<>();
+    public static RISCAccountDisabledReasons valueOfLabel(String name) {
+        return BY_NAME.get(name);
+    }
 
-	static {
-		for (RISCAccountDisabledReasons t: values()) {
-			BY_NAME.put(t.name, t);
-		}
-	}
+    public static boolean contains(final String name) {
+        return BY_NAME.containsKey(name);
+    }
 
-	public static RISCAccountDisabledReasons valueOfLabel(String name) {
-		return BY_NAME.get(name);
-	}
+    public boolean equalsName(String otherName) {
+        return name.equals(otherName);
+    }
 
-	public static boolean contains(final String name) {
-		return BY_NAME.containsKey(name);
-	}
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

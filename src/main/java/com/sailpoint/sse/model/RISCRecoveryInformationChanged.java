@@ -10,6 +10,10 @@ public class RISCRecoveryInformationChanged extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCRecoveryInformationChanged, RISCRecoveryInformationChanged.Builder> {
 
+        public Builder() {
+            super(SSEventTypes.RISC_RECOVERY_INFORMATION_CHANGED);
+        }
+
         @Override
         protected RISCRecoveryInformationChanged createObj() {
             return new RISCRecoveryInformationChanged();
@@ -17,10 +21,6 @@ public class RISCRecoveryInformationChanged extends SSEvent {
 
         protected RISCRecoveryInformationChanged.Builder getThis() {
             return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_RECOVERY_INFORMATION_CHANGED);
         }
     }
 

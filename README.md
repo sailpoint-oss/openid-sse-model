@@ -1,20 +1,19 @@
 # sse-openid-model
 
-An implementation of the Shared Signals and Events (SSE) data model for the Continuous 
-Access Evaluation Protocol (CAEP) and Risk Incident Sharing and Coordination (RISC) event profiles.
+An implementation of the Shared Signals and Events (SSE) data model for the Continuous Access Evaluation Protocol (CAEP)
+and Risk Incident Sharing and Coordination (RISC) event profiles.
 
-This library provides classes implementing SSE (both CAEP and RISC profiles) under
-a Java environment. It includes the following dependences:
+This library provides classes implementing SSE (both CAEP and RISC profiles) under a Java environment. It includes the
+following dependences:
 
 - com.nimbusds nimbus-jose-jwt for JSONObject and JWTClaimsSet
 
- 
 ## Examples
 
-Producing a Security Event Token using this library involves constructing the objects
-representing the Subject Identifier, the Shared Signals Event, and the Security 
-Event Token that will carry the event.  There are specific event classes for each defined RISC and CAEP event.
-Construction follows the builder pattern. Events each have a validate() method to verify mandatory fields. 
+Producing a Security Event Token using this library involves constructing the objects representing the Subject
+Identifier, the Shared Signals Event, and the Security Event Token that will carry the event. There are specific event
+classes for each defined RISC and CAEP event. Construction follows the builder pattern. Events each have a validate()
+method to verify mandatory fields.
 
         SubjectIdentifier session = new SubjectIdentifier.Builder()
                 .format(IdentifierFormats.OPAQUE)
@@ -55,15 +54,12 @@ Construction follows the builder pattern. Events each have a validate() method t
                 .claim(SEToken.EVENTS_CLAIM, evt)
                 .build();
 
-
-
-
 See more usage examples in `src/test`.
 
 ## Compiling
- 
- This library is implemented as a Gradle based java library.  Java 9+ is required.  Running:
- 
+
+This library is implemented as a Gradle based java library. Java 9+ is required. Running:
+
 	./gradlew build
 
 produces a versioned .jar file in the build/libs directory:
@@ -73,8 +69,8 @@ produces a versioned .jar file in the build/libs directory:
     -rwxrwxrwx 1 mdomsch mdomsch  64318 Mar 10 22:33 openid-sse-model-0.1.0-SNAPSHOT.jar
     -rwxrwxrwx 1 mdomsch mdomsch 616249 Mar 10 22:33 openid-sse-model-0.1.0-SNAPSHOT-javadoc.jar
     -rwxrwxrwx 1 mdomsch mdomsch  28791 Mar 10 22:33 openid-sse-model-0.1.0-SNAPSHOT-sources.jar
-	
-## Testing 
+
+## Testing
 
 The library has tests implemented in `/src/test/java/` and are run with Gradle:
 

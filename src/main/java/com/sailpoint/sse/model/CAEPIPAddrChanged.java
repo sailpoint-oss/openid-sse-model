@@ -7,16 +7,21 @@
 package com.sailpoint.sse.model;
 
 public class CAEPIPAddrChanged extends CAEPBaseEvent {
-    private static final String IPADDRESS_MEMBER   = "ip_address";
+    private static final String IPADDRESS_MEMBER = "ip_address";
 
     public static class Builder extends CAEPBaseEvent.Builder<CAEPIPAddrChanged, CAEPIPAddrChanged.Builder> {
 
 
-        protected CAEPIPAddrChanged createObj() {return new CAEPIPAddrChanged();}
-        protected CAEPIPAddrChanged.Builder getThis() { return this; }
-
         public Builder() {
             super(SSEventTypes.CAEP_IPADDR_CHANGED);
+        }
+
+        protected CAEPIPAddrChanged createObj() {
+            return new CAEPIPAddrChanged();
+        }
+
+        protected CAEPIPAddrChanged.Builder getThis() {
+            return this;
         }
 
         public Builder ipAddress(final String ipAddress) {
@@ -24,7 +29,6 @@ public class CAEPIPAddrChanged extends CAEPBaseEvent {
             return thisObj;
         }
     }
-
 
 
 }

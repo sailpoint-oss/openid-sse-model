@@ -12,13 +12,26 @@ public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
     protected static final String PREVIOUS_LEVEL = "previous_level";
     protected static final String CHANGE_DIRECTION = "change_direction";
 
-    public static class Builder extends CAEPBaseEvent.Builder<CAEPAssuranceLevelChange, CAEPAssuranceLevelChange.Builder> {
+    @Override
+    public void validate() throws ValidationException {
+        super.validate();
+        Utils.validateMember(this, CURRENT_LEVEL, NISTAuthenticatorAssuranceLevel.class);
+        Utils.validateMember(this, PREVIOUS_LEVEL, NISTAuthenticatorAssuranceLevel.class);
+        Utils.validateMember(this, CHANGE_DIRECTION, AssuranceLevelChangeDirection.class);
+    }
 
-        protected CAEPAssuranceLevelChange createObj() {return new CAEPAssuranceLevelChange();}
-        protected CAEPAssuranceLevelChange.Builder getThis() { return this; }
+    public static class Builder extends CAEPBaseEvent.Builder<CAEPAssuranceLevelChange, CAEPAssuranceLevelChange.Builder> {
 
         public Builder() {
             super(SSEventTypes.CAEP_ASSURANCE_LEVEL_CHANGE);
+        }
+
+        protected CAEPAssuranceLevelChange createObj() {
+            return new CAEPAssuranceLevelChange();
+        }
+
+        protected CAEPAssuranceLevelChange.Builder getThis() {
+            return this;
         }
 
         public Builder currentLevel(final NISTAuthenticatorAssuranceLevel level) {
@@ -35,14 +48,6 @@ public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
             members.put(CHANGE_DIRECTION, direction.toString());
             return thisObj;
         }
-    }
-
-    @Override
-    public void validate() throws ValidationException {
-        super.validate();
-        Utils.validateMember(this, CURRENT_LEVEL,    NISTAuthenticatorAssuranceLevel.class);
-        Utils.validateMember(this, PREVIOUS_LEVEL,   NISTAuthenticatorAssuranceLevel.class);
-        Utils.validateMember(this, CHANGE_DIRECTION, AssuranceLevelChangeDirection.class);
     }
 
 }

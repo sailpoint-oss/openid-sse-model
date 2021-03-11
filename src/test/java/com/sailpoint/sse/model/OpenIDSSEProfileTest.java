@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertEquals;
 
-public class OpenIDSSEProfileTest  {
+public class OpenIDSSEProfileTest {
 
     private void dumpMapRecursive(Map<String, Object> map, int level) {
         for (String k : map.keySet()) {
@@ -28,7 +28,7 @@ public class OpenIDSSEProfileTest  {
             String sb = IntStream.range(0, level).mapToObj(i -> "\t").collect(Collectors.joining());
             System.out.printf("%s%s -> (%s) %s%n", sb, k, o.getClass(), o.toString());
             if (o instanceof JSONObject) {
-                dumpMapRecursive((JSONObject) o, level+1);
+                dumpMapRecursive((JSONObject) o, level + 1);
             }
         }
     }
@@ -125,10 +125,10 @@ public class OpenIDSSEProfileTest  {
 
     /**
      * Figure 4:    {
-     *        "format": "saml-assertion-id",
-     *        "issuer": "https://idp.example.com/123456789/",
-     *        "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
-     *    }
+     * "format": "saml-assertion-id",
+     * "issuer": "https://idp.example.com/123456789/",
+     * "assertion_id": "_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6"
+     * }
      */
     @Test
     public void Figure4() throws ParseException, ValidationException {
@@ -266,8 +266,8 @@ public class OpenIDSSEProfileTest  {
 
 
     /**
-     *     Figure 7: Example: SET Containing a SSE Event with a Simple Subject
-     *                            and a Property Claim
+     * Figure 7: Example: SET Containing a SSE Event with a Simple Subject
+     * and a Property Claim
      */
     @Test()
     public void Figure7() throws ParseException, ValidationException {
@@ -324,7 +324,7 @@ public class OpenIDSSEProfileTest  {
     }
 
     /**
-     *     Figure 8: Example: SET Containing a SSE Event with a Proprietary format
+     * Figure 8: Example: SET Containing a SSE Event with a Proprietary format
      */
     @Test()
     public void Figure8() throws ParseException, ValidationException {

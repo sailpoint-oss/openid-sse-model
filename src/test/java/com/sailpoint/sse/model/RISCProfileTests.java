@@ -67,7 +67,6 @@ public class RISCProfileTests {
     }
 
 
-
     /**
      * Figure 2: Example: Account Disabled
      */
@@ -167,6 +166,7 @@ public class RISCProfileTests {
         JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
         SEToken.validate(parsedSet);
     }
+
     /**
      * Figure 4: Example: Identifier Recycled
      */

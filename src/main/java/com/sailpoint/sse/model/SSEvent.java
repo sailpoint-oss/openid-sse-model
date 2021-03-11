@@ -16,149 +16,147 @@ import java.util.Objects;
  *
  * @author adam.hampton
  * @author matt.domsch
- *
  */
 public abstract class SSEvent extends JSONObject {
 
-	private static final String SUBJECT_MEMBER     = "subject";
-	private static final String STATUS_MEMBER      = "status";
-	private static final String REASON_MEMBER      = "reason";
-	private static final String PROPERTIES_MEMBER  = "properties";
+    private static final String SUBJECT_MEMBER = "subject";
+    private static final String STATUS_MEMBER = "status";
+    private static final String REASON_MEMBER = "reason";
+    private static final String PROPERTIES_MEMBER = "properties";
 
-	private SSEventTypes eventType;
+    private SSEventTypes eventType;
 
-	public SSEventTypes getEventType() {
-		return eventType;
-	}
+    protected SSEvent() {
+    }
 
-	public void setEventType(SSEventTypes eventType) {
-		this.eventType = eventType;
-	}
+    public SSEventTypes getEventType() {
+        return eventType;
+    }
 
-	protected SSEvent() {}
+    public void setEventType(SSEventTypes eventType) {
+        this.eventType = eventType;
+    }
 
-	protected abstract static class Builder<T extends SSEvent, B extends Builder<T, B>> {
+    private void validateEventTypeName() throws ValidationException {
+        for (String k : this.keySet()) {
+            if (SSEventTypes.contains(k))
+                return;
+        }
+        throw new ValidationException("SSEvent eventTypeName not in SSEventTypes.");
+    }
 
-		protected final T members;
-		protected final B thisObj;
+    private void validateSubjectPresent() throws ValidationException {
+        if (null == eventType) {
+            /* Unknown event type, not instantiated via a normal constructor. */
+            return;
+        }
+        JSONObject members = (JSONObject) get(eventType.toString());
+        if (null == members) {
+            throw new ValidationException("SSE Events must have a container Map whose key is the event type URI");
+        }
 
-		protected Builder() {
-			members = createObj();
-			thisObj = getThis();
-		}
+        if (!members.containsKey(SUBJECT_MEMBER)) {
+            throw new ValidationException("SSE Events must include subject member.");
+        }
+    }
 
-		protected Builder(final SSEventTypes eventType) {
-			members = createObj();
-			thisObj = getThis();
-			this.eventType(eventType);
-		}
+    public Object getMember(final String member) {
+        JSONObject members = (JSONObject) get(eventType.toString());
+        if (null == members) {
+            return null;
+        }
 
-		public T build() {
-			T t = createObj();
-			t.setEventType(eventType);
-			t.put(eventType.toString(), members);
-			return t;
-		}
+        if (!members.containsKey(member)) {
+            return null;
+        }
+        return members.get(member);
+    }
 
-		protected abstract T createObj();
-		protected abstract B getThis();
+    public final SubjectIdentifier getSubjectIdentifier() {
+        return (SubjectIdentifier) getMember(SUBJECT_MEMBER);
+    }
 
+    public final String getStatus() {
+        return (String) getMember(STATUS_MEMBER);
+    }
 
-		private SSEventTypes eventType;
+    public void validate() throws ValidationException {
+        validateEventTypeName();
+        validateSubjectPresent();
+    }
 
-		public B eventType(final SSEventTypes eventType) {
-			this.eventType = eventType;
-			return thisObj;
-		}
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        SSEvent event = (SSEvent) obj;
+        return eventType.equals(event.getEventType());
+    }
 
-		public B subject(final Map<String, Object> sub) {
-			members.put(SUBJECT_MEMBER, sub);
-			return thisObj;
-		}
+    @Override
+    public int hashCode() {
+        return Objects.hash(this, eventType);
+    }
 
-		public B status(final String status) {
-			members.put(STATUS_MEMBER, status);
-			return thisObj;
-		}
+    protected abstract static class Builder<T extends SSEvent, B extends Builder<T, B>> {
 
-		public B reason(final String reason) {
-			members.put(REASON_MEMBER, reason);
-			return thisObj;
-		}
+        protected final T members;
+        protected final B thisObj;
+        private SSEventTypes eventType;
 
-		public B properties(final Map<String, Object> properties) {
-			members.put(PROPERTIES_MEMBER, properties);
-			return thisObj;
-		}
+        protected Builder() {
+            members = createObj();
+            thisObj = getThis();
+        }
 
-		public B member(final String key, final Object o) {
-			members.put(key, o);
-			return thisObj;
-		}
-	}
+        protected Builder(final SSEventTypes eventType) {
+            members = createObj();
+            thisObj = getThis();
+            this.eventType(eventType);
+        }
 
-	private void validateEventTypeName() throws ValidationException {
-		for (String k : this.keySet()) {
-			if (SSEventTypes.contains(k))
-				return;
-		}
-		throw new ValidationException("SSEvent eventTypeName not in SSEventTypes.");
-	}
+        public T build() {
+            T t = createObj();
+            t.setEventType(eventType);
+            t.put(eventType.toString(), members);
+            return t;
+        }
 
-	private void validateSubjectPresent() throws ValidationException {
-		if (null == eventType) {
-			/* Unknown event type, not instantiated via a normal constructor. */
-			return;
-		}
-		JSONObject members = (JSONObject) get(eventType.toString());
-		if (null == members) {
-			throw new ValidationException("SSE Events must have a container Map whose key is the event type URI");
-		}
+        protected abstract T createObj();
 
-		if (!members.containsKey(SUBJECT_MEMBER)) {
-			throw new ValidationException("SSE Events must include subject member.");
-		}
-	}
+        protected abstract B getThis();
 
-	public Object getMember(final String member) {
-		JSONObject members = (JSONObject) get(eventType.toString());
-		if (null == members) {
-			return null;
-		}
+        public B eventType(final SSEventTypes eventType) {
+            this.eventType = eventType;
+            return thisObj;
+        }
 
-		if (!members.containsKey(member)) {
-			return null;
-		}
-		return members.get(member);
-	}
+        public B subject(final Map<String, Object> sub) {
+            members.put(SUBJECT_MEMBER, sub);
+            return thisObj;
+        }
 
-	public final SubjectIdentifier getSubjectIdentifier() {
-		return (SubjectIdentifier) getMember(SUBJECT_MEMBER);
-	}
+        public B status(final String status) {
+            members.put(STATUS_MEMBER, status);
+            return thisObj;
+        }
 
-	public final String getStatus() {
-		return (String) getMember(STATUS_MEMBER);
-	}
+        public B reason(final String reason) {
+            members.put(REASON_MEMBER, reason);
+            return thisObj;
+        }
 
-	public void validate() throws ValidationException {
-		validateEventTypeName();
-		validateSubjectPresent();
-	}
+        public B properties(final Map<String, Object> properties) {
+            members.put(PROPERTIES_MEMBER, properties);
+            return thisObj;
+        }
 
-
-	@Override
-	public boolean equals(Object obj) {
-		if (!super.equals(obj)) {
-			return false;
-		}
-		SSEvent event = (SSEvent) obj;
-		return eventType.equals(event.getEventType());
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(this, eventType);
-	}
+        public B member(final String key, final Object o) {
+            members.put(key, o);
+            return thisObj;
+        }
+    }
 }
 
 

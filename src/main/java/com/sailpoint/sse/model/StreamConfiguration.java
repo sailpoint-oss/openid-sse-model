@@ -1,10 +1,16 @@
+/*
+ * Copyright (c) 2021 SailPoint Technologies, Inc.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 package com.sailpoint.sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 
 public class StreamConfiguration extends JSONObject {
 
@@ -89,7 +95,6 @@ public class StreamConfiguration extends JSONObject {
             return sc;
         }
     }
-
 
 
 }

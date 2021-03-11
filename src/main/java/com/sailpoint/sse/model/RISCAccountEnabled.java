@@ -10,6 +10,10 @@ public class RISCAccountEnabled extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCAccountEnabled, RISCAccountEnabled.Builder> {
 
+        public Builder() {
+            super(SSEventTypes.RISC_ACCOUNT_ENABLED);
+        }
+
         @Override
         protected RISCAccountEnabled createObj() {
             return new RISCAccountEnabled();
@@ -17,10 +21,6 @@ public class RISCAccountEnabled extends SSEvent {
 
         protected RISCAccountEnabled.Builder getThis() {
             return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_ACCOUNT_ENABLED);
         }
     }
 

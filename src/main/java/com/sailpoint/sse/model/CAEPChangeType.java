@@ -16,10 +16,26 @@ public enum CAEPChangeType {
     UPDATE("update"),
     DELETE("delete");
 
+    private static final Map<String, CAEPChangeType> BY_NAME = new HashMap<>();
+
+    static {
+        for (CAEPChangeType t : values()) {
+            BY_NAME.put(t.name, t);
+        }
+    }
+
     private final String name;
 
     CAEPChangeType(String s) {
         name = s;
+    }
+
+    public static CAEPChangeType valueOfLabel(String name) {
+        return BY_NAME.get(name);
+    }
+
+    public static boolean contains(final String name) {
+        return BY_NAME.containsKey(name);
     }
 
     public boolean equalsName(String otherName) {
@@ -29,22 +45,6 @@ public enum CAEPChangeType {
     @Override
     public String toString() {
         return this.name;
-    }
-
-    private static final Map<String, CAEPChangeType> BY_NAME = new HashMap<>();
-
-    static {
-        for (CAEPChangeType t: values()) {
-            BY_NAME.put(t.name, t);
-        }
-    }
-
-    public static CAEPChangeType valueOfLabel(String name) {
-        return BY_NAME.get(name);
-    }
-
-    public static boolean contains(final String name) {
-        return BY_NAME.containsKey(name);
     }
 
 }

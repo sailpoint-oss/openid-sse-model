@@ -9,22 +9,33 @@ package com.sailpoint.sse.model;
 public class CAEPCredentialChange extends CAEPBaseEvent {
 
     private static final String CREDENTIAL_TYPE = "credential_type";
-    private static final String CHANGE_TYPE     = "change_type";
+    private static final String CHANGE_TYPE = "change_type";
+
+    @Override
+    public void validate() throws ValidationException {
+        super.validate();
+        Utils.validateMember(this, CREDENTIAL_TYPE, CAEPCredentialType.class);
+        Utils.validateMember(this, CHANGE_TYPE, CAEPChangeType.class);
+    }
 
     public static class Builder extends CAEPBaseEvent.Builder<CAEPCredentialChange, CAEPCredentialChange.Builder> {
 
-        private static final String FRIENDLY_NAME   = "friendly_name";
-        private static final String X509_ISSUER     = "x509_issuer";
-        private static final String X509_SERIAL     = "x509_serial";
-        private static final String FIDO2_AAGUID    = "fido2_aaguid";
-
-        @Override
-        protected CAEPCredentialChange createObj() {return new CAEPCredentialChange();}
-        protected CAEPCredentialChange.Builder getThis() { return this; }
-
+        private static final String FRIENDLY_NAME = "friendly_name";
+        private static final String X509_ISSUER = "x509_issuer";
+        private static final String X509_SERIAL = "x509_serial";
+        private static final String FIDO2_AAGUID = "fido2_aaguid";
 
         public Builder() {
             super(SSEventTypes.CAEP_CREDENTIAL_CHANGE);
+        }
+
+        @Override
+        protected CAEPCredentialChange createObj() {
+            return new CAEPCredentialChange();
+        }
+
+        protected CAEPCredentialChange.Builder getThis() {
+            return this;
         }
 
         public Builder credentialType(final CAEPCredentialType type) {
@@ -57,13 +68,6 @@ public class CAEPCredentialChange extends CAEPBaseEvent {
             return thisObj;
         }
 
-    }
-
-    @Override
-    public void validate() throws ValidationException {
-        super.validate();
-        Utils.validateMember(this, CREDENTIAL_TYPE, CAEPCredentialType.class);
-        Utils.validateMember(this, CHANGE_TYPE,     CAEPChangeType.class);
     }
 
 }

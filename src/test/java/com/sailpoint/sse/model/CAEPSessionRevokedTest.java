@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class CAEPSessionRevokedTest {
     /**
      * Figure 1: Example: Session Revoked for User + Session ID + Tenant
-     *                              (Complex Subject)
+     * (Complex Subject)
      */
 
     @Test
@@ -141,8 +141,8 @@ public class CAEPSessionRevokedTest {
     }
 
     /**
-     *        Figure 3: Example: Session Revoked for User + Device + Tenant
-     *                              (Complex Subject)
+     * Figure 3: Example: Session Revoked for User + Device + Tenant
+     * (Complex Subject)
      */
 
     @Test

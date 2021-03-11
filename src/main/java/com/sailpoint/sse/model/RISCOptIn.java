@@ -10,6 +10,10 @@ public class RISCOptIn extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCOptIn, RISCOptIn.Builder> {
 
+        public Builder() {
+            super(SSEventTypes.RISC_OPT_IN);
+        }
+
         @Override
         protected RISCOptIn createObj() {
             return new RISCOptIn();
@@ -17,10 +21,6 @@ public class RISCOptIn extends SSEvent {
 
         protected RISCOptIn.Builder getThis() {
             return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_OPT_IN);
         }
     }
 

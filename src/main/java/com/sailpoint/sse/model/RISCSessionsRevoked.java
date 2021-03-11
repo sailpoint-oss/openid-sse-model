@@ -10,6 +10,10 @@ public class RISCSessionsRevoked extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCSessionsRevoked, RISCSessionsRevoked.Builder> {
 
+        public Builder() {
+            super(SSEventTypes.RISC_SESSIONS_REVOKED);
+        }
+
         @Override
         protected RISCSessionsRevoked createObj() {
             return new RISCSessionsRevoked();
@@ -17,10 +21,6 @@ public class RISCSessionsRevoked extends SSEvent {
 
         protected RISCSessionsRevoked.Builder getThis() {
             return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_SESSIONS_REVOKED);
         }
     }
 

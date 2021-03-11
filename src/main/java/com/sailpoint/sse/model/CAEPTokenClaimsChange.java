@@ -12,23 +12,6 @@ public class CAEPTokenClaimsChange extends CAEPBaseEvent {
 
     private static final String CLAIMS = "claims";
 
-    public static class Builder extends CAEPBaseEvent.Builder<CAEPTokenClaimsChange, CAEPTokenClaimsChange.Builder> {
-
-        protected CAEPTokenClaimsChange createObj() {return new CAEPTokenClaimsChange();}
-        protected CAEPTokenClaimsChange.Builder getThis() { return this; }
-
-        public Builder() {
-            super(SSEventTypes.CAEP_TOKEN_CLAIMS_CHANGE);
-        }
-
-        public CAEPTokenClaimsChange.Builder claims(final JSONObject newClaims) {
-            members.put(CLAIMS, newClaims);
-            return thisObj;
-        }
-
-
-    }
-
     @Override
     public void validate() throws ValidationException {
         super.validate();
@@ -37,6 +20,28 @@ public class CAEPTokenClaimsChange extends CAEPBaseEvent {
         if (null == o) {
             throw new ValidationException(this.getClass().getName() + " member " + CLAIMS + " is missing or null.");
         }
+    }
+
+    public static class Builder extends CAEPBaseEvent.Builder<CAEPTokenClaimsChange, CAEPTokenClaimsChange.Builder> {
+
+        public Builder() {
+            super(SSEventTypes.CAEP_TOKEN_CLAIMS_CHANGE);
+        }
+
+        protected CAEPTokenClaimsChange createObj() {
+            return new CAEPTokenClaimsChange();
+        }
+
+        protected CAEPTokenClaimsChange.Builder getThis() {
+            return this;
+        }
+
+        public CAEPTokenClaimsChange.Builder claims(final JSONObject newClaims) {
+            members.put(CLAIMS, newClaims);
+            return thisObj;
+        }
+
+
     }
 
 

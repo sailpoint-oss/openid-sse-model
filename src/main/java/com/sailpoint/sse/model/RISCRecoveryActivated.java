@@ -10,6 +10,10 @@ public class RISCRecoveryActivated extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCRecoveryActivated, RISCRecoveryActivated.Builder> {
 
+        public Builder() {
+            super(SSEventTypes.RISC_RECOVERY_ACTIVATED);
+        }
+
         @Override
         protected RISCRecoveryActivated createObj() {
             return new RISCRecoveryActivated();
@@ -17,10 +21,6 @@ public class RISCRecoveryActivated extends SSEvent {
 
         protected RISCRecoveryActivated.Builder getThis() {
             return this;
-        }
-
-        public Builder() {
-            super(SSEventTypes.RISC_RECOVERY_ACTIVATED);
         }
     }
 

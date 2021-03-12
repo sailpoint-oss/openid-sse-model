@@ -9,9 +9,12 @@ package com.sailpoint.sse.model;
 import com.nimbusds.jose.shaded.json.JSONObject;
 
 public abstract class CAEPBaseEvent extends SSEvent {
+    private static final String EVENT_TIMESTAMP_MEMBER = "event_timestamp";
+    private static final String INITIATING_ENTITY_MEMBER = "initiating_entity";
+    private static final String REASON_ADMIN_MEMBER = "reason_admin";
+    private static final String REASON_USER_MEMBER = "reason_user";
 
-    protected CAEPBaseEvent() {
-    }
+    protected CAEPBaseEvent() {}
 
     public JSONObject getEventMembers() throws ValidationException {
         final SSEventTypes eventType = getEventType();
@@ -30,7 +33,7 @@ public abstract class CAEPBaseEvent extends SSEvent {
     public void validateEventTimestamp() throws ValidationException {
         JSONObject members = getEventMembers();
 
-        Object eventTimestamp = members.get(Builder.EVENT_TIMESTAMP_MEMBER);
+        Object eventTimestamp = members.get(EVENT_TIMESTAMP_MEMBER);
         if (null == eventTimestamp) {
             throw new ValidationException("CAEP Events must have an event_timestamp member");
         }
@@ -52,10 +55,6 @@ public abstract class CAEPBaseEvent extends SSEvent {
 
     public abstract static class Builder<T extends CAEPBaseEvent, B extends CAEPBaseEvent.Builder<T, B>>
             extends SSEvent.Builder<T, B> {
-        protected static final String EVENT_TIMESTAMP_MEMBER = "event_timestamp";
-        protected static final String INITIATING_ENTITY_MEMBER = "initiating_entity";
-        protected static final String REASON_ADMIN_MEMBER = "reason_admin";
-        protected static final String REASON_USER_MEMBER = "reason_user";
 
         protected Builder(final SSEventTypes eventType) {
             super(eventType);

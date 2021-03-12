@@ -10,6 +10,10 @@ public class CAEPCredentialChange extends CAEPBaseEvent {
 
     private static final String CREDENTIAL_TYPE = "credential_type";
     private static final String CHANGE_TYPE = "change_type";
+    private static final String FRIENDLY_NAME = "friendly_name";
+    private static final String X509_ISSUER = "x509_issuer";
+    private static final String X509_SERIAL = "x509_serial";
+    private static final String FIDO2_AAGUID = "fido2_aaguid";
 
     @Override
     public void validate() throws ValidationException {
@@ -20,10 +24,6 @@ public class CAEPCredentialChange extends CAEPBaseEvent {
 
     public static class Builder extends CAEPBaseEvent.Builder<CAEPCredentialChange, CAEPCredentialChange.Builder> {
 
-        private static final String FRIENDLY_NAME = "friendly_name";
-        private static final String X509_ISSUER = "x509_issuer";
-        private static final String X509_SERIAL = "x509_serial";
-        private static final String FIDO2_AAGUID = "fido2_aaguid";
 
         public Builder() {
             super(SSEventTypes.CAEP_CREDENTIAL_CHANGE);

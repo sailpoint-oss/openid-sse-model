@@ -8,9 +8,9 @@ package com.sailpoint.sse.model;
 
 public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
 
-    protected static final String CURRENT_LEVEL = "current_level";
-    protected static final String PREVIOUS_LEVEL = "previous_level";
-    protected static final String CHANGE_DIRECTION = "change_direction";
+    private static final String CURRENT_LEVEL = "current_level";
+    private static final String PREVIOUS_LEVEL = "previous_level";
+    private static final String CHANGE_DIRECTION = "change_direction";
 
     @Override
     public void validate() throws ValidationException {

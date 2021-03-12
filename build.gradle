@@ -38,9 +38,6 @@ java {
     withSourcesJar()
 }
 
-compileJava {
-    options.release = 9
-}
 publishing {
     publications {
         model(MavenPublication) {
@@ -98,5 +95,5 @@ signing {
 
 group = 'com.sailpoint'
 version = '0.1.0-SNAPSHOT'
-
-
+sourceCompatibility = 9;
+targetCompatibility = 9;

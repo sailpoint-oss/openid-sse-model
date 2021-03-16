@@ -10,6 +10,7 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
+import com.sailpoint.sse.model.risc.*;
 import org.junit.Test;
 
 import java.text.ParseException;

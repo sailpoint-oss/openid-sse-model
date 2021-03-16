@@ -4,32 +4,31 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.caep;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public enum NISTAuthenticatorAssuranceLevel {
+public enum CAEPComplianceStatus {
 
-    NIST_AAL1("nist-aal1"),
-    NIST_AAL2("nist-aal2"),
-    NIST_AAL3("nist-aal3");
+    COMPLIANT("compliant"),
+    NOT_COMPLIANT("not-compliant");
 
-    private static final Map<String, NISTAuthenticatorAssuranceLevel> BY_NAME = new HashMap<>();
+    private static final Map<String, CAEPComplianceStatus> BY_NAME = new HashMap<>();
 
     static {
-        for (NISTAuthenticatorAssuranceLevel t : values()) {
+        for (CAEPComplianceStatus t : values()) {
             BY_NAME.put(t.name, t);
         }
     }
 
     private final String name;
 
-    NISTAuthenticatorAssuranceLevel(final String s) {
+    CAEPComplianceStatus(String s) {
         name = s;
     }
 
-    public static NISTAuthenticatorAssuranceLevel valueOfLabel(String name) {
+    public static CAEPComplianceStatus valueOfLabel(String name) {
         return BY_NAME.get(name);
     }
 
@@ -37,7 +36,7 @@ public enum NISTAuthenticatorAssuranceLevel {
         return BY_NAME.containsKey(name);
     }
 
-    public boolean equalsName(final String otherName) {
+    public boolean equalsName(String otherName) {
         return name.equals(otherName);
     }
 
@@ -45,6 +44,5 @@ public enum NISTAuthenticatorAssuranceLevel {
     public String toString() {
         return this.name;
     }
-
 
 }

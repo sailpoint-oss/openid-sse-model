@@ -4,7 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.caep;
+
+import com.sailpoint.sse.model.SSEventTypes;
+import com.sailpoint.sse.model.Utils;
+import com.sailpoint.sse.model.ValidationException;
 
 public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
 
@@ -17,7 +21,7 @@ public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
         super.validate();
         Utils.validateMember(this, CURRENT_LEVEL, NISTAuthenticatorAssuranceLevel.class);
         Utils.validateMember(this, PREVIOUS_LEVEL, NISTAuthenticatorAssuranceLevel.class);
-        Utils.validateMember(this, CHANGE_DIRECTION, AssuranceLevelChangeDirection.class);
+        Utils.validateMember(this, CHANGE_DIRECTION, CAEPAssuranceLevelChangeDirection.class);
     }
 
     public static class Builder extends CAEPBaseEvent.Builder<CAEPAssuranceLevelChange, CAEPAssuranceLevelChange.Builder> {
@@ -44,7 +48,7 @@ public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
             return thisObj;
         }
 
-        public Builder changeDirection(final AssuranceLevelChangeDirection direction) {
+        public Builder changeDirection(final CAEPAssuranceLevelChangeDirection direction) {
             members.put(CHANGE_DIRECTION, direction.toString());
             return thisObj;
         }

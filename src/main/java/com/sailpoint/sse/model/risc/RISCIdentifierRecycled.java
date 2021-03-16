@@ -4,7 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.risc;
+
+import com.sailpoint.sse.model.*;
 
 public class RISCIdentifierRecycled extends SSEvent {
 

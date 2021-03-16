@@ -4,31 +4,32 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.caep;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public enum RISCAccountDisabledReasons {
+public enum CAEPInitiatingEntity {
+    ADMIN("admin"),
+    USER("user"),
+    POLICY("policy"),
+    SYSTEM("system");
 
-    HIJACKING("hijacking"),
-    BULK_ACCOUNT("bulk-account");
-
-    private static final Map<String, RISCAccountDisabledReasons> BY_NAME = new HashMap<>();
+    private static final Map<String, CAEPInitiatingEntity> BY_NAME = new HashMap<>();
 
     static {
-        for (RISCAccountDisabledReasons t : values()) {
+        for (CAEPInitiatingEntity t : values()) {
             BY_NAME.put(t.name, t);
         }
     }
 
     private final String name;
 
-    RISCAccountDisabledReasons(String s) {
+    CAEPInitiatingEntity(String s) {
         name = s;
     }
 
-    public static RISCAccountDisabledReasons valueOfLabel(String name) {
+    public static CAEPInitiatingEntity valueOfLabel(String name) {
         return BY_NAME.get(name);
     }
 
@@ -44,4 +45,6 @@ public enum RISCAccountDisabledReasons {
     public String toString() {
         return this.name;
     }
+
+
 }

@@ -4,40 +4,39 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.risc;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public enum AssuranceLevelChangeDirection {
+public enum RISCAccountDisabledReasons {
 
-    INCREASE("increase"),
-    DECREASE("decrease");
+    HIJACKING("hijacking"),
+    BULK_ACCOUNT("bulk-account");
 
-    private static final Map<String, AssuranceLevelChangeDirection> BY_NAME = new HashMap<>();
+    private static final Map<String, RISCAccountDisabledReasons> BY_NAME = new HashMap<>();
 
     static {
-        for (AssuranceLevelChangeDirection t : values()) {
+        for (RISCAccountDisabledReasons t : values()) {
             BY_NAME.put(t.name, t);
         }
     }
 
     private final String name;
 
-    AssuranceLevelChangeDirection(final String s) {
+    RISCAccountDisabledReasons(String s) {
         name = s;
     }
 
-    public static AssuranceLevelChangeDirection valueOfLabel(String name) {
+    public static RISCAccountDisabledReasons valueOfLabel(String name) {
         return BY_NAME.get(name);
     }
 
-    @SuppressWarnings("unused")
     public static boolean contains(final String name) {
         return BY_NAME.containsKey(name);
     }
 
-    public boolean equalsName(final String otherName) {
+    public boolean equalsName(String otherName) {
         return name.equals(otherName);
     }
 
@@ -45,5 +44,4 @@ public enum AssuranceLevelChangeDirection {
     public String toString() {
         return this.name;
     }
-
 }

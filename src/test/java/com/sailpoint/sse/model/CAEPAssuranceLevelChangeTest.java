@@ -22,11 +22,12 @@ import static org.junit.Assert.assertEquals;
 
 public class CAEPAssuranceLevelChangeTest {
     /**
-     * Figure 7: Example: Assurance Level Increase
+     * Figure 9: Example: Assurance Level Increase - Simple Subject +
+     *                               optional claims
      */
 
     @Test
-    public void Figure7() throws ParseException, ValidationException {
+    public void Figure9() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(IdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3456789/")

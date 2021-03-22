@@ -20,12 +20,57 @@ import static org.junit.Assert.assertEquals;
 
 public class CAEPSessionRevokedTest {
     /**
-     * Figure 1: Example: Session Revoked for User + Session ID + Tenant
-     * (Complex Subject)
+     * Figure 1: Example: Session Revoked - Required claims + Simple Subject
+     */
+    @Test
+    public void Figure1() throws ParseException {
+        SubjectIdentifier subj = new SubjectIdentifier.Builder()
+                .format(IdentifierFormats.OPAQUE)
+                .subject("dMTlD|1600802906337.16|16008.16")
+                .build();
+
+        CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
+                .eventTimestamp(1615304991643L)
+                .subject(subj)
+                .build();
+
+        JWTClaimsSet set = new JWTClaimsSet.Builder()
+                .issuer("https://idp.example.com/123456789/")
+                .jwtID("24c63fb56e5a2d77a6b512616ca9fa24")
+                .issueTime(DateUtils.fromSecondsSinceEpoch(1615305159L))
+                .audience("https://sp.example.com/caep")
+                .claim(SEToken.EVENTS_CLAIM, evt)
+                .build();
+
+        final String figure_text = "   {\n" +
+                "       \"iss\": \"https://idp.example.com/123456789/\",\n" +
+                "       \"jti\": \"24c63fb56e5a2d77a6b512616ca9fa24\",\n" +
+                "       \"iat\": 1615305159,\n" +
+                "       \"aud\": \"https://sp.example.com/caep\",\n" +
+                "       \"events\": {\n" +
+                "           \"https://schemas.openid.net/secevent/caep/event-type/session-revoked\": {\n" +
+                "               \"subject\": {\n" +
+                "                   \"format\": \"opaque\",\n" +
+                "                   \"sub\": \"dMTlD|1600802906337.16|16008.16\"\n" +
+                "               },\n" +
+                "               \"event_timestamp\": 1615304991643\n" +
+                "           }\n" +
+                "       }\n" +
+                "   }\n";
+
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
+    }
+
+
+    /**
+     * Figure 2: Example: Session Revoked - Complex Subject describing user
+     *              + session ID + device (includes optional claims)
      */
 
     @Test
-    public void Figure1() throws ParseException {
+    public void Figure2() throws ParseException {
         SubjectIdentifier session = new SubjectIdentifier.Builder()
                 .format(IdentifierFormats.OPAQUE)
                 .subject("dMTlD|1600802906337.16|16008.16")
@@ -100,11 +145,12 @@ public class CAEPSessionRevokedTest {
     }
 
     /**
-     * Figure 2: Example: Session Revoked for User using sub claim
+     * Figure 3: Example: Session Revoked - subject as `sub` claim (includes
+     *                              optional claims)
      */
 
     @Test
-    public void Figure2() throws ParseException {
+    public void Figure3() throws ParseException {
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Landspeed Policy Violation: C076E82F")
@@ -135,7 +181,7 @@ public class CAEPSessionRevokedTest {
                 "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +
-                "   }\n";
+                "   }";
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
@@ -143,12 +189,12 @@ public class CAEPSessionRevokedTest {
     }
 
     /**
-     * Figure 3: Example: Session Revoked for User + Device + Tenant
-     * (Complex Subject)
+     *   Figure 4: Example: Session Revoked - Complex Subject describing user
+     *                + device + tenant (includes optional claims)
      */
 
     @Test
-    public void Figure3() throws ParseException, ValidationException {
+    public void Figure4() throws ParseException, ValidationException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
                 .format(IdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
@@ -217,7 +263,7 @@ public class CAEPSessionRevokedTest {
                 "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +
-                "   }";
+                "   }\n";
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());

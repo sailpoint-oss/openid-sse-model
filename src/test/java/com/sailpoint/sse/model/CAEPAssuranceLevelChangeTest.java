@@ -29,7 +29,7 @@ public class CAEPAssuranceLevelChangeTest {
     @Test
     public void Figure9() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3456789/")
                 .subject("jane.smith@example.com")
                 .build();

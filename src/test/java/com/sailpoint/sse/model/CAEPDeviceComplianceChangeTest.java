@@ -28,13 +28,13 @@ public class CAEPDeviceComplianceChangeTest {
     @Test
     public void Figure10() throws ParseException, ValidationException {
         SubjectIdentifier device = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();
 
         SubjectIdentifier tenant = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.OPAQUE)
+                .format(SubjectIdentifierFormats.OPAQUE)
                 .id("123456789")
                 .build();
 

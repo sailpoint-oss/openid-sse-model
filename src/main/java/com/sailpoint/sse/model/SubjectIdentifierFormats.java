@@ -9,7 +9,7 @@ package com.sailpoint.sse.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum IdentifierFormats {
+public enum SubjectIdentifierFormats {
 
     // https://github.com/richanna/secevent/blob/master/draft-ietf-secevent-subject-identifiers.txt
     ACCOUNT("account"),
@@ -24,21 +24,21 @@ public enum IdentifierFormats {
     //  https://bitbucket.org/openid/risc/pull-requests/8/align-with-new-subject-identifier-draft
     OPAQUE("opaque");
 
-    private static final Map<String, IdentifierFormats> BY_NAME = new HashMap<>();
+    private static final Map<String, SubjectIdentifierFormats> BY_NAME = new HashMap<>();
 
     static {
-        for (IdentifierFormats t : values()) {
+        for (SubjectIdentifierFormats t : values()) {
             BY_NAME.put(t.name, t);
         }
     }
 
     private final String name;
 
-    IdentifierFormats(final String s) {
+    SubjectIdentifierFormats(final String s) {
         name = s;
     }
 
-    public static IdentifierFormats valueOfLabel(String name) {
+    public static SubjectIdentifierFormats valueOfLabel(String name) {
         return BY_NAME.get(name);
     }
 

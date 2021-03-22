@@ -25,7 +25,7 @@ public class CAEPSessionRevokedTest {
     @Test
     public void Figure1() throws ParseException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.OPAQUE)
+                .format(SubjectIdentifierFormats.OPAQUE)
                 .subject("dMTlD|1600802906337.16|16008.16")
                 .build();
 
@@ -72,18 +72,18 @@ public class CAEPSessionRevokedTest {
     @Test
     public void Figure2() throws ParseException {
         SubjectIdentifier session = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.OPAQUE)
+                .format(SubjectIdentifierFormats.OPAQUE)
                 .subject("dMTlD|1600802906337.16|16008.16")
                 .build();
 
         SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("dMTlD|1600802906337.16|16008.16")
                 .build();
 
         SubjectIdentifier tenant = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.OPAQUE)
+                .format(SubjectIdentifierFormats.OPAQUE)
                 .id("123456789")
                 .build();
 
@@ -196,19 +196,19 @@ public class CAEPSessionRevokedTest {
     @Test
     public void Figure4() throws ParseException, ValidationException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("jane.smith@example.com")
                 .build();
 
         SubjectIdentifier device = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/123456789/")
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();
 
         SubjectIdentifier tenant = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.OPAQUE)
+                .format(SubjectIdentifierFormats.OPAQUE)
                 .id("123456789")
                 .build();
 

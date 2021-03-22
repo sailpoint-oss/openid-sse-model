@@ -24,7 +24,7 @@ public class RISCProfileTests {
     @Test
     public void Figure1() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/")
                 .subject("7375626A656374")
                 .build();
@@ -74,7 +74,7 @@ public class RISCProfileTests {
     @Test
     public void Figure2() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/")
                 .subject("7375626A656374")
                 .build();
@@ -125,7 +125,7 @@ public class RISCProfileTests {
     @Test
     public void Figure3() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.EMAIL)
+                .format(SubjectIdentifierFormats.EMAIL)
                 .email("john.doe@example.com")
                 .build();
 
@@ -174,7 +174,7 @@ public class RISCProfileTests {
     @Test
     public void Figure4() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.EMAIL)
+                .format(SubjectIdentifierFormats.EMAIL)
                 .email("foo@example.com")
                 .build();
 

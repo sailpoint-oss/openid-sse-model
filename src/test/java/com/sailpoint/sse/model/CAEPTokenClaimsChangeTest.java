@@ -26,7 +26,7 @@ public class CAEPTokenClaimsChangeTest {
     @Test
     public void Figure5() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.JWT_ID)
+                .format(SubjectIdentifierFormats.JWT_ID)
                 .issuer("https://idp.example.com/987654321/")
                 .jwtID("f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7")
                 .build();
@@ -81,7 +81,7 @@ public class CAEPTokenClaimsChangeTest {
     @Test
     public void Figure6() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.JWT_ID)
+                .format(SubjectIdentifierFormats.JWT_ID)
                 .issuer("https://idp.example.com/987654321/")
                 .jwtID("f61t6e20zdo3px56gepu8rzlsp4c1dpc0fx7")
                 .build();
@@ -144,7 +144,7 @@ public class CAEPTokenClaimsChangeTest {
     @Test
     public void Figure7() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.SAML_ASSERTION_ID)
+                .format(SubjectIdentifierFormats.SAML_ASSERTION_ID)
                 .issuer("https://idp.example.com/987654321/")
                 .samlAssertionID("_a75adf55-01d7-dbd8372ebdfc")
                 .build();

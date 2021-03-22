@@ -4,9 +4,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.caep;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
+import com.sailpoint.sse.model.SSEvent;
+import com.sailpoint.sse.model.SSEventTypes;
+import com.sailpoint.sse.model.ValidationException;
 
 public abstract class CAEPBaseEvent extends SSEvent {
     private static final String EVENT_TIMESTAMP_MEMBER = "event_timestamp";

@@ -4,7 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.caep;
+
+import com.sailpoint.sse.model.SSEventTypes;
+import com.sailpoint.sse.model.Utils;
+import com.sailpoint.sse.model.ValidationException;
 
 public class CAEPCredentialChange extends CAEPBaseEvent {
 

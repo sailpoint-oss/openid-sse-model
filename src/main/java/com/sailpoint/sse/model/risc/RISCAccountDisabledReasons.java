@@ -4,27 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.risc;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Commonly used SSE stream states for SSE/RISC/CAEP events.
- * <p>
- * A Transmitter MAY decide to enable, pause or disable updates about a
- * SPAG independently of an update request from a Receiver.  If a
- * Transmitter decides to start or stop events for a SPAG then the
- * Transmitter MUST do the following according to the status of the
- * stream. If the stream is:
- * <p>
- * Enabled  the Transmitter MUST send a SPAG stream updated
- * (Section 8.1.5) event respectively to the Receiver within the Event Stream.
- * Paused  the Transmitter SHOULD send SPAG stream updated
- * (Section 8.1.5) after the Event Stream is re-started.
- * Disabled  the Transmitter MAY send SPAG stream updated
- * (Section 8.1.5) after the Event Stream is re-enabled.
- */
 public enum RISCAccountDisabledReasons {
 
     HIJACKING("hijacking"),

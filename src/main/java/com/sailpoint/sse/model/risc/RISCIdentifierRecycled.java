@@ -4,7 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.risc;
+
+import com.sailpoint.sse.model.*;
 
 public class RISCIdentifierRecycled extends SSEvent {
 
@@ -16,7 +18,7 @@ public class RISCIdentifierRecycled extends SSEvent {
         super.validate();
         SubjectIdentifier subj = getSubjectIdentifier();
         final String type = subj.get(SubjectIdentifierMembers.FORMAT);
-        if (IdentifierFormats.EMAIL.equalsName(type) || IdentifierFormats.PHONE_NUMBER.equalsName(type)) {
+        if (SubjectIdentifierFormats.EMAIL.equalsName(type) || SubjectIdentifierFormats.PHONE_NUMBER.equalsName(type)) {
             return;
         }
         throw new ValidationException("RISC Identifier Recycled event must have a subject_type of email or phone_number");

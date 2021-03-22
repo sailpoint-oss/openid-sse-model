@@ -10,6 +10,10 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
+import com.sailpoint.sse.model.caep.CAEPChangeType;
+import com.sailpoint.sse.model.caep.CAEPCredentialChange;
+import com.sailpoint.sse.model.caep.CAEPCredentialType;
+import com.sailpoint.sse.model.caep.CAEPInitiatingEntity;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -18,13 +22,14 @@ import static org.junit.Assert.assertEquals;
 
 public class CAEPCredentialChangeTest {
     /**
-     * Figure 6: Example: Provisioning a new FIDO2 authenticator
+     * Figure 8: Example: Provisioning a new FIDO2 authenticator - Simple
+     *                          Subject + optional claims
      */
 
     @Test
-    public void Figure6() throws ParseException, ValidationException {
+    public void Figure8() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3456789/")
                 .subject("jane.smith@example.com")
                 .build();
@@ -37,7 +42,7 @@ public class CAEPCredentialChangeTest {
                 .initiatingEntity(CAEPInitiatingEntity.USER)
                 .subject(subj)
                 .reasonAdmin("User self-enrollment")
-//                .member("credential_name", "Jane's USB authenticator")
+                .friendlyName("Jane's USB authenticator")
                 .build();
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
@@ -63,12 +68,13 @@ public class CAEPCredentialChangeTest {
                 "               \"credential_type\": \"fido2-roaming\",\n" +
                 "               \"change_type\": \"create\",\n" +
                 "               \"fido2_aaguid\": \"accced6a-63f5-490a-9eea-e59bc1896cfc\",\n" +
-//                "               \"credential_name\": \"Jane's USB authenticator\",\n" +
+                "               \"friendly_name\": \"Jane's USB authenticator\",\n" +
                 "               \"initiating_entity\": \"user\",\n" +
                 "               \"reason_admin\": \"User self-enrollment\",\n" +
                 "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +
+                "   }" +
                 "   }\n";
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));

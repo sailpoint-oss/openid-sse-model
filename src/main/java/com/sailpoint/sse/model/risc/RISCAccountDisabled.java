@@ -4,7 +4,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.risc;
+
+import com.sailpoint.sse.model.SSEvent;
+import com.sailpoint.sse.model.SSEventTypes;
+import com.sailpoint.sse.model.Utils;
+import com.sailpoint.sse.model.ValidationException;
 
 public class RISCAccountDisabled extends SSEvent {
 

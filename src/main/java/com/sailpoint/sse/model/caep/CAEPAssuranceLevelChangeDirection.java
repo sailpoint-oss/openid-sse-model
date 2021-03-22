@@ -4,39 +4,40 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.caep;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public enum CAEPComplianceStatus {
+public enum CAEPAssuranceLevelChangeDirection {
 
-    COMPLIANT("compliant"),
-    NOT_COMPLIANT("not-compliant");
+    INCREASE("increase"),
+    DECREASE("decrease");
 
-    private static final Map<String, CAEPComplianceStatus> BY_NAME = new HashMap<>();
+    private static final Map<String, CAEPAssuranceLevelChangeDirection> BY_NAME = new HashMap<>();
 
     static {
-        for (CAEPComplianceStatus t : values()) {
+        for (CAEPAssuranceLevelChangeDirection t : values()) {
             BY_NAME.put(t.name, t);
         }
     }
 
     private final String name;
 
-    CAEPComplianceStatus(String s) {
+    CAEPAssuranceLevelChangeDirection(final String s) {
         name = s;
     }
 
-    public static CAEPComplianceStatus valueOfLabel(String name) {
+    public static CAEPAssuranceLevelChangeDirection valueOfLabel(String name) {
         return BY_NAME.get(name);
     }
 
+    @SuppressWarnings("unused")
     public static boolean contains(final String name) {
         return BY_NAME.containsKey(name);
     }
 
-    public boolean equalsName(String otherName) {
+    public boolean equalsName(final String otherName) {
         return name.equals(otherName);
     }
 

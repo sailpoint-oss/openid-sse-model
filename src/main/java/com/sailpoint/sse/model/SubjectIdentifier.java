@@ -25,7 +25,7 @@ public class SubjectIdentifier extends JSONObject {
         if (null == format) {
             return;
         }
-        if (IdentifierFormats.contains(format) || format.startsWith("x-"))
+        if (SubjectIdentifierFormats.contains(format) || format.startsWith("x-"))
             return;
         throw new ValidationException("Subject Identifier member format " +
                 "must be defined by specification or begin with x-.");
@@ -48,14 +48,14 @@ public class SubjectIdentifier extends JSONObject {
 
         private final SubjectIdentifier members = new SubjectIdentifier();
 
-        public Builder format(final IdentifierFormats format) {
+        public Builder format(final SubjectIdentifierFormats format) {
             members.put(SubjectIdentifierMembers.FORMAT, format.toString());
             return this;
         }
 
         public Builder issuer(final String iss) {
             final String subjectTypeMember = members.get(SubjectIdentifierMembers.FORMAT);
-            if (IdentifierFormats.SAML_ASSERTION_ID.equalsName(subjectTypeMember)) {
+            if (SubjectIdentifierFormats.SAML_ASSERTION_ID.equalsName(subjectTypeMember)) {
                 members.put(SubjectIdentifierMembers.SAML_ISSUER, iss);
             } else {
                 members.put(SubjectIdentifierMembers.ISSUER, iss);

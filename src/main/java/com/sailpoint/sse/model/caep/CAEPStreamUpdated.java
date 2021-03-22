@@ -4,7 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model;
+package com.sailpoint.sse.model.caep;
+
+import com.sailpoint.sse.model.SSEventTypes;
 
 public class CAEPStreamUpdated extends CAEPBaseEvent {
 

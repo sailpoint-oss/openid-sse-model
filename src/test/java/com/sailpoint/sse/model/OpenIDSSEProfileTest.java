@@ -10,6 +10,9 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
+import com.sailpoint.sse.model.caep.CAEPSessionRevoked;
+import com.sailpoint.sse.model.caep.CAEPTokenClaimsChange;
+import com.sailpoint.sse.model.risc.RISCAccountEnabled;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -45,7 +48,7 @@ public class OpenIDSSEProfileTest {
     @Test
     public void Figure1() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.EMAIL)
+                .format(SubjectIdentifierFormats.EMAIL)
                 .email("foo@example.com")
                 .build();
 
@@ -68,11 +71,11 @@ public class OpenIDSSEProfileTest {
     @Test
     public void Figure2() throws ParseException, ValidationException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.EMAIL)
+                .format(SubjectIdentifierFormats.EMAIL)
                 .email("bar@example.com")
                 .build();
         SubjectIdentifier tenant = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("http://example.com/idp1")
                 .subject("1234")
                 .build();
@@ -108,7 +111,7 @@ public class OpenIDSSEProfileTest {
     @Test
     public void Figure3() throws ParseException, ValidationException {
         SubjectIdentifier jwtid = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.JWT_ID)
+                .format(SubjectIdentifierFormats.JWT_ID)
                 .issuer("https://idp.example.com/123456789/")
                 .jwtID("B70BA622-9515-4353-A866-823539EECBC8")
                 .build();
@@ -133,7 +136,7 @@ public class OpenIDSSEProfileTest {
     @Test
     public void Figure4() throws ParseException, ValidationException {
         SubjectIdentifier jwtid = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.SAML_ASSERTION_ID)
+                .format(SubjectIdentifierFormats.SAML_ASSERTION_ID)
                 .issuer("https://idp.example.com/123456789/")
                 .samlAssertionID("_8e8dc5f69a98cc4c1ff3427e5ce34606fd672f91e6")
                 .build();
@@ -156,7 +159,7 @@ public class OpenIDSSEProfileTest {
     @Test
     public void Figure5() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.EMAIL)
+                .format(SubjectIdentifierFormats.EMAIL)
                 .email("foo@example.com")
                 .build();
 
@@ -204,12 +207,12 @@ public class OpenIDSSEProfileTest {
     @Test
     public void Figure6() throws ParseException, ValidationException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/")
                 .subject("jane.smith@example.com")
                 .build();
         SubjectIdentifier device = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/")
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();
@@ -272,7 +275,7 @@ public class OpenIDSSEProfileTest {
     @Test()
     public void Figure7() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.EMAIL)
+                .format(SubjectIdentifierFormats.EMAIL)
                 .email("foo@example2.com")
                 .build();
 

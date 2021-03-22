@@ -10,6 +10,10 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
+import com.sailpoint.sse.model.caep.CAEPAssuranceLevelChange;
+import com.sailpoint.sse.model.caep.CAEPAssuranceLevelChangeDirection;
+import com.sailpoint.sse.model.caep.CAEPInitiatingEntity;
+import com.sailpoint.sse.model.caep.NISTAuthenticatorAssuranceLevel;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -18,13 +22,14 @@ import static org.junit.Assert.assertEquals;
 
 public class CAEPAssuranceLevelChangeTest {
     /**
-     * Figure 7: Example: Assurance Level Increase
+     * Figure 9: Example: Assurance Level Increase - Simple Subject +
+     *                               optional claims
      */
 
     @Test
-    public void Figure7() throws ParseException, ValidationException {
+    public void Figure9() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.ISSUER_SUBJECT)
+                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
                 .issuer("https://idp.example.com/3456789/")
                 .subject("jane.smith@example.com")
                 .build();
@@ -32,7 +37,7 @@ public class CAEPAssuranceLevelChangeTest {
         CAEPAssuranceLevelChange evt = new CAEPAssuranceLevelChange.Builder()
                 .currentLevel(NISTAuthenticatorAssuranceLevel.NIST_AAL2)
                 .previousLevel(NISTAuthenticatorAssuranceLevel.NIST_AAL1)
-                .changeDirection(AssuranceLevelChangeDirection.INCREASE)
+                .changeDirection(CAEPAssuranceLevelChangeDirection.INCREASE)
                 .eventTimestamp(1615304991643L)
                 .initiatingEntity(CAEPInitiatingEntity.USER)
                 .subject(subj)

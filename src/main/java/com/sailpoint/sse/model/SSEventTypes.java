@@ -15,7 +15,6 @@ public enum SSEventTypes {
     RISC_ACCOUNT_PURGED("account-purged", SSESpecs.RISC_PREFIX),
     RISC_ACCOUNT_DISABLED("account-disabled", SSESpecs.RISC_PREFIX),
     RISC_ACCOUNT_ENABLED("account-enabled", SSESpecs.RISC_PREFIX),
-    RISC_VERIFICATION("verification", SSESpecs.SSE_PREFIX),
     RISC_IDENTIFIER_CHANGED("identifier-changed", SSESpecs.RISC_PREFIX),
     RISC_IDENTIFIER_RECYCLED("identifier-recycled", SSESpecs.RISC_PREFIX),
     RISC_OPT_IN("opt-in", SSESpecs.RISC_PREFIX),
@@ -27,16 +26,19 @@ public enum SSEventTypes {
     RISC_SESSIONS_REVOKED("sessions-revoked", SSESpecs.RISC_PREFIX),
 
     CAEP_IPADDR_CHANGED("ip-address-changed", SSESpecs.CAEP_PREFIX),
-    SSE_STREAM_UPDATED("stream-updated", SSESpecs.SSE_PREFIX),
     CAEP_TOKEN_REVOCATION("token-revocation", SSESpecs.CAEP_PREFIX),
     CAEP_SESSION_REVOKED("session-revoked", SSESpecs.CAEP_PREFIX),
     CAEP_TOKEN_CLAIMS_CHANGE("token-claims-change", SSESpecs.CAEP_PREFIX),
     CAEP_CREDENTIAL_CHANGE("credential-change", SSESpecs.CAEP_PREFIX),
     CAEP_ASSURANCE_LEVEL_CHANGE("assurance-level-change", SSESpecs.CAEP_PREFIX),
-    CAEP_DEVICE_COMPLIANCE_CHANGE("device-compliance-change", SSESpecs.CAEP_PREFIX);
+    CAEP_DEVICE_COMPLIANCE_CHANGE("device-compliance-change", SSESpecs.CAEP_PREFIX),
+
+    SSE_VERIFICATION("verification", SSESpecs.SSE_PREFIX),
+    SSE_STREAM_UPDATED("stream-updated", SSESpecs.SSE_PREFIX);
+
 
     // Name space prefix string for Shared Signals and Event types.
-    private static final String SSE_PREFIX = "https://schemas.openid.net/secevent/";
+    private static final String SSE_URL_PREFIX = "https://schemas.openid.net/secevent/";
     private static final Map<String, SSEventTypes> BY_NAME = new HashMap<>();
 
     static {
@@ -48,7 +50,7 @@ public enum SSEventTypes {
     private final String name;
 
     SSEventTypes(final String s, final String spec) {
-        name = SSE_PREFIX + spec + "/event-type/" + s;
+        name = SSE_URL_PREFIX + spec + "/event-type/" + s;
     }
 
     public static SSEventTypes valueOfLabel(String name) {

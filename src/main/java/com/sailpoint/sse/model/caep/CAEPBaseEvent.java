@@ -17,7 +17,7 @@ public abstract class CAEPBaseEvent extends SSEvent {
     private static final String REASON_ADMIN_MEMBER = "reason_admin";
     private static final String REASON_USER_MEMBER = "reason_user";
 
-    protected CAEPBaseEvent() {}
+    protected CAEPBaseEvent() { }
 
     public JSONObject getEventMembers() throws ValidationException {
         final SSEventTypes eventType = getEventType();

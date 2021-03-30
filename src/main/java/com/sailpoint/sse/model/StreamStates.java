@@ -41,11 +41,11 @@ public enum StreamStates {
 
     private final String name;
 
-    StreamStates(String s) {
+    StreamStates(final String s) {
         name = s;
     }
 
-    public static StreamStates valueOfLabel(String name) {
+    public static StreamStates valueOfLabel(final String name) {
         return BY_NAME.get(name);
     }
 
@@ -53,7 +53,7 @@ public enum StreamStates {
         return BY_NAME.containsKey(name);
     }
 
-    public boolean equalsName(String otherName) {
+    public boolean equalsName(final String otherName) {
         return name.equals(otherName);
     }
 

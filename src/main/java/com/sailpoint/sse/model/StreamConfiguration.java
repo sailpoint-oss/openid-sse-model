@@ -23,7 +23,7 @@ public class StreamConfiguration extends JSONObject {
     private static final String MIN_VERIFICATION_INTERVAL_MEMBER = "min_verification_interval";
     private static final String FORMAT_MEMBER = "format";
 
-    private static final HashSet<String> readOnlyMembers = new HashSet<>(Arrays.asList(
+    private static final HashSet<String> READ_ONLY_MEMBERS = new HashSet<>(Arrays.asList(
             ISSUER_MEMBER,
             AUDIENCE_MEMBER,
             EVENTS_SUPPORTED_MEMBER,
@@ -31,14 +31,14 @@ public class StreamConfiguration extends JSONObject {
             MIN_VERIFICATION_INTERVAL_MEMBER));
 
     @Override
-    public Object put(String key, Object value) throws UnsupportedOperationException {
-        if (readOnlyMembers.contains(key)) {
+    public Object put(final String key, final Object value) throws UnsupportedOperationException {
+        if (READ_ONLY_MEMBERS.contains(key)) {
             throw new UnsupportedOperationException(String.format("StreamConfiguration member %s is read-only", key));
         }
         return super.put(key, value);
     }
 
-    protected Object superPut(String key, Object value) {
+    protected Object superPut(final String key, final Object value) {
         return super.put(key, value);
     }
 

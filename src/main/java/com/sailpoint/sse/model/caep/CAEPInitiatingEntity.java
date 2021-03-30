@@ -25,11 +25,11 @@ public enum CAEPInitiatingEntity {
 
     private final String name;
 
-    CAEPInitiatingEntity(String s) {
+    CAEPInitiatingEntity(final String s) {
         name = s;
     }
 
-    public static CAEPInitiatingEntity valueOfLabel(String name) {
+    public static CAEPInitiatingEntity valueOfLabel(final String name) {
         return BY_NAME.get(name);
     }
 
@@ -37,7 +37,7 @@ public enum CAEPInitiatingEntity {
         return BY_NAME.containsKey(name);
     }
 
-    public boolean equalsName(String otherName) {
+    public boolean equalsName(final String otherName) {
         return name.equals(otherName);
     }
 

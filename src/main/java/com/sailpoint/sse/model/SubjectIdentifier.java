@@ -15,7 +15,7 @@ public class SubjectIdentifier extends JSONObject {
         return (String) this.get(s);
     }
 
-    public void put(final SubjectIdentifierMembers member, Object o) {
+    public void put(final SubjectIdentifierMembers member, final Object o) {
         final String s = member.toString();
         this.put(s, o);
     }
@@ -25,10 +25,11 @@ public class SubjectIdentifier extends JSONObject {
         if (null == format) {
             return;
         }
-        if (SubjectIdentifierFormats.contains(format) || format.startsWith("x-"))
+        if (SubjectIdentifierFormats.contains(format) || format.startsWith("x-")) {
             return;
-        throw new ValidationException("Subject Identifier member format " +
-                "must be defined by specification or begin with x-.");
+        }
+        throw new ValidationException("Subject Identifier member format "
+                + "must be defined by specification or begin with x-.");
     }
 
     public void validate() throws ValidationException {

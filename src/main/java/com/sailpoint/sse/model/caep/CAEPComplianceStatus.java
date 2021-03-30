@@ -24,11 +24,11 @@ public enum CAEPComplianceStatus {
 
     private final String name;
 
-    CAEPComplianceStatus(String s) {
+    CAEPComplianceStatus(final String s) {
         name = s;
     }
 
-    public static CAEPComplianceStatus valueOfLabel(String name) {
+    public static CAEPComplianceStatus valueOfLabel(final String name) {
         return BY_NAME.get(name);
     }
 
@@ -36,7 +36,7 @@ public enum CAEPComplianceStatus {
         return BY_NAME.containsKey(name);
     }
 
-    public boolean equalsName(String otherName) {
+    public boolean equalsName(final String otherName) {
         return name.equals(otherName);
     }
 

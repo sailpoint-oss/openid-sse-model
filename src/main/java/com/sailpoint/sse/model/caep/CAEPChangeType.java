@@ -26,7 +26,7 @@ public enum CAEPChangeType {
 
     private final String name;
 
-    CAEPChangeType(String s) {
+    CAEPChangeType(final String s) {
         name = s;
     }
 

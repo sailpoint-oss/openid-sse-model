@@ -33,14 +33,15 @@ public abstract class SSEvent extends JSONObject {
         return eventType;
     }
 
-    public void setEventType(SSEventTypes eventType) {
+    public void setEventType(final SSEventTypes eventType) {
         this.eventType = eventType;
     }
 
     private void validateEventTypeName() throws ValidationException {
         for (String k : this.keySet()) {
-            if (SSEventTypes.contains(k))
+            if (SSEventTypes.contains(k)) {
                 return;
+            }
         }
         throw new ValidationException("SSEvent eventTypeName not in SSEventTypes.");
     }
@@ -86,7 +87,7 @@ public abstract class SSEvent extends JSONObject {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (!super.equals(obj)) {
             return false;
         }

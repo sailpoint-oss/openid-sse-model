@@ -7,7 +7,7 @@
 package com.sailpoint.sse.model;
 
 public class ValidationException extends Exception {
-    public ValidationException(String message) {
+    public ValidationException(final String message) {
         super(message);
     }
 }

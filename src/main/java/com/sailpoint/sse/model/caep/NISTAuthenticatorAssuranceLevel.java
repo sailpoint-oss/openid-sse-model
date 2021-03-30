@@ -29,7 +29,7 @@ public enum NISTAuthenticatorAssuranceLevel {
         name = s;
     }
 
-    public static NISTAuthenticatorAssuranceLevel valueOfLabel(String name) {
+    public static NISTAuthenticatorAssuranceLevel valueOfLabel(final String name) {
         return BY_NAME.get(name);
     }
 

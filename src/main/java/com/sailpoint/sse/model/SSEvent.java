@@ -20,7 +20,6 @@ import java.util.Objects;
 public abstract class SSEvent extends JSONObject {
 
     private static final String SUBJECT_MEMBER = "subject";
-    private static final String STATUS_MEMBER = "status";
     private static final String REASON_MEMBER = "reason";
     private static final String PROPERTIES_MEMBER = "properties";
 
@@ -37,7 +36,7 @@ public abstract class SSEvent extends JSONObject {
         this.eventType = eventType;
     }
 
-    private void validateEventTypeName() throws ValidationException {
+    protected void validateEventTypeName() throws ValidationException {
         for (String k : this.keySet()) {
             if (SSEventTypes.contains(k)) {
                 return;
@@ -75,10 +74,6 @@ public abstract class SSEvent extends JSONObject {
 
     public final SubjectIdentifier getSubjectIdentifier() {
         return (SubjectIdentifier) getMember(SUBJECT_MEMBER);
-    }
-
-    public final String getStatus() {
-        return (String) getMember(STATUS_MEMBER);
     }
 
     public void validate() throws ValidationException {
@@ -135,11 +130,6 @@ public abstract class SSEvent extends JSONObject {
 
         public B subject(final Map<String, Object> sub) {
             members.put(SUBJECT_MEMBER, sub);
-            return thisObj;
-        }
-
-        public B status(final String status) {
-            members.put(STATUS_MEMBER, status);
             return thisObj;
         }
 

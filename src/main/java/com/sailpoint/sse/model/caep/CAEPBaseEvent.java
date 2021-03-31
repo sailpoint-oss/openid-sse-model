@@ -38,8 +38,7 @@ public abstract class CAEPBaseEvent extends SSEvent {
 
         Object eventTimestamp = members.get(EVENT_TIMESTAMP_MEMBER);
         if (null == eventTimestamp) {
-            // Event timestamps are optional as of 2021-03-23 SSE WG meeting
-            return;
+            throw new ValidationException("CAEP Events must have an event_timestamp member");
         }
 
         if (!(eventTimestamp instanceof Long)) {

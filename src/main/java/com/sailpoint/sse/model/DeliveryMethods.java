@@ -33,7 +33,7 @@ public enum DeliveryMethods {
         name = SSE_PREFIX + s;
     }
 
-    public static DeliveryMethods valueOfLabel(String name) {
+    public static DeliveryMethods valueOfLabel(final String name) {
         return BY_NAME.get(name);
     }
 
@@ -41,7 +41,7 @@ public enum DeliveryMethods {
         return BY_NAME.containsKey(name);
     }
 
-    public boolean equalsName(String otherName) {
+    public boolean equalsName(final String otherName) {
         return name.equals(otherName);
     }
 

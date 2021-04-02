@@ -25,27 +25,27 @@ import java.util.Map;
  * Disabled  the Transmitter MAY send SPAG stream updated
  * (Section 8.1.5) after the Event Stream is re-enabled.
  */
-public enum StreamStates {
+public enum StreamStatus {
 
     ENABLED("enabled"),
     PAUSED("paused"),
     DISABLED("disabled");
 
-    private static final Map<String, StreamStates> BY_NAME = new HashMap<>();
+    private static final Map<String, StreamStatus> BY_NAME = new HashMap<>();
 
     static {
-        for (StreamStates t : values()) {
+        for (StreamStatus t : values()) {
             BY_NAME.put(t.name, t);
         }
     }
 
     private final String name;
 
-    StreamStates(String s) {
+    StreamStatus(final String s) {
         name = s;
     }
 
-    public static StreamStates valueOfLabel(String name) {
+    public static StreamStatus valueOfLabel(final String name) {
         return BY_NAME.get(name);
     }
 
@@ -53,7 +53,7 @@ public enum StreamStates {
         return BY_NAME.containsKey(name);
     }
 
-    public boolean equalsName(String otherName) {
+    public boolean equalsName(final String otherName) {
         return name.equals(otherName);
     }
 

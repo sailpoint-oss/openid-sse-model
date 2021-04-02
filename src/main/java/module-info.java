@@ -6,5 +6,8 @@
 
 module com.sailpoint.sse.model {
     exports com.sailpoint.sse.model;
+    exports com.sailpoint.sse.model.caep;
+    exports com.sailpoint.sse.model.risc;
+    exports com.sailpoint.sse.model.sse;
     requires transitive com.nimbusds.jose.jwt;
 }

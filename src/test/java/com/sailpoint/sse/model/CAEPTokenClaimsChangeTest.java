@@ -71,8 +71,9 @@ public class CAEPTokenClaimsChangeTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
-
         evt.validate();
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
+
     }
     /**
      * Figure 6: Example: OIDC ID Token Claims Change - Optional claims
@@ -132,8 +133,9 @@ public class CAEPTokenClaimsChangeTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
-
         evt.validate();
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
+
     }
 
     /**
@@ -191,5 +193,6 @@ public class CAEPTokenClaimsChangeTest {
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
         evt.validate();
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 }

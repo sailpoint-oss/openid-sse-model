@@ -28,7 +28,7 @@ public enum CAEPAssuranceLevelChangeDirection {
         name = s;
     }
 
-    public static CAEPAssuranceLevelChangeDirection valueOfLabel(String name) {
+    public static CAEPAssuranceLevelChangeDirection valueOfLabel(final String name) {
         return BY_NAME.get(name);
     }
 

@@ -32,11 +32,11 @@ public enum CAEPCredentialType {
 
     private final String name;
 
-    CAEPCredentialType(String s) {
+    CAEPCredentialType(final String s) {
         name = s;
     }
 
-    public static CAEPCredentialType valueOfLabel(String name) {
+    public static CAEPCredentialType valueOfLabel(final String name) {
         return BY_NAME.get(name);
     }
 
@@ -44,7 +44,7 @@ public enum CAEPCredentialType {
         return BY_NAME.containsKey(name);
     }
 
-    public boolean equalsName(String otherName) {
+    public boolean equalsName(final String otherName) {
         return name.equals(otherName);
     }
 

@@ -24,11 +24,11 @@ public enum RISCAccountDisabledReasons {
 
     private final String name;
 
-    RISCAccountDisabledReasons(String s) {
+    RISCAccountDisabledReasons(final String s) {
         name = s;
     }
 
-    public static RISCAccountDisabledReasons valueOfLabel(String name) {
+    public static RISCAccountDisabledReasons valueOfLabel(final String name) {
         return BY_NAME.get(name);
     }
 
@@ -36,7 +36,7 @@ public enum RISCAccountDisabledReasons {
         return BY_NAME.containsKey(name);
     }
 
-    public boolean equalsName(String otherName) {
+    public boolean equalsName(final String otherName) {
         return name.equals(otherName);
     }
 

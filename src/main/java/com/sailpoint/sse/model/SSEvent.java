@@ -66,11 +66,10 @@ public abstract class SSEvent extends JSONObject {
             throw new ValidationException("SSE Events must have a container Map whose key is the event type URI");
         }
 
-        if (!members.containsKey(SUBJECT_MEMBER)) {
-            throw new ValidationException("SSE Events must include subject member.");
-        }
+        // SSE Events may have a simple subject in the JWT claims "sub" instead, which we wouldn't know about here
+        // Therefore subj may be null in this event.
         SubjectIdentifier subj = getSubjectIdentifier();
-        subj.validate();
+        if (null != subj) { subj.validate(); }
     }
 
     public Object getMember(final String member) {

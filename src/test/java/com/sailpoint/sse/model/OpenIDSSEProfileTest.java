@@ -195,7 +195,7 @@ public class OpenIDSSEProfileTest {
         assertEquals(figureJson, setJson);
         evt.validate();
 
-        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
         SEToken.validate(parsedSet);
     }
 
@@ -383,4 +383,57 @@ public class OpenIDSSEProfileTest {
         JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
         SEToken.validate(parsedSet);
     }
+
+    /**
+     * SET Containing a SSE Event with a Simple Subject Claim
+     * and an undefined event type
+     */
+
+    @Test
+    public void UndefinedEventParseTest() throws ParseException, ValidationException {
+        SubjectIdentifier subj = new SubjectIdentifier.Builder()
+                .format(SubjectIdentifierFormats.EMAIL)
+                .email("foo@example.com")
+                .build();
+
+        NonstandardSSEvent evt = new NonstandardSSEvent.Builder()
+                .eventName("https://schemas.openid.net/secevent/unknown/event-type/unknown")
+                .subject(subj)
+                .build();
+
+        JWTClaimsSet set = new JWTClaimsSet.Builder()
+                .issuer("https://idp.example.com/")
+                .jwtID("756E69717565206964656E746966696572")
+                .issueTime(DateUtils.fromSecondsSinceEpoch(1520364019))
+                .audience("636C69656E745F6964")
+                .claim(SEToken.EVENTS_CLAIM, evt)
+                .build();
+
+        final String figure_text = "{\n" +
+                "  \"iss\": \"https://idp.example.com/\",\n" +
+                "  \"jti\": \"756E69717565206964656E746966696572\",\n" +
+                "  \"iat\": 1520364019,\n" +
+                "  \"aud\": \"636C69656E745F6964\",\n" +
+                "  \"events\": {\n" +
+                "    \"https://schemas.openid.net/secevent/unknown/event-type/unknown\": {\n" +
+                "      \"subject\": {\n" +
+                "        \"format\": \"email\",\n" +
+                "        \"email\": \"foo@example.com\"\n" +
+                "      }\n" +
+                "    }\n" +
+                "  }\n" +
+                "}";
+
+        final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
+        final JSONObject setJson = new JSONObject(set.toJSONObject());
+        assertEquals(figureJson, setJson);
+        evt.validate();
+
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
+        SEToken.validate(parsedSet);
+    }
+
+
+
 }
+

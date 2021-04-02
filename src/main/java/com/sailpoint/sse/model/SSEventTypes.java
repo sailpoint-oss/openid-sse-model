@@ -42,7 +42,6 @@ public enum SSEventTypes {
     SSE_VERIFICATION("verification", SSESpecs.SSE_PREFIX, SSEVerification.class),
     SSE_STREAM_UPDATED("stream-updated", SSESpecs.SSE_PREFIX, null);
 
-
     // Name space prefix string for Shared Signals and Event types.
     private static final String SSE_URL_PREFIX = "https://schemas.openid.net/secevent/";
     private static final Map<String, SSEventTypes> BY_NAME = new HashMap<>();
@@ -61,7 +60,7 @@ public enum SSEventTypes {
         this.cls = cls;
     }
 
-    public static SSEventTypes valueOfLabel(String name) {
+    public static SSEventTypes enumByName(String name) {
         return BY_NAME.get(name);
     }
 

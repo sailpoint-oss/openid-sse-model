@@ -19,11 +19,12 @@ import java.util.Objects;
  */
 public abstract class SSEvent extends JSONObject {
 
-    private static final String SUBJECT_MEMBER = "subject";
+    public static final String SUBJECT_MEMBER = "subject";
     private static final String REASON_MEMBER = "reason";
     private static final String PROPERTIES_MEMBER = "properties";
 
     private SSEventTypes eventType;
+    private String eventTypeName;
 
     protected SSEvent() {
     }
@@ -32,8 +33,18 @@ public abstract class SSEvent extends JSONObject {
         return eventType;
     }
 
+    public String getEventTypeName() {
+        return eventTypeName;
+    }
+    public void setEventTypeName(final String name) {
+        eventTypeName = name;
+    }
+
     public void setEventType(final SSEventTypes eventType) {
         this.eventType = eventType;
+        if (null != eventType) {
+            this.eventTypeName = eventType.toString();
+        }
     }
 
     protected void validateEventTypeName() throws ValidationException {
@@ -45,12 +56,12 @@ public abstract class SSEvent extends JSONObject {
         throw new ValidationException("SSEvent eventTypeName not in SSEventTypes.");
     }
 
-    private void validateSubjectPresent() throws ValidationException {
-        if (null == eventType) {
+    protected void validateSubject() throws ValidationException {
+        if (null == eventTypeName) {
             /* Unknown event type, not instantiated via a normal constructor. */
             return;
         }
-        JSONObject members = (JSONObject) get(eventType.toString());
+        JSONObject members = (JSONObject) get(eventTypeName);
         if (null == members) {
             throw new ValidationException("SSE Events must have a container Map whose key is the event type URI");
         }
@@ -58,10 +69,12 @@ public abstract class SSEvent extends JSONObject {
         if (!members.containsKey(SUBJECT_MEMBER)) {
             throw new ValidationException("SSE Events must include subject member.");
         }
+        SubjectIdentifier subj = getSubjectIdentifier();
+        subj.validate();
     }
 
     public Object getMember(final String member) {
-        JSONObject members = (JSONObject) get(eventType.toString());
+        JSONObject members = (JSONObject) get(getEventTypeName());
         if (null == members) {
             return null;
         }
@@ -71,14 +84,19 @@ public abstract class SSEvent extends JSONObject {
         }
         return members.get(member);
     }
+    // Used when we are parsing and thus do not know we have a SubjectIdentifier there
+    public final JSONObject getSubjectIdentifierJO() {
+        return (JSONObject) getMember(SUBJECT_MEMBER);
+    }
+
 
     public final SubjectIdentifier getSubjectIdentifier() {
         return (SubjectIdentifier) getMember(SUBJECT_MEMBER);
     }
 
+
     public void validate() throws ValidationException {
-        validateEventTypeName();
-        validateSubjectPresent();
+        validateSubject();
     }
 
     @Override

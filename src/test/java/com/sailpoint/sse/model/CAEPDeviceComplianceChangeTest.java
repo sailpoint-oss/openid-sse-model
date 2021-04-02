@@ -93,5 +93,6 @@ public class CAEPDeviceComplianceChangeTest {
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
         evt.validate();
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 }

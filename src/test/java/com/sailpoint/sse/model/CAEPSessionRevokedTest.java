@@ -23,7 +23,7 @@ public class CAEPSessionRevokedTest {
      * Figure 1: Example: Session Revoked - Required claims + Simple Subject
      */
     @Test
-    public void Figure1() throws ParseException {
+    public void Figure1() throws ParseException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.OPAQUE)
                 .subject("dMTlD|1600802906337.16|16008.16")
@@ -61,6 +61,7 @@ public class CAEPSessionRevokedTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 
 
@@ -70,7 +71,7 @@ public class CAEPSessionRevokedTest {
      */
 
     @Test
-    public void Figure2() throws ParseException {
+    public void Figure2() throws ParseException, ValidationException {
         SubjectIdentifier session = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.OPAQUE)
                 .subject("dMTlD|1600802906337.16|16008.16")
@@ -142,6 +143,7 @@ public class CAEPSessionRevokedTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 
     /**
@@ -150,7 +152,7 @@ public class CAEPSessionRevokedTest {
      */
 
     @Test
-    public void Figure3() throws ParseException {
+    public void Figure3() throws ParseException, ValidationException {
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Landspeed Policy Violation: C076E82F")
@@ -186,6 +188,7 @@ public class CAEPSessionRevokedTest {
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 
     /**
@@ -269,8 +272,7 @@ public class CAEPSessionRevokedTest {
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);
 
-        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
-        SEToken.validate(parsedSet);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 
 }

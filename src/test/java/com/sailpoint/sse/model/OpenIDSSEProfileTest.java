@@ -196,7 +196,6 @@ public class OpenIDSSEProfileTest {
         evt.validate();
 
         JWTClaimsSet parsedSet = SEToken.parse(figure_text);
-        SEToken.validate(parsedSet);
     }
 
 
@@ -263,8 +262,7 @@ public class OpenIDSSEProfileTest {
         assertEquals(figureJson, setJson);
         evt.validate();
 
-        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
-        SEToken.validate(parsedSet);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 
 
@@ -322,8 +320,7 @@ public class OpenIDSSEProfileTest {
         subj.validate();
         evt.validate();
 
-        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
-        SEToken.validate(parsedSet);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 
     /**
@@ -380,8 +377,7 @@ public class OpenIDSSEProfileTest {
         subj.validate();
         evt.validate();
 
-        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
-        SEToken.validate(parsedSet);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 
     /**
@@ -430,10 +426,6 @@ public class OpenIDSSEProfileTest {
         evt.validate();
 
         JWTClaimsSet parsedSet = SEToken.parse(figure_text);
-        SEToken.validate(parsedSet);
     }
-
-
-
 }
 

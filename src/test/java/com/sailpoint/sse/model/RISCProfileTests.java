@@ -63,8 +63,7 @@ public class RISCProfileTests {
         subj.validate();
         evt.validate();
 
-        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
-        SEToken.validate(parsedSet);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 
 
@@ -115,8 +114,7 @@ public class RISCProfileTests {
         subj.validate();
         evt.validate();
 
-        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
-        SEToken.validate(parsedSet);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 
     /**
@@ -164,8 +162,7 @@ public class RISCProfileTests {
         subj.validate();
         evt.validate();
 
-        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
-        SEToken.validate(parsedSet);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 
     /**
@@ -211,7 +208,6 @@ public class RISCProfileTests {
         subj.validate();
         evt.validate();
 
-        JWTClaimsSet parsedSet = JWTClaimsSet.parse(figure_text);
-        SEToken.validate(parsedSet);
+        JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 }

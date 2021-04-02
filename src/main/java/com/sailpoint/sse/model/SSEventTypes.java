@@ -40,7 +40,7 @@ public enum SSEventTypes {
     CAEP_DEVICE_COMPLIANCE_CHANGE("device-compliance-change", SSESpecs.CAEP_PREFIX, CAEPDeviceComplianceChange.class),
 
     SSE_VERIFICATION("verification", SSESpecs.SSE_PREFIX, SSEVerification.class),
-    SSE_STREAM_UPDATED("stream-updated", SSESpecs.SSE_PREFIX, null);
+    SSE_STREAM_UPDATED("stream-updated", SSESpecs.SSE_PREFIX, SSEStreamUpdated.class);
 
     // Name space prefix string for Shared Signals and Event types.
     private static final String SSE_URL_PREFIX = "https://schemas.openid.net/secevent/";

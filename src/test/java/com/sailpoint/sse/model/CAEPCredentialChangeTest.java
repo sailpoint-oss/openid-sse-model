@@ -74,8 +74,7 @@ public class CAEPCredentialChangeTest {
                 "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +
-                "   }" +
-                "   }\n";
+                "   }";
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());

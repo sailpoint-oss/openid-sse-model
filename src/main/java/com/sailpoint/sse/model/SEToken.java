@@ -88,6 +88,8 @@ public class SEToken {
      * Parse a JSON String into a fully fleshed sse.model class hierarchy
      * @param jsonString - representing a JSON object "{ ... }"
      * @return a JWTClaimsSet wherein all members have been converted to sse.model classes
+     * @throws ParseException when JSONObject parsing fails
+     * @throws ValidationException when SSE validation rules fail
      */
 
     public static JWTClaimsSet parse(final String jsonString) throws ParseException, ValidationException {

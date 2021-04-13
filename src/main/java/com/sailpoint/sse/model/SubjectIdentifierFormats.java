@@ -22,7 +22,10 @@ public enum SubjectIdentifierFormats {
     SAML_ASSERTION_ID("saml_assertion_id"),
 
     //  https://bitbucket.org/openid/risc/pull-requests/8/align-with-new-subject-identifier-draft
-    OPAQUE("opaque");
+    OPAQUE("opaque"),
+
+    // https://bitbucket.org/openid/risc/src/master/oauth-event-types-1_0.txt
+    OAUTH_TOKEN("oauth_token");
 
     private static final Map<String, SubjectIdentifierFormats> BY_NAME = new HashMap<>();
 

@@ -26,7 +26,13 @@ public enum SubjectIdentifierMembers {
     TENANT("tenant"),
     ORG_UNIT("org-unit"),
     GROUP("group"),
-    ID("id");
+    ID("id"),
+
+    //https://bitbucket.org/openid/risc/src/master/oauth-event-types-1_0.txt
+    SUBJECT_TYPE("subject_type"),
+    TOKEN_TYPE("token_type"),
+    TOKEN_IDENTIFIER_ALG("token_identifier_alg"),
+    TOKEN("token");
 
     private static final Map<String, SubjectIdentifierMembers> BY_NAME = new HashMap<>();
 

@@ -9,6 +9,7 @@ package com.sailpoint.sse.model;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.sailpoint.sse.model.oauth.OAuthTokenIdentifierAlg;
+import com.sailpoint.sse.model.oauth.OAuthTokenSubjectIdentifier;
 import com.sailpoint.sse.model.oauth.OAuthTokenType;
 import org.junit.Test;
 
@@ -22,12 +23,13 @@ public class OAuthTests {
      */
     @Test
     public void Figure1() throws ParseException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .member("subject_type", SubjectIdentifierFormats.OAUTH_TOKEN.toString())
-                .member("token_type", OAuthTokenType.REFRESH_TOKEN.toString())
-                .member("token_identifier_alg", OAuthTokenIdentifierAlg.PLAIN.toString())
-                .member("token", "7265667265736820746F6B656E20737472696E67")
+        OAuthTokenSubjectIdentifier subj = new OAuthTokenSubjectIdentifier.Builder()
+                .subjectType(SubjectIdentifierFormats.OAUTH_TOKEN)
+                .tokenType(OAuthTokenType.REFRESH_TOKEN)
+                .tokenIdentifierAlg(OAuthTokenIdentifierAlg.PLAIN)
+                .token("7265667265736820746F6B656E20737472696E67")
                 .build();
+
         JSONObject obj = new JSONObject();
         obj.put("subject", subj);
 

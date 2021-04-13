@@ -25,7 +25,11 @@ public enum SubjectIdentifierFormats {
     OPAQUE("opaque"),
 
     // https://bitbucket.org/openid/risc/src/master/oauth-event-types-1_0.txt
-    OAUTH_TOKEN("oauth_token");
+    OAUTH_TOKEN("oauth_token"),
+
+    // https://github.com/richanna/secevent/pull/2
+    // Decentralized Identifier
+    DID("did");
 
     private static final Map<String, SubjectIdentifierFormats> BY_NAME = new HashMap<>();
 

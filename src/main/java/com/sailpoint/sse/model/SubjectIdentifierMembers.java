@@ -32,7 +32,10 @@ public enum SubjectIdentifierMembers {
     SUBJECT_TYPE("subject_type"),
     TOKEN_TYPE("token_type"),
     TOKEN_IDENTIFIER_ALG("token_identifier_alg"),
-    TOKEN("token");
+    TOKEN("token"),
+
+    // https://github.com/richanna/secevent/pull/2
+    URI("uri");
 
     private static final Map<String, SubjectIdentifierMembers> BY_NAME = new HashMap<>();
 

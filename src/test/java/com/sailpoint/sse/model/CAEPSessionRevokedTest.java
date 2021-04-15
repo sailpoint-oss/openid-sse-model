@@ -77,8 +77,7 @@ public class CAEPSessionRevokedTest {
                 .subject("dMTlD|1600802906337.16|16008.16")
                 .build();
 
-        SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+        IssSubSubjectIdentifier user = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/123456789/")
                 .subject("dMTlD|1600802906337.16|16008.16")
                 .build();
@@ -198,14 +197,12 @@ public class CAEPSessionRevokedTest {
 
     @Test
     public void Figure4() throws ParseException, ValidationException {
-        SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+        IssSubSubjectIdentifier user = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/123456789/")
                 .subject("jane.smith@example.com")
                 .build();
 
-        SubjectIdentifier device = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+        IssSubSubjectIdentifier device = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/123456789/")
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();

@@ -23,8 +23,7 @@ public class RISCProfileTests {
      */
     @Test
     public void Figure1() throws ParseException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+        IssSubSubjectIdentifier subj = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/")
                 .subject("7375626A656374")
                 .build();
@@ -72,8 +71,7 @@ public class RISCProfileTests {
      */
     @Test
     public void Figure2() throws ParseException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+        IssSubSubjectIdentifier subj = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/")
                 .subject("7375626A656374")
                 .build();

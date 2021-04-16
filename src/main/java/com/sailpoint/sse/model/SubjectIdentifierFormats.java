@@ -6,16 +6,18 @@
 
 package com.sailpoint.sse.model;
 
+import com.sailpoint.sse.model.did.DIDSubjectIdentifier;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public enum SubjectIdentifierFormats {
 
     // https://github.com/richanna/secevent/blob/master/draft-ietf-secevent-subject-identifiers.txt
-    ACCOUNT("account"),
+    ACCOUNT("account", AccountSubjectIdentifier.class),
     EMAIL("email"),
     PHONE_NUMBER("phone_number"),
-    ISSUER_SUBJECT("iss_sub"),
+    ISSUER_SUBJECT("iss_sub", IssSubSubjectIdentifier.class),
     ALIASES("aliases"),
 
     JWT_ID("jwt_id"),
@@ -29,7 +31,7 @@ public enum SubjectIdentifierFormats {
 
     // https://github.com/richanna/secevent/pull/2
     // Decentralized Identifier
-    DID("did");
+    DID("did", DIDSubjectIdentifier.class);
 
     private static final Map<String, SubjectIdentifierFormats> BY_NAME = new HashMap<>();
 
@@ -40,14 +42,19 @@ public enum SubjectIdentifierFormats {
     }
 
     private final String name;
+    private final Class<? extends SubjectIdentifier> cls;
 
     SubjectIdentifierFormats(final String s) {
         name = s;
+        this.cls = null;
     }
 
-    public static SubjectIdentifierFormats valueOfLabel(String name) {
-        return BY_NAME.get(name);
+    SubjectIdentifierFormats(final String s, final Class<? extends SubjectIdentifier> cls) {
+        name = s;
+        this.cls = cls;
     }
+
+    public static SubjectIdentifierFormats enumByName(String name) { return BY_NAME.get(name); }
 
     public static boolean contains(final String name) {
         return BY_NAME.containsKey(name);
@@ -61,4 +68,6 @@ public enum SubjectIdentifierFormats {
     public String toString() {
         return this.name;
     }
+
+    public Class<? extends SubjectIdentifier> getCls() { return this.cls; }
 }

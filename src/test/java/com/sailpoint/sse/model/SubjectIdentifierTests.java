@@ -21,7 +21,7 @@ public class SubjectIdentifierTests {
      *  https://github.com/richanna/secevent/pull/2
      */
     @Test
-    public void DIDTest() throws ParseException, ValidationException {
+    public void DIDTest1() throws ParseException, ValidationException {
         DIDSubjectIdentifier subj = new DIDSubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.DID)
                 .uri("did:example:123456")
@@ -34,8 +34,36 @@ public class SubjectIdentifierTests {
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         assertEquals(figureJson, subj);
+    }
+
+    @Test
+    public void DIDTest2() throws ValidationException {
+        DIDSubjectIdentifier subj = new DIDSubjectIdentifier.Builder()
+                .format(SubjectIdentifierFormats.DID)
+                .uri("did:example:123456")
+                .build();
         subj.validate();
     }
+
+    @Test
+    public void DIDTest3()  {
+        DIDSubjectIdentifier subj = new DIDSubjectIdentifier.Builder()
+                .format(SubjectIdentifierFormats.DID)
+                .uri("example:123456")
+                .build();
+        assertThrows(ValidationException.class, subj::validate);
+    }
+
+    @Test
+    public void DIDTest4()  {
+        DIDSubjectIdentifier subj = new DIDSubjectIdentifier.Builder()
+                .format(SubjectIdentifierFormats.DID)
+                .uri("http://example:123456")
+                .build();
+        assertThrows(ValidationException.class, subj::validate);
+    }
+
+
 
     @Test
     public void AccountTest() throws ParseException {

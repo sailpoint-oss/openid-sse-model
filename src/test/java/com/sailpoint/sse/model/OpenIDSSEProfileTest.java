@@ -74,11 +74,12 @@ public class OpenIDSSEProfileTest {
                 .format(SubjectIdentifierFormats.EMAIL)
                 .email("bar@example.com")
                 .build();
-        SubjectIdentifier tenant = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+
+        IssSubSubjectIdentifier tenant = new IssSubSubjectIdentifier.Builder()
                 .issuer("http://example.com/idp1")
                 .subject("1234")
                 .build();
+
         SubjectIdentifier transferee = new SubjectIdentifier.Builder()
                 .user(user)
                 .tenant(tenant)
@@ -205,16 +206,16 @@ public class OpenIDSSEProfileTest {
 
     @Test
     public void Figure6() throws ParseException, ValidationException {
-        SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+        IssSubSubjectIdentifier user = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/")
                 .subject("jane.smith@example.com")
                 .build();
-        SubjectIdentifier device = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+
+        IssSubSubjectIdentifier device = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/")
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();
+
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .user(user)
                 .device(device)
@@ -428,4 +429,3 @@ public class OpenIDSSEProfileTest {
         JWTClaimsSet parsedSet = SEToken.parse(figure_text);
     }
 }
-

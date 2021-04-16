@@ -66,28 +66,14 @@ public class SEToken {
         validateEventsClaim(set);
     }
 
-    // Handle recursive nature of SubjectIdentifiers
-    private static SubjectIdentifier convertSubjects(final JSONObject subjectJO) {
-        if (null == subjectJO) { return null; }
 
-        SubjectIdentifier subj = new SubjectIdentifier();
-        subj.merge(subjectJO);
-
-        // Override child SIs with specific object types
-        for (Map.Entry<String,Object> entry : subjectJO.entrySet()) {
-            String k = entry.getKey();
-            Object value = entry.getValue();
-            if (value instanceof JSONObject) {
-                subj.put(k, convertSubjects((JSONObject) value));
-            }
-        }
-        return subj;
-    }
 
     /**
      * Parse a JSON String into a fully fleshed sse.model class hierarchy
      * @param jsonString - representing a JSON object "{ ... }"
      * @return a JWTClaimsSet wherein all members have been converted to sse.model classes
+     * @throws ParseException when JSONObject parsing fails
+     * @throws ValidationException when SSE validation rules fail
      */
 
     public static JWTClaimsSet parse(final String jsonString) throws ParseException, ValidationException {
@@ -127,7 +113,7 @@ public class SEToken {
         // Convert the incoming event subject into a SubjectIdentifier hierarchy
         JSONObject eventDetailsJO = (JSONObject) eventsClaim.get(eventName);
         JSONObject subjectJO = (JSONObject) eventDetailsJO.get(SSEvent.SUBJECT_MEMBER);
-        SubjectIdentifier subj = convertSubjects(subjectJO);
+        SubjectIdentifier subj = SubjectIdentifier.convertSubjects(subjectJO);
         eventDetailsJO.put(SSEvent.SUBJECT_MEMBER, subj);
         event.merge(eventsClaim);
 

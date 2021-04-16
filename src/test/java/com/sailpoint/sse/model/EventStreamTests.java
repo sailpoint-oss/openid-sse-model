@@ -62,8 +62,7 @@ public class EventStreamTests {
      */
     @Test()
     public void Figure32() throws ParseException, ValidationException {
-        SubjectIdentifier tenant = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+        IssSubSubjectIdentifier tenant = new IssSubSubjectIdentifier.Builder()
                 .issuer("http://example.com/idp1")
                 .subject("1234")
                 .build();

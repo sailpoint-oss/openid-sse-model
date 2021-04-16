@@ -8,6 +8,10 @@ package com.sailpoint.sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+
 public class SubjectIdentifier extends JSONObject {
 
     public final String get(SubjectIdentifierMembers member) {
@@ -44,6 +48,54 @@ public class SubjectIdentifier extends JSONObject {
         }
     }
 
+    private void convertChildSubjects(final JSONObject subjectJO) throws ValidationException {
+        // Recursively create child SIs with specific object types
+        for (Map.Entry<String, Object> entry : subjectJO.entrySet()) {
+            String k = entry.getKey();
+            Object value = entry.getValue();
+            if (value instanceof JSONObject) {
+                this.put(k, convertSubjects((JSONObject) value));
+            }
+        }
+    }
+
+    private static SubjectIdentifier constructSubjectIdentifier(final JSONObject subjectJO) throws ValidationException {
+        SubjectIdentifierFormats format;
+        String formatName = (String) subjectJO.get(SubjectIdentifierMembers.FORMAT.toString());
+
+        if (null == formatName
+                || null == (format = SubjectIdentifierFormats.enumByName(formatName))
+                || null == format.getCls()) {
+            // No format member, no standardized format, or no specialized class for that format.
+            // Return a base SubjectIdentifier.
+            return new SubjectIdentifier();
+        }
+
+        Class<? extends SubjectIdentifier> cls = format.getCls();
+        Constructor<? extends SubjectIdentifier> ctor;
+
+        try {
+            ctor = cls.getConstructor();
+        } catch (NoSuchMethodException e) {
+            throw new ValidationException("Cannot find a constructor() for " + cls.getName());
+        }
+
+        try {
+            return ctor.newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new ValidationException("Cannot instantiate SubjectIdentifier subclass");
+        }
+    }
+
+    public static SubjectIdentifier convertSubjects(final JSONObject subjectJO) throws ValidationException {
+        if (null == subjectJO) { return null; }
+
+        SubjectIdentifier subj = constructSubjectIdentifier(subjectJO);
+        subj.merge(subjectJO);
+        subj.convertChildSubjects(subjectJO);
+        subj.validate();
+        return subj;
+    }
 
     public static class Builder {
 

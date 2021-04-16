@@ -28,8 +28,7 @@ public class CAEPCredentialChangeTest {
 
     @Test
     public void Figure8() throws ParseException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+        IssSubSubjectIdentifier subj = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/3456789/")
                 .subject("jane.smith@example.com")
                 .build();
@@ -74,8 +73,7 @@ public class CAEPCredentialChangeTest {
                 "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +
-                "   }" +
-                "   }\n";
+                "   }";
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());

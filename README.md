@@ -1,4 +1,4 @@
-# sse-openid-model
+# openid-sse-model
 
 An implementation of the [OpenID Foundation](https://openid.net/wg/sse/)'s Shared Signals and Events (SSE) data model for the Continuous Access Evaluation Protocol (CAEP) and Risk Incident Sharing and Coordination (RISC) event profiles.
 

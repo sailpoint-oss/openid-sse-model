@@ -27,8 +27,7 @@ public class CAEPDeviceComplianceChangeTest {
 
     @Test
     public void Figure10() throws ParseException, ValidationException {
-        SubjectIdentifier device = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.ISSUER_SUBJECT)
+        IssSubSubjectIdentifier device = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/123456789/")
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();

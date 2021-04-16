@@ -9,5 +9,7 @@ module com.sailpoint.sse.model {
     exports com.sailpoint.sse.model.caep;
     exports com.sailpoint.sse.model.risc;
     exports com.sailpoint.sse.model.sse;
+    exports com.sailpoint.sse.model.oauth;
+    exports com.sailpoint.sse.model.did;
     requires transitive com.nimbusds.jose.jwt;
 }

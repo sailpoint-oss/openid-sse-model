@@ -6,8 +6,6 @@
 
 package com.sailpoint.sse.model;
 
-import com.sailpoint.sse.model.did.DIDSubjectIdentifier;
-
 import java.util.HashMap;
 import java.util.Map;
 

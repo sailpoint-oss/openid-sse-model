@@ -8,7 +8,6 @@ package com.sailpoint.sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
-import com.sailpoint.sse.model.did.DIDSubjectIdentifier;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -21,7 +20,7 @@ public class SubjectIdentifierTests {
      *  https://github.com/richanna/secevent/pull/2
      */
     @Test
-    public void DIDTest1() throws ParseException, ValidationException {
+    public void DIDTest1() throws ParseException {
         DIDSubjectIdentifier subj = new DIDSubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.DID)
                 .uri("did:example:123456")

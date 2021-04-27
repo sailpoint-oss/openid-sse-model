@@ -4,12 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.sailpoint.sse.model.did;
-
-import com.sailpoint.sse.model.SubjectIdentifier;
-import com.sailpoint.sse.model.SubjectIdentifierFormats;
-import com.sailpoint.sse.model.SubjectIdentifierMembers;
-import com.sailpoint.sse.model.ValidationException;
+package com.sailpoint.sse.model;
 
 import java.net.URISyntaxException;
 import java.net.URI;

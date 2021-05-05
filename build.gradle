@@ -18,7 +18,7 @@ dependencies {
 
     // Nimbus JOSE JWT
     // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
-    api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.8.1'
+    api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.9.1'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.13.2'

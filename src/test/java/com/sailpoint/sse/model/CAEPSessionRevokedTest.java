@@ -12,6 +12,10 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
 import com.sailpoint.sse.model.caep.CAEPInitiatingEntity;
 import com.sailpoint.sse.model.caep.CAEPSessionRevoked;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -23,7 +27,7 @@ public class CAEPSessionRevokedTest {
      * Figure 1: Example: Session Revoked - Required claims + Simple Subject
      */
     @Test
-    public void Figure1() throws ParseException, ValidationException {
+    public void Figure1() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.OPAQUE)
                 .subject("dMTlD|1600802906337.16|16008.16")
@@ -71,7 +75,7 @@ public class CAEPSessionRevokedTest {
      */
 
     @Test
-    public void Figure2() throws ParseException, ValidationException {
+    public void Figure2() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier session = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.OPAQUE)
                 .subject("dMTlD|1600802906337.16|16008.16")
@@ -151,7 +155,7 @@ public class CAEPSessionRevokedTest {
      */
 
     @Test
-    public void Figure3() throws ParseException, ValidationException {
+    public void Figure3() throws ParseException, SIValidationException, ValidationException {
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
                 .reasonAdmin("Landspeed Policy Violation: C076E82F")
@@ -196,7 +200,7 @@ public class CAEPSessionRevokedTest {
      */
 
     @Test
-    public void Figure4() throws ParseException, ValidationException {
+    public void Figure4() throws ParseException, SIValidationException, ValidationException {
         IssSubSubjectIdentifier user = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/123456789/")
                 .subject("jane.smith@example.com")

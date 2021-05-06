@@ -10,13 +10,14 @@ import com.sailpoint.sse.model.SSEvent;
 import com.sailpoint.sse.model.SSEventTypes;
 import com.sailpoint.sse.model.Utils;
 import com.sailpoint.sse.model.ValidationException;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
 public class RISCAccountDisabled extends SSEvent {
 
     private static final String REASON_MEMBER = "reason";
 
     @Override
-    public void validate() throws ValidationException {
+    public void validate() throws SIValidationException, ValidationException {
         super.validate();
         Utils.validateMember(this, REASON_MEMBER, RISCAccountDisabledReasons.class);
     }

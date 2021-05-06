@@ -14,6 +14,8 @@ import com.sailpoint.sse.model.caep.CAEPChangeType;
 import com.sailpoint.sse.model.caep.CAEPCredentialChange;
 import com.sailpoint.sse.model.caep.CAEPCredentialType;
 import com.sailpoint.sse.model.caep.CAEPInitiatingEntity;
+import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -27,7 +29,7 @@ public class CAEPCredentialChangeTest {
      */
 
     @Test
-    public void Figure8() throws ParseException, ValidationException {
+    public void Figure8() throws ParseException, SIValidationException, ValidationException {
         IssSubSubjectIdentifier subj = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/3456789/")
                 .subject("jane.smith@example.com")

@@ -7,6 +7,8 @@
 package com.sailpoint.sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
 import java.util.Map;
 import java.util.Objects;
@@ -56,7 +58,7 @@ public abstract class SSEvent extends JSONObject {
         throw new ValidationException("SSEvent eventTypeName not in SSEventTypes.");
     }
 
-    protected void validateSubject() throws ValidationException {
+    protected void validateSubject() throws SIValidationException, ValidationException {
         if (null == eventTypeName) {
             /* Unknown event type, not instantiated via a normal constructor. */
             return;
@@ -94,7 +96,7 @@ public abstract class SSEvent extends JSONObject {
     }
 
 
-    public void validate() throws ValidationException {
+    public void validate() throws SIValidationException, ValidationException {
         validateSubject();
     }
 

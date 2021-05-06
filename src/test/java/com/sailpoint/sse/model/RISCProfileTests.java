@@ -11,6 +11,11 @@ import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
 import com.sailpoint.sse.model.risc.*;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -22,7 +27,7 @@ public class RISCProfileTests {
      *  Figure 1:  Example: Account Credential Change Required
      */
     @Test
-    public void Figure1() throws ParseException, ValidationException {
+    public void Figure1() throws ParseException, SIValidationException, ValidationException {
         IssSubSubjectIdentifier subj = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/")
                 .subject("7375626A656374")
@@ -70,7 +75,7 @@ public class RISCProfileTests {
      * Figure 2: Example: Account Disabled
      */
     @Test
-    public void Figure2() throws ParseException, ValidationException {
+    public void Figure2() throws ParseException, SIValidationException, ValidationException {
         IssSubSubjectIdentifier subj = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/")
                 .subject("7375626A656374")
@@ -119,7 +124,7 @@ public class RISCProfileTests {
      * Figure 3: Example: Identifier Changed
      */
     @Test
-    public void Figure3() throws ParseException, ValidationException {
+    public void Figure3() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.EMAIL)
                 .email("john.doe@example.com")
@@ -167,7 +172,7 @@ public class RISCProfileTests {
      * Figure 4: Example: Identifier Recycled
      */
     @Test
-    public void Figure4() throws ParseException, ValidationException {
+    public void Figure4() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.EMAIL)
                 .email("foo@example.com")

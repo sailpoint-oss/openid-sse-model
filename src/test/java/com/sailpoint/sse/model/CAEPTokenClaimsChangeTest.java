@@ -12,6 +12,9 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
 import com.sailpoint.sse.model.caep.CAEPInitiatingEntity;
 import com.sailpoint.sse.model.caep.CAEPTokenClaimsChange;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -24,7 +27,7 @@ public class CAEPTokenClaimsChangeTest {
      */
 
     @Test
-    public void Figure5() throws ParseException, ValidationException {
+    public void Figure5() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.JWT_ID)
                 .issuer("https://idp.example.com/987654321/")
@@ -80,7 +83,7 @@ public class CAEPTokenClaimsChangeTest {
      */
 
     @Test
-    public void Figure6() throws ParseException, ValidationException {
+    public void Figure6() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.JWT_ID)
                 .issuer("https://idp.example.com/987654321/")
@@ -144,7 +147,7 @@ public class CAEPTokenClaimsChangeTest {
      */
 
     @Test
-    public void Figure7() throws ParseException, ValidationException {
+    public void Figure7() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.SAML_ASSERTION_ID)
                 .issuer("https://idp.example.com/987654321/")

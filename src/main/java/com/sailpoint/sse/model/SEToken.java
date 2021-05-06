@@ -8,6 +8,8 @@ package com.sailpoint.sse.model;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jwt.JWTClaimsSet;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -74,9 +76,10 @@ public class SEToken {
      * @return a JWTClaimsSet wherein all members have been converted to sse.model classes
      * @throws ParseException when JSONObject parsing fails
      * @throws ValidationException when SSE validation rules fail
+     * @throws SIValidationException when SubjectIdentifier validation rules fail
      */
 
-    public static JWTClaimsSet parse(final String jsonString) throws ParseException, ValidationException {
+    public static JWTClaimsSet parse(final String jsonString) throws ParseException, SIValidationException, ValidationException {
         SSEvent event;
         Constructor<? extends SSEvent> ctor;
         Class<? extends SSEvent> cls;

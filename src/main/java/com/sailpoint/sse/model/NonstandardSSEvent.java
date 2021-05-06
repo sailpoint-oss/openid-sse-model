@@ -6,6 +6,8 @@
 
 package com.sailpoint.sse.model;
 
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+
 public class NonstandardSSEvent extends SSEvent {
 
     public NonstandardSSEvent(final String eventName) {
@@ -17,7 +19,7 @@ public class NonstandardSSEvent extends SSEvent {
     }
 
     @Override
-    public void validate() throws ValidationException {
+    public void validate() throws SIValidationException, ValidationException {
         validateSubject();
     }
 

@@ -10,9 +10,13 @@ plugins {
     id 'signing'
 }
 
+version = '0.2.0-SNAPSHOT'
+
 repositories {
     mavenCentral()
-
+    maven {
+        url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+    }
     flatDir {
         dirs 'libs'
     }
@@ -23,7 +27,8 @@ dependencies {
     // Nimbus JOSE JWT
     // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
     api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.9'
-    implementation files("libs/ietf-subject-identifiers-model-0.1.0-SNAPSHOT.jar")
+    implementation group: 'com.sailpoint', name: 'ietf-subject-identifiers-model', version: '0.1.0-SNAPSHOT'
+    //implementation files("libs/ietf-subject-identifiers-model-0.1.0-SNAPSHOT.jar")
     // Use JUnit test framework
     testImplementation 'junit:junit:4.13.2'
 }
@@ -41,6 +46,8 @@ java {
     withJavadocJar()
     withSourcesJar()
 }
+
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 publishing {
     publications {
@@ -83,6 +90,15 @@ publishing {
             name = 'myRepo'
             url = "file://${buildDir}/repo"
         }
+        maven {
+            def releaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            url = isReleaseVersion ? releaseRepo : snapshotRepo
+            credentials {
+                username = project.hasProperty('ossrhUsername') ? ossrhUsername : "Unknown user"
+                password = project.hasProperty('ossrhPassword') ? ossrhPassword : "Unknown password"
+            }
+        }
     }
 }
 
@@ -98,6 +114,5 @@ signing {
 }
 
 group = 'com.sailpoint'
-version = '0.1.0-SNAPSHOT'
 sourceCompatibility = 9;
 targetCompatibility = 9;

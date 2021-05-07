@@ -56,11 +56,6 @@ method to verify mandatory fields.
 
 See more usage examples in `src/test`.
 
-## Prerequisite libraries
-
-You must first build ietf-subject-identifiers-model, and place the resulting jar in the libs/ directory here.
-This will be necessary until ietf-subject-identifiers-model is available via Maven Central.
-
 ## Compiling
 
 This library is implemented as a Gradle based java library. Java 9+ is required. Running:
@@ -80,3 +75,26 @@ produces a versioned .jar file in the build/libs directory:
 The library has tests implemented in `/src/test/java/` and are run with Gradle:
 
 	./gradlew test
+
+## Incorporation into your own projects
+
+The library is published to Maven Central, and may be incorporated into your own projects as a dependency.
+Because the library is under active and frequent development, you may wish to pull from the OSSRH
+snapshot repository as added here:
+
+`build.gradle`
+
+    repositories {
+        mavenCentral()
+            maven {
+                url "https://s01.oss.sonatype.org/content/repositories/releases/"
+            }
+            maven {
+                url "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            }
+    }
+    
+    dependencies {
+        implementation group: 'com.sailpoint', name: 'openid-sse-model', version: '0.2.0'
+    }
+

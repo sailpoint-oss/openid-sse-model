@@ -10,6 +10,7 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import com.sailpoint.sse.model.SSEvent;
 import com.sailpoint.sse.model.SSEventTypes;
 import com.sailpoint.sse.model.ValidationException;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
 public abstract class CAEPBaseEvent extends SSEvent {
     private static final String EVENT_TIMESTAMP_MEMBER = "event_timestamp";
@@ -52,7 +53,7 @@ public abstract class CAEPBaseEvent extends SSEvent {
     }
 
     @Override
-    public void validate() throws ValidationException {
+    public void validate() throws SIValidationException, ValidationException {
         super.validate();
         validateEventTimestamp();
     }

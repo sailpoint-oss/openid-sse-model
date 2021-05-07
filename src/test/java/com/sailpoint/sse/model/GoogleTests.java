@@ -11,6 +11,8 @@ import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
 import com.sailpoint.sse.model.risc.*;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -24,7 +26,7 @@ public class GoogleTests {
      *    rather than the newer (April 2021) format "iss_sub"
      */
     @Test
-    public void AccountDisabled() throws ParseException, ValidationException {
+    public void AccountDisabled() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .member("subject_type", "iss-sub")
                 .issuer("https://accounts.google.com/")

@@ -56,6 +56,11 @@ method to verify mandatory fields.
 
 See more usage examples in `src/test`.
 
+## Prerequisite libraries
+
+You must first build ietf-subject-identifiers-model, and place the resulting jar in the libs/ directory here.
+This will be necessary until ietf-subject-identifiers-model is available via Maven Central.
+
 ## Compiling
 
 This library is implemented as a Gradle based java library. Java 9+ is required. Running:

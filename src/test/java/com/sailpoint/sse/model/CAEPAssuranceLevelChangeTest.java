@@ -14,6 +14,8 @@ import com.sailpoint.sse.model.caep.CAEPAssuranceLevelChange;
 import com.sailpoint.sse.model.caep.CAEPAssuranceLevelChangeDirection;
 import com.sailpoint.sse.model.caep.CAEPInitiatingEntity;
 import com.sailpoint.sse.model.caep.NISTAuthenticatorAssuranceLevel;
+import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -27,7 +29,7 @@ public class CAEPAssuranceLevelChangeTest {
      */
 
     @Test
-    public void Figure9() throws ParseException, ValidationException {
+    public void Figure9() throws ParseException, SIValidationException, ValidationException {
         IssSubSubjectIdentifier subj = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/3456789/")
                 .subject("jane.smith@example.com")

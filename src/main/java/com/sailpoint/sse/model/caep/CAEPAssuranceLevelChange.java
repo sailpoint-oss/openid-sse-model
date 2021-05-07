@@ -9,6 +9,7 @@ package com.sailpoint.sse.model.caep;
 import com.sailpoint.sse.model.SSEventTypes;
 import com.sailpoint.sse.model.Utils;
 import com.sailpoint.sse.model.ValidationException;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
 public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
 
@@ -17,7 +18,7 @@ public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
     private static final String CHANGE_DIRECTION = "change_direction";
 
     @Override
-    public void validate() throws ValidationException {
+    public void validate() throws SIValidationException, ValidationException {
         super.validate();
         Utils.validateMember(this, CURRENT_LEVEL, NISTAuthenticatorAssuranceLevel.class);
         Utils.validateMember(this, PREVIOUS_LEVEL, NISTAuthenticatorAssuranceLevel.class);

@@ -12,6 +12,11 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
 import com.sailpoint.sse.model.sse.SSEStreamUpdated;
 import com.sailpoint.sse.model.sse.SSEVerification;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -23,7 +28,7 @@ public class EventStreamTests {
      * Figure 31: Example: Verification SET
      */
     @Test()
-    public void Figure31() throws ParseException, ValidationException {
+    public void Figure31() throws ParseException, SIValidationException, ValidationException {
 
         SSEVerification evt = new SSEVerification.Builder()
                 .state("VGhpcyBpcyBhbiBleGFtcGxlIHN0YXRlIHZhbHVlLgo=")
@@ -61,7 +66,7 @@ public class EventStreamTests {
      * Figure 32: Example: Stream Updated SET
      */
     @Test()
-    public void Figure32() throws ParseException, ValidationException {
+    public void Figure32() throws ParseException, SIValidationException, ValidationException {
         IssSubSubjectIdentifier tenant = new IssSubSubjectIdentifier.Builder()
                 .issuer("http://example.com/idp1")
                 .subject("1234")

@@ -13,6 +13,10 @@ import com.nimbusds.jwt.util.DateUtils;
 import com.sailpoint.sse.model.caep.CAEPSessionRevoked;
 import com.sailpoint.sse.model.caep.CAEPTokenClaimsChange;
 import com.sailpoint.sse.model.risc.RISCAccountEnabled;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -46,7 +50,7 @@ public class OpenIDSSEProfileTest {
      * Figure 1: Example: Simple Subject
      */
     @Test
-    public void Figure1() throws ParseException, ValidationException {
+    public void Figure1() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.EMAIL)
                 .email("foo@example.com")
@@ -69,7 +73,7 @@ public class OpenIDSSEProfileTest {
      * Figure 2: Example: Complex Subject
      */
     @Test
-    public void Figure2() throws ParseException, ValidationException {
+    public void Figure2() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier user = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.EMAIL)
                 .email("bar@example.com")
@@ -110,7 +114,7 @@ public class OpenIDSSEProfileTest {
      */
 
     @Test
-    public void Figure3() throws ParseException, ValidationException {
+    public void Figure3() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier jwtid = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.JWT_ID)
                 .issuer("https://idp.example.com/123456789/")
@@ -135,7 +139,7 @@ public class OpenIDSSEProfileTest {
      * }
      */
     @Test
-    public void Figure4() throws ParseException, ValidationException {
+    public void Figure4() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier jwtid = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.SAML_ASSERTION_ID)
                 .issuer("https://idp.example.com/123456789/")
@@ -158,7 +162,7 @@ public class OpenIDSSEProfileTest {
      */
 
     @Test
-    public void Figure5() throws ParseException, ValidationException {
+    public void Figure5() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.EMAIL)
                 .email("foo@example.com")
@@ -205,7 +209,7 @@ public class OpenIDSSEProfileTest {
      */
 
     @Test
-    public void Figure6() throws ParseException, ValidationException {
+    public void Figure6() throws ParseException, SIValidationException, ValidationException {
         IssSubSubjectIdentifier user = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/3957ea72-1b66-44d6-a044-d805712b9288/")
                 .subject("jane.smith@example.com")
@@ -272,7 +276,7 @@ public class OpenIDSSEProfileTest {
      * and a Property Claim
      */
     @Test()
-    public void Figure7() throws ParseException, ValidationException {
+    public void Figure7() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.EMAIL)
                 .email("foo@example2.com")
@@ -328,7 +332,7 @@ public class OpenIDSSEProfileTest {
      * Figure 8: Example: SET Containing a SSE Event with a Proprietary format
      */
     @Test()
-    public void Figure8() throws ParseException, ValidationException {
+    public void Figure8() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .member("format", "x-catalog-item")
                 .member("catalog_id", "c0384/winter/2354122")
@@ -387,7 +391,7 @@ public class OpenIDSSEProfileTest {
      */
 
     @Test
-    public void UndefinedEventParseTest() throws ParseException, ValidationException {
+    public void UndefinedEventParseTest() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.EMAIL)
                 .email("foo@example.com")

@@ -9,6 +9,7 @@ package com.sailpoint.sse.model.caep;
 import com.sailpoint.sse.model.SSEventTypes;
 import com.sailpoint.sse.model.Utils;
 import com.sailpoint.sse.model.ValidationException;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
 public class CAEPCredentialChange extends CAEPBaseEvent {
 
@@ -20,7 +21,7 @@ public class CAEPCredentialChange extends CAEPBaseEvent {
     private static final String FIDO2_AAGUID = "fido2_aaguid";
 
     @Override
-    public void validate() throws ValidationException {
+    public void validate() throws SIValidationException, ValidationException {
         super.validate();
         Utils.validateMember(this, CREDENTIAL_TYPE, CAEPCredentialType.class);
         Utils.validateMember(this, CHANGE_TYPE, CAEPChangeType.class);

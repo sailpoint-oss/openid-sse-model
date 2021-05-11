@@ -10,13 +10,10 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
+import com.sailpoint.ietf.subjectidentifiers.model.*;
 import com.sailpoint.sse.model.caep.CAEPSessionRevoked;
 import com.sailpoint.sse.model.caep.CAEPTokenClaimsChange;
 import com.sailpoint.sse.model.risc.RISCAccountEnabled;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
-import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
-import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -33,7 +30,7 @@ public class OpenIDSSEProfileTest {
             Object o = map.get(k);
             // Can't use String.repeat() here until Java 11, we support 9+ at the moment.
             String sb = IntStream.range(0, level).mapToObj(i -> "\t").collect(Collectors.joining());
-            System.out.printf("%s%s -> (%s) %s%n", sb, k, o.getClass(), o.toString());
+            System.out.printf("%s%s -> (%s) %s%n", sb, k, o.getClass(), o);
             if (o instanceof JSONObject) {
                 dumpMapRecursive((JSONObject) o, level + 1);
             }
@@ -50,9 +47,8 @@ public class OpenIDSSEProfileTest {
      * Figure 1: Example: Simple Subject
      */
     @Test
-    public void Figure1() throws ParseException, SIValidationException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.EMAIL)
+    public void Figure1() throws ParseException, SIValidationException {
+        EmailSubjectIdentifier subj = new EmailSubjectIdentifier.Builder()
                 .email("foo@example.com")
                 .build();
 
@@ -73,9 +69,8 @@ public class OpenIDSSEProfileTest {
      * Figure 2: Example: Complex Subject
      */
     @Test
-    public void Figure2() throws ParseException, SIValidationException, ValidationException {
-        SubjectIdentifier user = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.EMAIL)
+    public void Figure2() throws ParseException, SIValidationException {
+        EmailSubjectIdentifier user = new EmailSubjectIdentifier.Builder()
                 .email("bar@example.com")
                 .build();
 
@@ -114,7 +109,7 @@ public class OpenIDSSEProfileTest {
      */
 
     @Test
-    public void Figure3() throws ParseException, SIValidationException, ValidationException {
+    public void Figure3() throws ParseException, SIValidationException {
         SubjectIdentifier jwtid = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.JWT_ID)
                 .issuer("https://idp.example.com/123456789/")
@@ -139,7 +134,7 @@ public class OpenIDSSEProfileTest {
      * }
      */
     @Test
-    public void Figure4() throws ParseException, SIValidationException, ValidationException {
+    public void Figure4() throws ParseException, SIValidationException {
         SubjectIdentifier jwtid = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.SAML_ASSERTION_ID)
                 .issuer("https://idp.example.com/123456789/")
@@ -163,8 +158,7 @@ public class OpenIDSSEProfileTest {
 
     @Test
     public void Figure5() throws ParseException, SIValidationException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.EMAIL)
+        EmailSubjectIdentifier subj = new EmailSubjectIdentifier.Builder()
                 .email("foo@example.com")
                 .build();
 
@@ -277,8 +271,7 @@ public class OpenIDSSEProfileTest {
      */
     @Test()
     public void Figure7() throws ParseException, SIValidationException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.EMAIL)
+        EmailSubjectIdentifier subj = new EmailSubjectIdentifier.Builder()
                 .email("foo@example2.com")
                 .build();
 
@@ -392,8 +385,7 @@ public class OpenIDSSEProfileTest {
 
     @Test
     public void UndefinedEventParseTest() throws ParseException, SIValidationException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.EMAIL)
+        EmailSubjectIdentifier subj = new EmailSubjectIdentifier.Builder()
                 .email("foo@example.com")
                 .build();
 

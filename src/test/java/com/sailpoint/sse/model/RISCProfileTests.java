@@ -10,12 +10,8 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
+import com.sailpoint.ietf.subjectidentifiers.model.*;
 import com.sailpoint.sse.model.risc.*;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
-import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
-import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
-
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -125,8 +121,7 @@ public class RISCProfileTests {
      */
     @Test
     public void Figure3() throws ParseException, SIValidationException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.EMAIL)
+        EmailSubjectIdentifier subj = new EmailSubjectIdentifier.Builder()
                 .email("john.doe@example.com")
                 .build();
 
@@ -173,8 +168,7 @@ public class RISCProfileTests {
      */
     @Test
     public void Figure4() throws ParseException, SIValidationException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.EMAIL)
+        EmailSubjectIdentifier subj = new EmailSubjectIdentifier.Builder()
                 .email("foo@example.com")
                 .build();
 

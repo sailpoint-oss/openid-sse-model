@@ -13,6 +13,7 @@ import com.nimbusds.jwt.util.DateUtils;
 import com.sailpoint.sse.model.caep.CAEPInitiatingEntity;
 import com.sailpoint.sse.model.caep.CAEPSessionRevoked;
 import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.OpaqueSubjectIdentifier;
 import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
 import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
 import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
@@ -28,9 +29,8 @@ public class CAEPSessionRevokedTest {
      */
     @Test
     public void Figure1() throws ParseException, SIValidationException, ValidationException {
-        SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.OPAQUE)
-                .subject("dMTlD|1600802906337.16|16008.16")
+        OpaqueSubjectIdentifier subj = new OpaqueSubjectIdentifier.Builder()
+                .id("dMTlD|1600802906337.16|16008.16")
                 .build();
 
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
@@ -55,7 +55,7 @@ public class CAEPSessionRevokedTest {
                 "           \"https://schemas.openid.net/secevent/caep/event-type/session-revoked\": {\n" +
                 "               \"subject\": {\n" +
                 "                   \"format\": \"opaque\",\n" +
-                "                   \"sub\": \"dMTlD|1600802906337.16|16008.16\"\n" +
+                "                   \"id\": \"dMTlD|1600802906337.16|16008.16\"\n" +
                 "               },\n" +
                 "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
@@ -76,9 +76,8 @@ public class CAEPSessionRevokedTest {
 
     @Test
     public void Figure2() throws ParseException, SIValidationException, ValidationException {
-        SubjectIdentifier session = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.OPAQUE)
-                .subject("dMTlD|1600802906337.16|16008.16")
+        OpaqueSubjectIdentifier session = new OpaqueSubjectIdentifier.Builder()
+                .id("dMTlD|1600802906337.16|16008.16")
                 .build();
 
         IssSubSubjectIdentifier user = new IssSubSubjectIdentifier.Builder()
@@ -86,8 +85,7 @@ public class CAEPSessionRevokedTest {
                 .subject("dMTlD|1600802906337.16|16008.16")
                 .build();
 
-        SubjectIdentifier tenant = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.OPAQUE)
+        OpaqueSubjectIdentifier tenant = new OpaqueSubjectIdentifier.Builder()
                 .id("123456789")
                 .build();
 
@@ -123,7 +121,7 @@ public class CAEPSessionRevokedTest {
                 "               \"subject\": {\n" +
                 "                   \"session\": {\n" +
                 "                     \"format\": \"opaque\",\n" +
-                "                     \"sub\": \"dMTlD|1600802906337.16|16008.16\"\n" +
+                "                     \"id\": \"dMTlD|1600802906337.16|16008.16\"\n" +
                 "                   },\n" +
                 "                   \"user\": {\n" +
                 "                     \"format\": \"iss_sub\",\n" +
@@ -211,8 +209,7 @@ public class CAEPSessionRevokedTest {
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();
 
-        SubjectIdentifier tenant = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.OPAQUE)
+        OpaqueSubjectIdentifier tenant = new OpaqueSubjectIdentifier.Builder()
                 .id("123456789")
                 .build();
 

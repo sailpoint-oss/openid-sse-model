@@ -14,9 +14,8 @@ Identifier, the Shared Signals Event, and the Security Event Token that will car
 classes for each defined RISC and CAEP event. Construction follows the builder pattern. Events each have a validate()
 method to verify mandatory fields.
 
-        SubjectIdentifier session = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.OPAQUE)
-                .subject("dMTlD|1600802906337.16|16008.16")
+        OpaqueSubjectIdentifier session = new OpaqueSubjectIdentifier.Builder()
+                .id("dMTlD|1600802906337.16|16008.16")
                 .build();
 
         SubjectIdentifier user = new SubjectIdentifier.Builder()
@@ -25,8 +24,7 @@ method to verify mandatory fields.
                 .subject("dMTlD|1600802906337.16|16008.16")
                 .build();
 
-        SubjectIdentifier tenant = new SubjectIdentifier.Builder()
-                .format(IdentifierFormats.OPAQUE)
+        OpaqueSubjectIdentifier tenant = new OpaqueSubjectIdentifier.Builder()
                 .id("123456789")
                 .build();
 

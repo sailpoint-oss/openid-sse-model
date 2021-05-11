@@ -6,18 +6,20 @@
 
 package com.sailpoint.sse.model.risc;
 
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import com.sailpoint.sse.model.SSEvent;
 import com.sailpoint.sse.model.SSEventTypes;
 import com.sailpoint.sse.model.Utils;
 import com.sailpoint.sse.model.ValidationException;
-import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+
+import java.text.ParseException;
 
 public class RISCAccountDisabled extends SSEvent {
 
     private static final String REASON_MEMBER = "reason";
 
     @Override
-    public void validate() throws SIValidationException, ValidationException {
+    public void validate() throws ParseException, SIValidationException, ValidationException {
         super.validate();
         Utils.validateMember(this, REASON_MEMBER, RISCAccountDisabledReasons.class);
     }

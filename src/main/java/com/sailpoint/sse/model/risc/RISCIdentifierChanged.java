@@ -6,17 +6,19 @@
 
 package com.sailpoint.sse.model.risc;
 
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import com.sailpoint.sse.model.SSEvent;
 import com.sailpoint.sse.model.SSEventTypes;
 import com.sailpoint.sse.model.ValidationException;
-import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+
+import java.text.ParseException;
 
 public class RISCIdentifierChanged extends SSEvent {
 
     private static final String NEW_VALUE_MEMBER = "new-value";
 
     @Override
-    public void validate() throws SIValidationException, ValidationException {
+    public void validate() throws ParseException, SIValidationException, ValidationException {
         super.validate();
         Object oNewValue = getMember(NEW_VALUE_MEMBER);
         if (null == oNewValue) {

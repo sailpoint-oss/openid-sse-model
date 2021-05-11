@@ -11,6 +11,8 @@ import com.sailpoint.sse.model.Utils;
 import com.sailpoint.sse.model.ValidationException;
 import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
+import java.text.ParseException;
+
 public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
 
     private static final String CURRENT_LEVEL = "current_level";
@@ -18,7 +20,7 @@ public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
     private static final String CHANGE_DIRECTION = "change_direction";
 
     @Override
-    public void validate() throws SIValidationException, ValidationException {
+    public void validate() throws ParseException, SIValidationException, ValidationException {
         super.validate();
         Utils.validateMember(this, CURRENT_LEVEL, NISTAuthenticatorAssuranceLevel.class);
         Utils.validateMember(this, PREVIOUS_LEVEL, NISTAuthenticatorAssuranceLevel.class);

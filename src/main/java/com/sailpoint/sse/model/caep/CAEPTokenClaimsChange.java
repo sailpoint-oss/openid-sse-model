@@ -7,16 +7,18 @@
 package com.sailpoint.sse.model.caep;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import com.sailpoint.sse.model.SSEventTypes;
 import com.sailpoint.sse.model.ValidationException;
-import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+
+import java.text.ParseException;
 
 public class CAEPTokenClaimsChange extends CAEPBaseEvent {
 
     private static final String CLAIMS = "claims";
 
     @Override
-    public void validate() throws SIValidationException, ValidationException {
+    public void validate() throws ParseException, SIValidationException, ValidationException {
         super.validate();
         JSONObject members = getEventMembers();
         final Object o = members.get(CLAIMS);

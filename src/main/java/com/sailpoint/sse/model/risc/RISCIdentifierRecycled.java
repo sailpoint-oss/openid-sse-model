@@ -6,13 +6,15 @@
 
 package com.sailpoint.sse.model.risc;
 
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierMembers;
 import com.sailpoint.sse.model.SSEvent;
 import com.sailpoint.sse.model.SSEventTypes;
 import com.sailpoint.sse.model.ValidationException;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierMembers;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
-import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+
+import java.text.ParseException;
 
 public class RISCIdentifierRecycled extends SSEvent {
 
@@ -20,10 +22,10 @@ public class RISCIdentifierRecycled extends SSEvent {
      *  The subject type MUST be either "email" or "phone".
      */
     @Override
-    public void validate() throws SIValidationException, ValidationException {
+    public void validate() throws ParseException, SIValidationException, ValidationException {
         super.validate();
         SubjectIdentifier subj = getSubjectIdentifier();
-        final String type = subj.get(SubjectIdentifierMembers.FORMAT);
+        final String type = subj.getString(SubjectIdentifierMembers.FORMAT);
         if (SubjectIdentifierFormats.EMAIL.equalsName(type) || SubjectIdentifierFormats.PHONE_NUMBER.equalsName(type)) {
             return;
         }

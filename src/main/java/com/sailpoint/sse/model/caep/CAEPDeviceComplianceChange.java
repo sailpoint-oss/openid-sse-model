@@ -6,10 +6,12 @@
 
 package com.sailpoint.sse.model.caep;
 
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import com.sailpoint.sse.model.SSEventTypes;
 import com.sailpoint.sse.model.Utils;
 import com.sailpoint.sse.model.ValidationException;
-import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+
+import java.text.ParseException;
 
 public class CAEPDeviceComplianceChange extends CAEPBaseEvent {
 
@@ -17,7 +19,7 @@ public class CAEPDeviceComplianceChange extends CAEPBaseEvent {
     private static final String CURRENT_STATUS = "current_status";
 
     @Override
-    public void validate() throws SIValidationException, ValidationException {
+    public void validate() throws ParseException, SIValidationException, ValidationException {
         super.validate();
         Utils.validateMember(this, PREVIOUS_STATUS, CAEPComplianceStatus.class);
         Utils.validateMember(this, CURRENT_STATUS, CAEPComplianceStatus.class);

@@ -12,6 +12,8 @@ import com.sailpoint.sse.model.SSEventTypes;
 import com.sailpoint.sse.model.ValidationException;
 import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
+import java.text.ParseException;
+
 public abstract class CAEPBaseEvent extends SSEvent {
     private static final String EVENT_TIMESTAMP_MEMBER = "event_timestamp";
     private static final String INITIATING_ENTITY_MEMBER = "initiating_entity";
@@ -53,7 +55,7 @@ public abstract class CAEPBaseEvent extends SSEvent {
     }
 
     @Override
-    public void validate() throws SIValidationException, ValidationException {
+    public void validate() throws ParseException, SIValidationException, ValidationException {
         super.validate();
         validateEventTimestamp();
     }

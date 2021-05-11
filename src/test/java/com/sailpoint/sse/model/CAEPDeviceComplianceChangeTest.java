@@ -10,13 +10,13 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
+import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.OpaqueSubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
 import com.sailpoint.sse.model.caep.CAEPComplianceStatus;
 import com.sailpoint.sse.model.caep.CAEPDeviceComplianceChange;
 import com.sailpoint.sse.model.caep.CAEPInitiatingEntity;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
-import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
-import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -36,8 +36,7 @@ public class CAEPDeviceComplianceChangeTest {
                 .subject("e9297990-14d2-42ec-a4a9-4036db86509a")
                 .build();
 
-        SubjectIdentifier tenant = new SubjectIdentifier.Builder()
-                .format(SubjectIdentifierFormats.OPAQUE)
+        OpaqueSubjectIdentifier tenant = new OpaqueSubjectIdentifier.Builder()
                 .id("123456789")
                 .build();
 

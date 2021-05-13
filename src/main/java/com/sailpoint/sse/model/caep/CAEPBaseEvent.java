@@ -78,13 +78,13 @@ public abstract class CAEPBaseEvent extends SSEvent {
             return thisObj;
         }
 
-        public B reasonAdmin(final String s) {
-            members.put(REASON_ADMIN_MEMBER, s);
+        public B reasonAdmin(final JSONObject o) {
+            members.put(REASON_ADMIN_MEMBER, o);
             return thisObj;
         }
 
-        public B reasonUser(final String s) {
-            members.put(REASON_USER_MEMBER, s);
+        public B reasonUser(final JSONObject o) {
+            members.put(REASON_USER_MEMBER, o);
             return thisObj;
         }
 

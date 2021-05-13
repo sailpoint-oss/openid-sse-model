@@ -24,16 +24,19 @@ import static org.junit.Assert.assertEquals;
 
 public class CAEPCredentialChangeTest {
     /**
-     * Figure 8: Example: Provisioning a new FIDO2 authenticator - Simple
+     * Figure 10: Example: Provisioning a new FIDO2 authenticator - Simple
      *                          Subject + optional claims
      */
 
     @Test
-    public void Figure8() throws ParseException, SIValidationException, ValidationException {
+    public void Figure10() throws ParseException, SIValidationException, ValidationException {
         IssSubSubjectIdentifier subj = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/3456789/")
                 .subject("jane.smith@example.com")
                 .build();
+
+        JSONObject reasonAdmin = new JSONObject();
+        reasonAdmin.put("en", "User self-enrollment");
 
         CAEPCredentialChange evt = new CAEPCredentialChange.Builder()
                 .credentialType(CAEPCredentialType.FIDO2_ROAMING)
@@ -42,7 +45,7 @@ public class CAEPCredentialChangeTest {
                 .eventTimestamp(1615304991643L)
                 .initiatingEntity(CAEPInitiatingEntity.USER)
                 .subject(subj)
-                .reasonAdmin("User self-enrollment")
+                .reasonAdmin(reasonAdmin)
                 .friendlyName("Jane's USB authenticator")
                 .build();
 
@@ -71,7 +74,9 @@ public class CAEPCredentialChangeTest {
                 "               \"fido2_aaguid\": \"accced6a-63f5-490a-9eea-e59bc1896cfc\",\n" +
                 "               \"friendly_name\": \"Jane's USB authenticator\",\n" +
                 "               \"initiating_entity\": \"user\",\n" +
-                "               \"reason_admin\": \"User self-enrollment\",\n" +
+                "               \"reason_admin\": {\n" +
+                "                   \"en\": \"User self-enrollment\"\n" +
+                "               },\n" +
                 "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +

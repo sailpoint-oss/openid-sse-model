@@ -23,11 +23,11 @@ import static org.junit.Assert.assertEquals;
 
 public class CAEPTokenClaimsChangeTest {
     /**
-     * Figure 5: Example: OIDC ID Token Claims Change - Required claims only
+     * Figure 7: Example: OIDC ID Token Claims Change - Required claims only
      */
 
     @Test
-    public void Figure5() throws ParseException, SIValidationException, ValidationException {
+    public void Figure7() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.JWT_ID)
                 .issuer("https://idp.example.com/987654321/")
@@ -79,11 +79,11 @@ public class CAEPTokenClaimsChangeTest {
 
     }
     /**
-     * Figure 6: Example: OIDC ID Token Claims Change - Optional claims
+     * Figure 8 Example: OIDC ID Token Claims Change - Optional claims
      */
 
     @Test
-    public void Figure6() throws ParseException, SIValidationException, ValidationException {
+    public void Figure8() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.JWT_ID)
                 .issuer("https://idp.example.com/987654321/")
@@ -93,13 +93,19 @@ public class CAEPTokenClaimsChangeTest {
         JSONObject claims = new JSONObject();
         claims.put("trusted_network", "false");
 
+        JSONObject reasonAdmin = new JSONObject();
+        JSONObject reasonUser = new JSONObject();
+        reasonAdmin.put("en", "User left trusted network: CorpNet3");
+        reasonUser.put("en", "You're no longer connected to a trusted network.");
+        reasonUser.put("it", "Non sei piu connesso a una rete attendibile.");
+
         CAEPTokenClaimsChange evt = new CAEPTokenClaimsChange.Builder()
                 .eventTimestamp(1615304991643L)
                 .subject(subj)
                 .claims(claims)
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
-                .reasonAdmin("User left trusted network: CorpNet3")
-                .reasonUser("You're no longer connected to a trusted network.")
+                .reasonAdmin(reasonAdmin)
+                .reasonUser(reasonUser)
                 .build();
 
         JWTClaimsSet set = new JWTClaimsSet.Builder()
@@ -124,14 +130,20 @@ public class CAEPTokenClaimsChangeTest {
                 "            },\n" +
                 "            \"event_timestamp\": 1615304991643,\n" +
                 "            \"initiating_entity\": \"policy\",\n" +
-                "            \"reason_admin\": \"User left trusted network: CorpNet3\",\n" +
-                "            \"reason_user\": \"You're no longer connected to a trusted network.\",\n" +
+                "            \"reason_admin\": {\n" +
+                "                \"en\": \"User left trusted network: CorpNet3\"\n" +
+                "            },\n" +
+                "            \"reason_user\": {\n" +
+                "                \"en\": \"You're no longer connected to a trusted network.\",\n" +
+                "                \"it\": \"Non sei piu connesso a una rete attendibile.\"\n" +
+                "            },\n" +
+                "\n" +
                 "            \"claims\": {\n" +
                 "                \"trusted_network\": \"false\"\n" +
                 "            }\n" +
                 "        }\n" +
                 "    }\n" +
-                "}";
+                "}\n";
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
@@ -142,12 +154,12 @@ public class CAEPTokenClaimsChangeTest {
     }
 
     /**
-     * Figure 7: Example: SAML Assertion Claims Change - Required claims
+     * Figure 9: Example: SAML Assertion Claims Change - Required claims
      *                                    only
      */
 
     @Test
-    public void Figure7() throws ParseException, SIValidationException, ValidationException {
+    public void Figure9() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
                 .format(SubjectIdentifierFormats.SAML_ASSERTION_ID)
                 .issuer("https://idp.example.com/987654321/")

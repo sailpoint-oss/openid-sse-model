@@ -10,13 +10,12 @@ import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.util.JSONObjectUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.util.DateUtils;
+import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.OpaqueSubjectIdentifier;
+import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
 import com.sailpoint.sse.model.caep.CAEPInitiatingEntity;
 import com.sailpoint.sse.model.caep.CAEPSessionRevoked;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
-import com.sailpoint.ietf.subjectidentifiers.model.OpaqueSubjectIdentifier;
-import com.sailpoint.ietf.subjectidentifiers.model.IssSubSubjectIdentifier;
-import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifierFormats;
-import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -25,10 +24,10 @@ import static org.junit.Assert.assertEquals;
 
 public class CAEPSessionRevokedTest {
     /**
-     * Figure 1: Example: Session Revoked - Required claims + Simple Subject
+     * Figure 3: Example: Session Revoked - Required claims + Simple Subject
      */
     @Test
-    public void Figure1() throws ParseException, SIValidationException, ValidationException {
+    public void Figure3() throws ParseException, SIValidationException, ValidationException {
         OpaqueSubjectIdentifier subj = new OpaqueSubjectIdentifier.Builder()
                 .id("dMTlD|1600802906337.16|16008.16")
                 .build();
@@ -70,12 +69,12 @@ public class CAEPSessionRevokedTest {
 
 
     /**
-     * Figure 2: Example: Session Revoked - Complex Subject describing user
+     * Figure 4: Example: Session Revoked - Complex Subject describing user
      *              + session ID + device (includes optional claims)
      */
 
     @Test
-    public void Figure2() throws ParseException, SIValidationException, ValidationException {
+    public void Figure4() throws ParseException, SIValidationException, ValidationException {
         OpaqueSubjectIdentifier session = new OpaqueSubjectIdentifier.Builder()
                 .id("dMTlD|1600802906337.16|16008.16")
                 .build();
@@ -95,10 +94,16 @@ public class CAEPSessionRevokedTest {
                 .tenant(tenant)
                 .build();
 
+        JSONObject reasonAdmin = new JSONObject();
+        JSONObject reasonUser = new JSONObject();
+        reasonAdmin.put("en", "Landspeed Policy Violation: C076E82F");
+        reasonUser.put("en", "Access attempt from multiple regions.");
+        reasonUser.put("es-410", "Intento de acceso desde varias regiones.");
+
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
-                .reasonAdmin("Landspeed Policy Violation: C076E82F")
-                .reasonUser("Access attempt from multiple regions.")
+                .reasonAdmin(reasonAdmin)
+                .reasonUser(reasonUser)
                 .eventTimestamp(1615304991643L)
                 .subject(subj)
                 .build();
@@ -134,8 +139,13 @@ public class CAEPSessionRevokedTest {
                 "                   }\n" +
                 "               },\n" +
                 "               \"initiating_entity\": \"policy\",\n" +
-                "               \"reason_admin\": \"Landspeed Policy Violation: C076E82F\",\n" +
-                "               \"reason_user\": \"Access attempt from multiple regions.\",\n" +
+                "               \"reason_admin\": {\n" +
+                "                   \"en\": \"Landspeed Policy Violation: C076E82F\"\n" +
+                "               },\n" +
+                "               \"reason_user\": {\n" +
+                "                   \"en\": \"Access attempt from multiple regions.\",\n" +
+                "                   \"es-410\": \"Intento de acceso desde varias regiones.\"\n" +
+                "               },\n" +
                 "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +
@@ -148,16 +158,22 @@ public class CAEPSessionRevokedTest {
     }
 
     /**
-     * Figure 3: Example: Session Revoked - subject as `sub` claim (includes
+     * Figure 5: Example: Session Revoked - subject as `sub` claim (includes
      *                              optional claims)
      */
 
     @Test
-    public void Figure3() throws ParseException, SIValidationException, ValidationException {
+    public void Figure5() throws ParseException, SIValidationException, ValidationException {
+        JSONObject reasonAdmin = new JSONObject();
+        reasonAdmin.put("en", "Landspeed Policy Violation: C076E82F");
+        JSONObject reasonUser = new JSONObject();
+        reasonUser.put("en", "Access attempt from multiple regions.");
+        reasonUser.put("es-410", "Intento de acceso desde varias regiones.");
+
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
-                .reasonAdmin("Landspeed Policy Violation: C076E82F")
-                .reasonUser("Access attempt from multiple regions.")
+                .reasonAdmin(reasonAdmin)
+                .reasonUser(reasonUser)
                 .eventTimestamp(1615304991643L)
                 .build();
 
@@ -179,12 +195,17 @@ public class CAEPSessionRevokedTest {
                 "       \"events\": {\n" +
                 "           \"https://schemas.openid.net/secevent/caep/event-type/session-revoked\": {\n" +
                 "               \"initiating_entity\": \"policy\",\n" +
-                "               \"reason_admin\": \"Landspeed Policy Violation: C076E82F\",\n" +
-                "               \"reason_user\": \"Access attempt from multiple regions.\",\n" +
+                "               \"reason_admin\": {\n" +
+                "                   \"en\": \"Landspeed Policy Violation: C076E82F\"\n" +
+                "               },\n" +
+                "               \"reason_user\": {\n" +
+                "                   \"en\": \"Access attempt from multiple regions.\",\n" +
+                "                   \"es-410\": \"Intento de acceso desde varias regiones.\"\n" +
+                "               },\n" +
                 "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +
-                "   }";
+                "   }\n";
 
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
@@ -193,12 +214,12 @@ public class CAEPSessionRevokedTest {
     }
 
     /**
-     *   Figure 4: Example: Session Revoked - Complex Subject describing user
+     *   Figure 6: Example: Session Revoked - Complex Subject describing user
      *                + device + tenant (includes optional claims)
      */
 
     @Test
-    public void Figure4() throws ParseException, SIValidationException, ValidationException {
+    public void Figure6() throws ParseException, SIValidationException, ValidationException {
         IssSubSubjectIdentifier user = new IssSubSubjectIdentifier.Builder()
                 .issuer("https://idp.example.com/123456789/")
                 .subject("jane.smith@example.com")
@@ -219,10 +240,16 @@ public class CAEPSessionRevokedTest {
                 .tenant(tenant)
                 .build();
 
+        JSONObject reasonAdmin = new JSONObject();
+        JSONObject reasonUser = new JSONObject();
+        reasonAdmin.put("en", "Policy Violation: C076E822");
+        reasonUser.put("en", "This device is no longer compliant.");
+        reasonUser.put("it", "Questo dispositivo non e piu conforme.");
+
         CAEPSessionRevoked evt = new CAEPSessionRevoked.Builder()
                 .initiatingEntity(CAEPInitiatingEntity.POLICY)
-                .reasonAdmin("Policy Violation: C076E82F")
-                .reasonUser("This device is no longer compliant.")
+                .reasonAdmin(reasonAdmin)
+                .reasonUser(reasonUser)
                 .eventTimestamp(1615304991643L)
                 .subject(subj)
                 .build();
@@ -235,7 +262,8 @@ public class CAEPSessionRevokedTest {
                 .claim(SEToken.EVENTS_CLAIM, evt)
                 .build();
 
-        final String figure_text = "   {\n" +
+        final String figure_text = "\n" +
+                "   {\n" +
                 "       \"iss\": \"https://idp.example.com/123456789/\",\n" +
                 "       \"jti\": \"24c63fb56e5a2d77a6b512616ca9fa24\",\n" +
                 "       \"iat\": 1615305159,\n" +
@@ -259,8 +287,13 @@ public class CAEPSessionRevokedTest {
                 "                   }\n" +
                 "               },\n" +
                 "               \"initiating_entity\": \"policy\",\n" +
-                "               \"reason_admin\": \"Policy Violation: C076E82F\",\n" +
-                "               \"reason_user\": \"This device is no longer compliant.\",\n" +
+                "               \"reason_admin\": {\n" +
+                "                   \"en\": \"Policy Violation: C076E822\"\n" +
+                "               },\n" +
+                "               \"reason_user\": {\n" +
+                "                   \"en\": \"This device is no longer compliant.\",\n" +
+                "                   \"it\": \"Questo dispositivo non e piu conforme.\"\n" +
+                "               },\n" +
                 "               \"event_timestamp\": 1615304991643\n" +
                 "           }\n" +
                 "       }\n" +

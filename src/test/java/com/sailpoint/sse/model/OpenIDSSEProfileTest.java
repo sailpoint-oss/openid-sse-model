@@ -327,16 +327,16 @@ public class OpenIDSSEProfileTest {
     @Test()
     public void Figure8() throws ParseException, SIValidationException, ValidationException {
         SubjectIdentifier subj = new SubjectIdentifier.Builder()
-                .member("format", "x-catalog-item")
+                .member("format", "catalog_item")
                 .member("catalog_id", "c0384/winter/2354122")
                 .build();
 
         JSONObject newClaims = new JSONObject();
-        newClaims.put("some_claim", "some_value");
+        newClaims.put("role", "ro-admin");
 
 
         CAEPTokenClaimsChange evt = new CAEPTokenClaimsChange.Builder()
-                .eventTimestamp(1615304991643L)
+                .eventTimestamp(1600975810L)
                 .subject(subj)
                 .claims(newClaims)
                 .build();
@@ -357,17 +357,16 @@ public class OpenIDSSEProfileTest {
                 "  \"events\": {\n" +
                 "    \"https://schemas.openid.net/secevent/caep/event-type/token-claims-change\": {\n" +
                 "    \"subject\": {\n" +
-                "        \"format\": \"x-catalog-item\",\n" +
+                "        \"format\": \"catalog_item\",\n" +
                 "        \"catalog_id\": \"c0384/winter/2354122\"\n" +
                 "      },\n" +
-                "    \"claims\": {\n" +
-                "      \"some_claim\" : \"some_value\"\n" +
-                "     },\n" +
-                "      \"event_timestamp\": 1615304991643\n" +
+                "      \"event_timestamp\": 1600975810,\n" +
+                "      \"claims\": {\n" +
+                "         \"role\": \"ro-admin\"\n" +
+                "      }\n" +
                 "    }\n" +
                 "  }\n" +
                 "}";
-
         final JSONObject figureJson = new JSONObject(JSONObjectUtils.parse(figure_text));
         final JSONObject setJson = new JSONObject(set.toJSONObject());
         assertEquals(figureJson, setJson);

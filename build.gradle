@@ -29,7 +29,7 @@ dependencies {
 
     // Nimbus JOSE JWT
     // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
-    api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.16-preview.1'
+    api group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '9.25.4'
     implementation group: 'com.sailpoint', name: 'ietf-subject-identifiers-model', version: '0.2.0-SNAPSHOT'
     //implementation files("../ietf-subject-identifiers-model/build/libs/ietf-subject-identifiers-model-0.2.0-SNAPSHOT.jar")
     // Use JUnit test framework

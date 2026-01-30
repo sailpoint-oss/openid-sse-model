@@ -8,7 +8,7 @@ package com.sailpoint.sse.model.caep;
 
 import com.sailpoint.sse.model.SSEventTypes;
 
-public class CAEPIPAddrChanged extends CAEPBaseEvent {
+public final class CAEPIPAddrChanged extends CAEPBaseEvent {
     private static final String IPADDRESS_MEMBER = "ip_address";
 
     public static class Builder extends CAEPBaseEvent.Builder<CAEPIPAddrChanged, CAEPIPAddrChanged.Builder> {

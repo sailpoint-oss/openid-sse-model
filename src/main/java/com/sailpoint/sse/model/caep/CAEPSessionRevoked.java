@@ -8,7 +8,7 @@ package com.sailpoint.sse.model.caep;
 
 import com.sailpoint.sse.model.SSEventTypes;
 
-public class CAEPSessionRevoked extends CAEPBaseEvent {
+public final class CAEPSessionRevoked extends CAEPBaseEvent {
 
     public static class Builder extends CAEPBaseEvent.Builder<CAEPSessionRevoked, CAEPSessionRevoked.Builder> {
 

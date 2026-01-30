@@ -9,6 +9,11 @@ package com.sailpoint.sse.model;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import com.sailpoint.ietf.subjectidentifiers.model.SubjectIdentifier;
 import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
+import com.sailpoint.sse.model.caep.CAEPBaseEvent;
+
+import com.sailpoint.sse.model.risc.*;
+import com.sailpoint.sse.model.sse.SSEStreamUpdated;
+import com.sailpoint.sse.model.sse.SSEVerification;
 
 import java.text.ParseException;
 import java.util.Map;
@@ -20,7 +25,8 @@ import java.util.Objects;
  * @author adam.hampton
  * @author matt.domsch
  */
-public abstract class SSEvent extends JSONObject {
+public abstract sealed class SSEvent extends JSONObject
+        permits NonstandardSSEvent, CAEPBaseEvent, RISCAccountCredentialChangeRequired, RISCAccountDisabled, RISCAccountEnabled, RISCAccountPurged, RISCIdentifierChanged, RISCIdentifierRecycled, RISCOptIn, RISCOptOutCancelled, RISCOptOutEffective, RISCOptOutInitiated, RISCRecoveryActivated, RISCRecoveryInformationChanged, RISCSessionsRevoked, SSEStreamUpdated, SSEVerification {
 
     public static final String SUBJECT_MEMBER = "subject";
     private static final String REASON_MEMBER = "reason";

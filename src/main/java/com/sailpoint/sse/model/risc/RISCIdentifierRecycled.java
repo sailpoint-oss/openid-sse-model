@@ -16,7 +16,7 @@ import com.sailpoint.sse.model.ValidationException;
 
 import java.text.ParseException;
 
-public class RISCIdentifierRecycled extends SSEvent {
+public final class RISCIdentifierRecycled extends SSEvent {
 
     /*
      *  The subject type MUST be either "email" or "phone".

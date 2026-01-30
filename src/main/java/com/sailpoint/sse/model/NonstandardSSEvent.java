@@ -10,7 +10,7 @@ import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
 import java.text.ParseException;
 
-public class NonstandardSSEvent extends SSEvent {
+public final class NonstandardSSEvent extends SSEvent {
 
     public NonstandardSSEvent(final String eventName) {
         super();

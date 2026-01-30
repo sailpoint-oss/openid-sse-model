@@ -9,7 +9,7 @@ package com.sailpoint.sse.model.risc;
 import com.sailpoint.sse.model.SSEvent;
 import com.sailpoint.sse.model.SSEventTypes;
 
-public class RISCOptOutCancelled extends SSEvent {
+public final class RISCOptOutCancelled extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCOptOutCancelled, RISCOptOutCancelled.Builder> {
 

@@ -14,7 +14,7 @@ import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
 import java.text.ParseException;
 
-public abstract class CAEPBaseEvent extends SSEvent {
+public abstract sealed class CAEPBaseEvent extends SSEvent permits CAEPAssuranceLevelChange, CAEPCredentialChange, CAEPDeviceComplianceChange, CAEPIPAddrChanged, CAEPSessionRevoked, CAEPStreamUpdated, CAEPTokenClaimsChange {
     private static final String EVENT_TIMESTAMP_MEMBER = "event_timestamp";
     private static final String INITIATING_ENTITY_MEMBER = "initiating_entity";
     private static final String REASON_ADMIN_MEMBER = "reason_admin";

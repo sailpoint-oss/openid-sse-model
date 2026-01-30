@@ -8,7 +8,7 @@ package com.sailpoint.sse.model.sse;
 
 import com.sailpoint.sse.model.*;
 
-public class SSEStreamUpdated extends SSEvent {
+public final class SSEStreamUpdated extends SSEvent {
 
     private static final String STATUS_MEMBER = "status";
 

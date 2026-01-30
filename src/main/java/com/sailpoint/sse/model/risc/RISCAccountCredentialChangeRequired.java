@@ -9,7 +9,7 @@ package com.sailpoint.sse.model.risc;
 import com.sailpoint.sse.model.SSEvent;
 import com.sailpoint.sse.model.SSEventTypes;
 
-public class RISCAccountCredentialChangeRequired extends SSEvent {
+public final class RISCAccountCredentialChangeRequired extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCAccountCredentialChangeRequired, RISCAccountCredentialChangeRequired.Builder> {
 

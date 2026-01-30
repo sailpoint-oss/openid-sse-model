@@ -8,7 +8,7 @@ package com.sailpoint.sse.model.sse;
 
 import com.sailpoint.sse.model.*;
 
-public class SSEVerification extends SSEvent {
+public final class SSEVerification extends SSEvent {
 
     private static final String STATE_MEMBER = "state";
 

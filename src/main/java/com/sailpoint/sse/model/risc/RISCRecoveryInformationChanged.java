@@ -9,7 +9,7 @@ package com.sailpoint.sse.model.risc;
 import com.sailpoint.sse.model.SSEvent;
 import com.sailpoint.sse.model.SSEventTypes;
 
-public class RISCRecoveryInformationChanged extends SSEvent {
+public final class RISCRecoveryInformationChanged extends SSEvent {
 
     public static class Builder extends SSEvent.Builder<RISCRecoveryInformationChanged, RISCRecoveryInformationChanged.Builder> {
 

@@ -13,7 +13,7 @@ import com.sailpoint.sse.model.ValidationException;
 
 import java.text.ParseException;
 
-public class CAEPTokenClaimsChange extends CAEPBaseEvent {
+public final class CAEPTokenClaimsChange extends CAEPBaseEvent {
 
     private static final String CLAIMS = "claims";
 

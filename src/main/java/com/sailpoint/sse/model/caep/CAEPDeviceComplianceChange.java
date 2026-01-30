@@ -13,7 +13,7 @@ import com.sailpoint.sse.model.ValidationException;
 
 import java.text.ParseException;
 
-public class CAEPDeviceComplianceChange extends CAEPBaseEvent {
+public final class CAEPDeviceComplianceChange extends CAEPBaseEvent {
 
     private static final String PREVIOUS_STATUS = "previous_status";
     private static final String CURRENT_STATUS = "current_status";

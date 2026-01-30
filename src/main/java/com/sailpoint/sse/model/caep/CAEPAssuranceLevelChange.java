@@ -13,7 +13,7 @@ import com.sailpoint.ietf.subjectidentifiers.model.SIValidationException;
 
 import java.text.ParseException;
 
-public class CAEPAssuranceLevelChange extends CAEPBaseEvent {
+public final class CAEPAssuranceLevelChange extends CAEPBaseEvent {
 
     private static final String CURRENT_LEVEL = "current_level";
     private static final String PREVIOUS_LEVEL = "previous_level";

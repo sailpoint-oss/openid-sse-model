@@ -13,7 +13,7 @@ import com.sailpoint.sse.model.ValidationException;
 
 import java.text.ParseException;
 
-public class RISCIdentifierChanged extends SSEvent {
+public final class RISCIdentifierChanged extends SSEvent {
 
     private static final String NEW_VALUE_MEMBER = "new-value";
 

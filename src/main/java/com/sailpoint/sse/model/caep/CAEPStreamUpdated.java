@@ -8,7 +8,7 @@ package com.sailpoint.sse.model.caep;
 
 import com.sailpoint.sse.model.SSEventTypes;
 
-public class CAEPStreamUpdated extends CAEPBaseEvent {
+public final class CAEPStreamUpdated extends CAEPBaseEvent {
 
     public static class Builder extends CAEPBaseEvent.Builder<CAEPStreamUpdated, CAEPStreamUpdated.Builder> {
 

@@ -14,7 +14,7 @@ import com.sailpoint.sse.model.ValidationException;
 
 import java.text.ParseException;
 
-public class RISCAccountDisabled extends SSEvent {
+public final class RISCAccountDisabled extends SSEvent {
 
     private static final String REASON_MEMBER = "reason";
 

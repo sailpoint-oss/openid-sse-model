@@ -13,7 +13,7 @@ import com.sailpoint.sse.model.ValidationException;
 
 import java.text.ParseException;
 
-public class CAEPCredentialChange extends CAEPBaseEvent {
+public final class CAEPCredentialChange extends CAEPBaseEvent {
 
     private static final String CREDENTIAL_TYPE = "credential_type";
     private static final String CHANGE_TYPE = "change_type";
